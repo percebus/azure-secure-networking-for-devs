@@ -1,5 +1,9 @@
 # azure-secure-networking-for-devs
 
+[`TODO`s](./TODO.md) | [`LICENSE`](./LICENSE.md) | [`CONTRIBUTING`](./CONTRIBUTING.md)
+
+## Summary
+
 This is a refursbished version of the [Lybecker](https://github.com/Lybecker)'s [Azure Secure Networking for Devs](https://github.com/Lybecker/azure-secure-networking-for-devs)
 
 ## Resources
