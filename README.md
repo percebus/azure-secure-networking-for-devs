@@ -1,6 +1,6 @@
 # azure-secure-networking-for-devs
 
-## Azure CLI commands
+## Useful Azure CLI commands
 
 - az
   - network
@@ -98,11 +98,11 @@
 
 #### Private
 
-##### DNS zone
+##### Private DNS zone
 
 - [What is an Azure Private DNS zone?](https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone)
 
-##### Endpoint
+##### Private Endpoint
 
 - [What is a private endpoint?](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 - [Azure Private Endpoint private DNS zone values](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns#private-dns-zone-group)
@@ -128,22 +128,22 @@
 - [What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
 - [Quickstart: Use the Azure portal to create a virtual network](https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-portal)
 
-##### Network Peering
+##### [VNet] Peering
 
 - [Virtual network peering](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 
-##### Network Link
+##### [VNet] Link
 
 - [What is a virtual network link?](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 
-##### Network Route table
+##### [VNet] Route table
 
 - [Create, change, or delete a route table](https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table)
 
-##### Network Subnet
+##### [VNet] Subnet
 
 - [Add, change, or delete a virtual network subnet](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet?tabs=azure-portal)
 
-#### Web Application Firewall
+#### [W]eb [A]pplication [F]irewall
 
 - [What is Azure Web Application Firewall?](https://learn.microsoft.com/en-us/azure/web-application-firewall/overview)
