@@ -1,5 +1,7 @@
 # azure-secure-networking-for-devs
 
+This is a refursbished version of the [Lybecker](https://github.com/Lybecker)'s [Azure Secure Networking for Devs](https://github.com/Lybecker/azure-secure-networking-for-devs)
+
 ## Useful Azure CLI commands
 
 - az
