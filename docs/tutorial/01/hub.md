@@ -138,3 +138,5 @@ If everything looks good, hit that `[ Create ]` button.
 
 1. Create a Network security group
 1. Attach it to the `default` subnet.
+
+We'll configure it later down the road
