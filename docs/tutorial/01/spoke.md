@@ -63,7 +63,7 @@ Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to conn
 
 Go to Peerings > Add
 
-FIXME ADD SCREENSHOT
+>> FIXME ADD SCREENSHOT
 
 Note that you can allow traffic:
 
