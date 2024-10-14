@@ -63,7 +63,7 @@ Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to conn
 
 Go to Peerings > Add
 
->> FIXME ADD SCREENSHOT
+> > FIXME ADD SCREENSHOT
 
 Note that you can allow traffic:
 
@@ -91,3 +91,16 @@ For this excercise will check all the boxes.
 | Allow {that vnet} to receive forwarded traffic from {this vnet}                | `x`    | `x`   |
 | Allow gateway or route server in {that vnet} to forward traffic to {this vnet} | `x`    | `x`   |
 | Enable {that vnet} tp use {this vnet}'s remote gateway or route server         | `x`    | `x`   |
+
+We can later come back and remove permissions to reinforce security.
+
+## Resource Visualizer
+
+Under the "Resource visualizer" you should see something like this:
+
+![Resource visualizer](../../../assets/img/spoke/vnet/resources/01.png)
+
+Note that the 2 arrows represent the peering between the 2 VNets.
+
+- [x] Hub > Spoke
+- [x] Spoke > Hub
