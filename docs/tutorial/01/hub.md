@@ -100,6 +100,8 @@ Both **Azure Bastion** and **Azure Firewall** need to have their own **delegated
 - `AzureBastionSubnet`
 - `AzureFirewallSubnet`
 
+> Quiz: _"How many IP addresses does Bastion need'?"_
+
 We'll also need a `default` subnet (for the lack of a better name) to host any other resource we want (NIC interfaces, VMs, etc).
 
 Now, you might be considering a setup like this
@@ -133,6 +135,14 @@ Give 1 good look before creating all the resources.
 ![Review](../../../assets/img/hub/vnet/create/review.png)
 
 If everything looks good, hit that `[ Create ]` button.
+
+### Firewal
+
+#### Resource visualizer
+
+You can see the relationship between the Firewall `fw` and the Public IP `fw-pip` in the resource visualizer.
+
+![Resource visualizer](../../../assets/img/hub/fw/resources/01.png)
 
 ### [N]etwork [S]ecurity [G]roup
 
