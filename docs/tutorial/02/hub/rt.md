@@ -4,6 +4,9 @@
 
 ### Route Table
 
+- Resource group: `{my-prefix}-hub-switzerlandnorth-{id}-rg` (already exists)
+  - Route table: `{my-prefix}-hub-switzerlandnorth-{id}-rt`
+
 #### Market place
 
 Look for a "Route table" in the Azure Portal's market place
@@ -38,4 +41,4 @@ Go to Settings > Routes > Add
 - **Destination IP addresses/CIDR ranges**: ???
 - **Next hop type**: _"Virtual appliance"_ (as in the **Azure Firewall**)
 - **Next hop address**: In a new tab, go to the **Azure Firewall** and copy the **Private IP** address
- ![Private IP](../../../../assets/img/hub/fw/overview.png)
+  ![Private IP](../../../../assets/img/hub/fw/overview.png)
