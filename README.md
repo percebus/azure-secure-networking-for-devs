@@ -22,7 +22,7 @@ Head to `docs/tutorial/README.md` to start the tutorial.
 
 #### Useful CLI commands
 
-- [az](./docs/az.md)
+- [az](./docs/az/cli.md)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 
 #### Naming Conventions
