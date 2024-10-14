@@ -67,3 +67,16 @@ Before we begin, be mindful that this is an expensive resource, which is charged
 1. **Azure Firewall Public IP Address**: Same as above,
   - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `nw-security-hub-switzerlandnorth-1-vnet-fw-firewall`.
   - But if you want to name it, you can create a new one, naming it `nw-security-hub-switzerlandnorth-1-vnet-fw-pip` and select it.
+
+##### IP Address
+
+Your Hub VNet will be on `10.1.X.X`. Remember that all VNets will communicate, so planning ahead to not have IP collision is important.
+
+Both Azure Bastion and Azure Firewall need to have their own **delegated subnets**. The names are reserved standard and cannot be changed:
+
+- `AzureBastionSubnet` for Azure Bastion
+- `AzureFirewallSubnet` for Azure Firewall
+
+Furthermore, we'll need a `default` subnet (for the lack of a better name) to host any other resource we want (NIC interfaces, VMs, etc).
+
+![IP Addresses](../assets/img/hub/vnet/create/ip.png)
