@@ -23,3 +23,13 @@ For a **resource group** in **Switzerland North**, the name would be:
 - `switzerlandnorth`: The regional `location` where the resources are deployed.
 - `1`: Identifier
 - `rg`: **Resource group** type
+
+## Virtual Networks
+
+For simplicity of this excercise, your VNets will look something like:
+
+| Subnet   | Address range | Location           |
+| -------- | ------------- | ------------------ |
+| Hub      | `10.1.x.x`    | `switzerlandnorth` |
+| US Spoke | `10.2.x.x`    | `westus2`          |
+| EU Spoke | `10.3.x.x`    | `eastus`           |
