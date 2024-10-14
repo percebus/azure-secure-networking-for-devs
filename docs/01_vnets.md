@@ -10,10 +10,14 @@ When doing a multi-region Hub-Spoke network architecture, you want your hub reso
 
 #### Create
 
-1. Create a `nw-security-hub-switzerlandnorth-1-rg` resource group in Switzerland North.
+##### Basic
+
+Create a `nw-security-hub-switzerlandnorth-1-rg` resource group in Switzerland North.
 ![Basics](../assets/img/hub/rg/create/basics.png)
 
-2. Add tags as needed
+##### Tags
+
+Add tags as needed
 ![Tags](../assets/img/hub/rg/create/tags.png)
 
 And the end result should look like this:
@@ -21,21 +25,45 @@ And the end result should look like this:
 
 ### Virtual Network
 
-#### Create
+#### Market place
 
-1. Look for a "Virtual network" in the Azure Portal's market place
+Look for a "Virtual network" in the Azure Portal's market place
 ![Market place](../assets/img/hub/vnet/market/logo.png)
 
 Make sure you selected the right one, by `Microsoft | Azure Service`
 ![Overview](../assets/img/hub/vnet/market/overview.png)
 
-1. Create a `nw-security-hub-switzerlandnorth-1-vnet` virtual network in Switzerland North.
-![Basics](../assets/img/hub/vnet/create/basics.png)
+#### Create
 
-##### Bastion
+##### Basic
 
-1. Enable **Bastion**. Add a `nw-security-hub-switzerlandnorth-1-vnet-bas` name.
+Create a `nw-security-hub-switzerlandnorth-1-vnet` virtual network in Switzerland North.
+![Basics](../assets/img/hub/vnet/create/basic.png)
+
+##### Security
+
+Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
+![Security](../assets/img/hub/vnet/create/security.png)
+
+###### Bastion
+
+Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
+
+1. Toggle ON the _"Enable Azure Bastion"_. Add a `nw-security-hub-switzerlandnorth-1-vnet-bas` name.
 1. For the **Public address**
-  - You can just let the default preselected '(New)'. It will create a new public IP address.
-  - But if you are particular about naming, you can
-    1. Create a new one, naming it `nw-security-hub-switzerlandnorth-1-vnet-bas-pip`
+  - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-bastion` suffix tho, so it will be `nw-security-hub-switzerlandnorth-1-vnet-bas-bastion`.
+  - So, if your OCD is anything like mine, and you are particular about naming, you can
+    1. Click on `Create a public IP address`
+    1. Create a new one, naming it `nw-security-hub-switzerlandnorth-1-vnet-bas-pip` (see how the suffix just keep adding up?)
+    1. Go back to the previous screen and select the newly created public IP address.
+
+###### Firewall
+
+Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
+
+1. Toggle ON the _"Enable Azure Firewall"_. Add a `nw-security-hub-switzerlandnorth-1-vnet-fw` name.
+1. **Tier**: You'll need at least **Standard** for this exercise.
+1. **Policy**: _"None (Use classic firewall rules)"_
+1. **Azure Firewall Public IP Address**: Same as above,
+  - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `nw-security-hub-switzerlandnorth-1-vnet-fw-firewall`.
+  - But if you want to name it, you can create a new one, naming it `nw-security-hub-switzerlandnorth-1-vnet-fw-pip` and select it.
