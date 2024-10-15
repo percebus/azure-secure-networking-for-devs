@@ -60,6 +60,8 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 
 ##### Review + Create
 
+Take a good look at the TERMS
+
 ![Review + Create](../../../../assets/img/hub/vm/create/review.png)
 
 #### Checkpoint

@@ -38,7 +38,10 @@ If you get a "You must enable DNS Proxy" error, go to the **Azure Firewall**, go
 
 ## Step 3: Enable DNS Proxy
 
-Uhm... it seems we missed something
+Uhm, it seems we missed something...
+
 ![DNS Proxy must be enabled](../../../../assets/img/hub/fw/rules/allow-github-disallowed.png)
 
-Oh, so we need to enable the DNS Proxy first.
+Oh, so we need to enable the DNS Proxy first!
+
+>> TODO Keep working on this document

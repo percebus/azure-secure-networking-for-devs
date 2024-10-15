@@ -32,9 +32,11 @@ Create a `{my-prefix}-hub-switzerlandnorth-{id}-rg` resource group in Switzerlan
 ##### Tags
 
 Add tags as needed
+
 ![Tags](../../../assets/img/hub/rg/create/tags.png)
 
 And the end result should look like this:
+
 ![Empty](../../../assets/img/hub/rg/empty.png)
 
 ### [V]irtual [Net]work
@@ -54,11 +56,13 @@ Make sure you selected the right one, by `Microsoft | Azure Service`
 ##### Basic
 
 Create a `{my-prefix}-hub-switzerlandnorth-{id}-vnet` virtual network in Switzerland North.
+
 ![Basics](../../../assets/img/hub/vnet/create/basics.png)
 
 ##### Security
 
 Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
+
 ![Security](../../../assets/img/hub/vnet/create/security.png)
 
 ###### Bastion
