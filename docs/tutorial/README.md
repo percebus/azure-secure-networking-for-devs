@@ -1,5 +1,16 @@
 # azure-secure-networking-for-devs
 
+## Table of Contents
+
+- [Before you begin](#before-you-begin)
+  - [Additional Resources](#additional-resources)
+  - [Azure CLI](#azure-cli)
+  - [Screenshots](#screenshots)
+  - [Naming conventions](#naming-conventions)
+    - [Example](#example)
+- [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
+- [The tutorial](#the-tutorial)
+
 ## Before you begin
 
 ### Additional Resources
@@ -45,16 +56,7 @@ For a **resource group** in **Switzerland North**, the name would be:
 - `1`: Identifier
 - `rg`: **Resource type**: Resource Group
 
-## Table of Contents
-
-Throughout this tutorial, you'll be creating the following resources:
-
-1. [VNets](./01/README.md)
-1. [Jump Box](./02/README.md)
-1. [BLOb Storage accounts](./03/README.md)
-1. [Web App](./04/README.md)
-
-## Virtual Networks
+## Virtual Networks & IP addresses
 
 For simplicity of this excercise, your VNets will look something like:
 
@@ -63,3 +65,12 @@ For simplicity of this excercise, your VNets will look something like:
 | Hub      | `10.1.x.x`    | `switzerlandnorth` |                               |
 | US Spoke | `10.2.x.x`    | `westus2`          |                               |
 | EU Spoke | `10.3.x.x`    | `westeurope`       | Not included in this tutorial |
+
+## The tutorial
+
+Throughout this tutorial, you'll be creating the resources via the following modules:
+
+1. [VNets](./01/README.md)
+1. [Jump Box](./02/README.md)
+1. [BLOb Storage accounts](./03/README.md)
+1. [Web App](./04/README.md)
