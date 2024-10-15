@@ -42,9 +42,11 @@ And the end result should look like this:
 #### Market place
 
 Look for a "Virtual network" in the Azure Portal's market place
+
 ![Market place](../../../assets/img/hub/vnet/market/logo.png)
 
 Make sure you selected the right one, by `Microsoft | Azure Service`
+
 ![Overview](../../../assets/img/hub/vnet/market/overview.png)
 
 #### Create

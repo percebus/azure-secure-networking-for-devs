@@ -3,7 +3,7 @@
 ## Description
 
 A "Spoke" VNet is merely a VNet that is connected to a "Hub" VNet to reuse centralized resources, like **Bastion**, **Firewall** or even a shared **Storage Account**.
-For this excercise we will only create 1 spoke subnet in the region of your choice. We chose with `westus2` for the US.
+For this excercise we will only create 1 spoke subnet in the region of your choice. We chose to go with `westus2` for the US.
 
 ## Resources
 
