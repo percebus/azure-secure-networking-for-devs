@@ -21,10 +21,10 @@ Be sure to check the [Additional Resources](../../README.md#additional-resources
 
 Make sure you check this [Azure CLI](../az/cli.md) guide to get familiar with the commands you'll be using.
 
-### Screenshots
+### Inconsistent screenshots
 
 There are discrepancies w/ the screenshots and the names used in this tutorial.
-Please use the names provided in the tutorial, we'll work on update the images w/ subsequent iterations of this training.
+Please use the names provided in the tutorial, we'll work on updating the images as we refine this training w/ each subsequent iterations.
 
 ### Naming conventions
 
