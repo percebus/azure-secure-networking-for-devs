@@ -2,7 +2,7 @@
 
 ## Before you begin
 
-Before creating resources, see [Naming conventions](./tutorial.md#naming-conventions).
+Before creating resources, see [Naming conventions](../README.md#naming-conventions).
 
 ## Table of Contents
 
