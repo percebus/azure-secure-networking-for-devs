@@ -4,7 +4,7 @@
 
 ## Tutorial
 
-Head to `docs/tutorial/README.md` to start the tutorial.
+[Head to the tutorial](./docs/tutorial/README.md).
 
 ## Additional Resources
 
