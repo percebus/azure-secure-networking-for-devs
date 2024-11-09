@@ -76,7 +76,7 @@ IP configurations:
 
 ![Create Storage Account](../../../../assets/img/azure/solution/vnets/hub/st/create/basics.png)
 
-**Storage account name**: `{short-prefix}hub
+**Storage account name**: `{short-prefix}hub{region}{id}st`
 
 **Primary Service**: Choose "Azure Files".
 
@@ -102,7 +102,7 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 - `default`: We want any service from the VNet to be able to access the storage account. We can add more security with ([A]pplication) [S]ecurity [G]roups.
 - `AzureBastionSubnet`: We want to be able to access & test the storage account from the Jump box accessible from Bastion.
-- `AzureFirewallSubnet`: N/A
+- ~~`AzureFirewallSubnet`~~: N/A
 
 **IP Addresses**: **TEMPORARY!** Add your current Public IP address. We will be removing this later on.
 

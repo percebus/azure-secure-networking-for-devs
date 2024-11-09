@@ -25,7 +25,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### Review + Create
 
-![Review + Create](../../../../assets/img/azure/solution/vnets/hub/pdns/st/create/review.png)
+![Review + Create](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/create/review.png)
 
 #### Create VNet Links
 
