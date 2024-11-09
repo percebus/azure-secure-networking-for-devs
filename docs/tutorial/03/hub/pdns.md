@@ -2,13 +2,15 @@
 
 ## Description
 
-**By default**, *Azure Storage Accounts* expose **public URLs** (with **public IP addresses**)
+**By default**, _Azure Storage Accounts_ expose **public URLs** (with **public IP addresses**)
 
 It doesn't matter how **private** our VNets are, if we constantly redirect traffic via public networks.
 
 ## Resources
 
 - Private DNS Zone: `privatelink.blob.core.windows.net`
+  - `privatelink-at-hub` VNet link
+  - `privatelink-at-spoke-westus2` VNet link
 
 ### Private DNS Zone
 
@@ -40,9 +42,8 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 ![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/pdns/st/vnet/links/hub.png)
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
-- **Virtual Network**: Select the **Hub** VNet
--[x] **Enable auto registration**: Click on this checkbox.
+- **Virtual Network**: Select the **Hub** VNet -[x] **Enable auto registration**: Click on this checkbox.
 
 > NOTE: You will only be able to select 1 VNet to enable auto registration.
 
->> FIXME KEEP GOING
+> > FIXME KEEP GOING
