@@ -1,4 +1,4 @@
-# Azure Firewall Rules
+# Configuring Azure Firewall
 
 Now that all traffic is going through the **Azure Firewall**, we can start adding rules to allow or deny traffic.
 

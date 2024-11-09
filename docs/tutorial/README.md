@@ -5,7 +5,7 @@
 - [Before you begin](#before-you-begin)
   - [Additional Resources](#additional-resources)
   - [Azure CLI](#azure-cli)
-  - [Screenshots](#screenshots)
+  - [Inconsistent Screenshots](#inconsistent-screenshots)
   - [Naming conventions](#naming-conventions)
     - [Example](#example)
 - [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
