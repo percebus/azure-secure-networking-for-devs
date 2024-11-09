@@ -1,4 +1,4 @@
-MIT License
+# LICENSE: MIT
 
 Copyright (c) 2024 Microsoft
 

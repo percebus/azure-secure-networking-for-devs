@@ -9,7 +9,11 @@ It doesn't matter how **private** our VNets are, if we constantly redirect traff
 ## Table of Contents
 
 1. Hub
-   1. [Create Private DNS](hub/dnsz.md)
+   1. [Create Private DNS Zone](hub/dnsz.md)
    1. [Create Storage Account](hub/st.md)
 1. Spoke
    1. [Create Storage Account](spoke/st.md)
+
+## Next Steps
+
+[Go back to parent](../README.md)
