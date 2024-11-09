@@ -45,8 +45,9 @@ Uhm, it seems we missed something...
 Oh, so we need to enable the DNS Proxy first!
 
 1. Navigate do DNS
-  - [x] Mark "DNS Settings" as "Enabled"
-  - [x] Mark "DNS Proxy" as Enabled
+
+- [x] Mark "DNS Settings" as "Enabled"
+- [x] Mark "DNS Proxy" as Enabled
 
 ![Enable DNS Proxy](../../../../assets/img/azure/solution/vnets/hub/fw/dns/proxy/disabled.png)
 
