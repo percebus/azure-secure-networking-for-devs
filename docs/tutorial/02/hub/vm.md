@@ -90,6 +90,6 @@ Finally, Windows Server should come up
 
 ![Windows Server](../../../../assets/img/azure/solution/vnets/hub/vm/inside/01.png)
 
-## Finished
+## Next Steps
 
 [Go back to parent](../README.md)

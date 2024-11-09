@@ -105,6 +105,6 @@ Note that the 2 arrows represent the peering between the 2 VNets.
 - [x] Hub > Spoke
 - [x] Spoke > Hub
 
-## Finished
+## Next Steps
 
 [Go back to module](./README.md)

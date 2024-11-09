@@ -43,6 +43,6 @@ Go to Settings > Routes > Add
 - **Next hop address**: In a new tab, go to the **Azure Firewall** and copy the **Private IP** address
   ![Private IP](../../../../assets/img/azure/solution/vnets/hub/fw/overview.png)
 
-## Finished
+## Next Steps
 
 [Go back to parent](../README.md)

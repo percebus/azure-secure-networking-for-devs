@@ -81,6 +81,6 @@ These are all the rules I ended up adding:
 
 ![rules](../../../../assets/img/azure/solution/vnets/hub/fw/rules/n.png)
 
-## Finished
+## Next Steps
 
 [Go back to parent](../README.md)

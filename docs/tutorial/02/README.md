@@ -17,6 +17,6 @@ Your resources should look like something this.-
 
 ![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/02.png)
 
-## Finished
+## Next Steps
 
 [Go back to parent](../README.md)

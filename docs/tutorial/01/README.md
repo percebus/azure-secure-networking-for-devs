@@ -24,6 +24,6 @@ You should see something like this.-
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
 
-## Finished
+## Next Steps
 
 [Go back to parent](../README.md)

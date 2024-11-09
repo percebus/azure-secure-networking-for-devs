@@ -163,6 +163,6 @@ You can see the relationship between the Firewall `fw` and the Public IP `fw-pip
 
 ![Resource visualizer](../../../assets/img/azure/solution/vnets/hub/fw/resources/01.png)
 
-## Finished
+## Next Steps
 
 [Go back to module](./README.md)
