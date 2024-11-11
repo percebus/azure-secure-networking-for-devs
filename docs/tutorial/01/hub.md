@@ -53,7 +53,7 @@ Make sure you selected the right one, by `Microsoft | Azure Service`
 
 #### Create
 
-##### Basic
+##### Basics
 
 Create a `{my-prefix}-hub-switzerlandnorth-{id}-vnet` virtual network in Switzerland North.
 
@@ -67,7 +67,7 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 
 ###### Bastion
 
-Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
+> NOTE: Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
 1. Toggle ON the _"Enable Azure Bastion"_. Add a `{my-prefix}-hub-switzerlandnorth-{id}-bas` name.
 1. For the **Public address**
@@ -162,6 +162,16 @@ Your resources should look like this.-
 You can see the relationship between the Firewall `fw` and the Public IP `fw-pip` in the resource visualizer.
 
 ![Resource visualizer](../../../assets/img/azure/solution/vnets/hub/fw/resources/01.png)
+
+## Costs
+
+Both **Azure Bastion** & **Azure Firewall** are expensive resources, which are charged by the hour.
+
+So keep an eye on them.
+
+![Costs - 01](../../../assets/img/azure/solution/vnets/hub/costs/01.png)
+
+![Costs - 02](../../../assets/img/azure/solution/vnets/hub/costs/02.png)
 
 ## Next Steps
 

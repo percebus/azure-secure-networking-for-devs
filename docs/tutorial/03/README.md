@@ -8,6 +8,7 @@ It doesn't matter how **private** our VNets are, if we constantly redirect traff
 
 ## Table of Contents
 
+1. [Download and install Storage Explorer](./storage_explorer.md)
 1. Hub
    1. [Create Private DNS Zone](hub/dnsz.md)
    1. [Create Storage Account](hub/st.md)

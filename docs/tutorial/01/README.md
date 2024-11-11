@@ -2,7 +2,32 @@
 
 ## Before you begin
 
+### Naming Conventions
+
 Before creating resources, see [Naming conventions](../README.md#naming-conventions).
+
+### Hub & Spoke architecture
+
+Look at the URLs we've included on [Hub-and-Spoke Architectures](../README.md).
+
+This module is part of a series of modules that will help you create a Hub & Spoke network architecture.
+
+The idea is that we can centralize some services to:
+
+- Reduce maintenance loads
+- Reduce operational costs (services like **Azure Firewall** and **Azure Bastion** can be expensive!)
+
+At a high level, it looks like this.-
+
+![Hub & Spokes](../../../assets/img/azure/architectures/hub_n_spokes/fw.png)
+
+> _"How is this applicable to ISE?"_ you might ask.
+
+Well, you can have multiple environments (Dev, Test, Prod) in the same subscription, and still keep them isolated.
+
+![Hub & Spokes environments](../../../assets/img/azure/architectures/hub_n_spokes/environments.png)
+
+The above example exceeds the scope of this tutorial, but it's good to know that you can expand on this.
 
 ## Table of Contents
 

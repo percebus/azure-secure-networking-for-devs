@@ -1,5 +1,15 @@
 # Jump box
 
+## Architecture
+
+Previously we created a **Bastion** service in the Hub-VNet. Now we can create a Virtual Machine that will serve as a jump box.
+
+Why does Bastion need a delegated subnet? That is how it controls the traffic coming from the public IP address to the VM(s) in the `default` subnet.
+
+![Azure Bastion](../../../../assets/img/azure/architectures/bas/subnets.png)
+
+This enables more than 1 person connecting at the same time; assuming your VM supports it, like a properly configured **Windows Server**.
+
 ## Resources
 
 - Resource group: `{my-prefix}-spoke-westus2-{id}-rg` (already exists)
@@ -29,7 +39,7 @@ Look for the `Virtual machine` service Azure Portal's Market place.
 
 ###### Administrator account
 
-Create a username and password you'll remember. If you forget it, you might need to completely recreate the VM.
+Create a `username` and `password` you'll remember. If you forget it, you might need to completely recreate the VM.
 
 ##### Disks
 
@@ -64,18 +74,18 @@ Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
 
-#### Checkpoint
+## Status Check
 
 Note that some names will be auto-generated with randomized characters.
 If you want to avoid this, you would need to create those resources manually and then attaching them.
 
 ![Snapshot 01](../../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
 
-#### Overview
+### Overview
 
 ![Overview](../../../../assets/img/azure/solution/vnets/hub/vm/overview.png)
 
-#### Connect
+### Connect
 
 1. Select Connect > Bastion
 

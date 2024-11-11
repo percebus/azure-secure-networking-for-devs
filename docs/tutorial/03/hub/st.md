@@ -90,6 +90,8 @@ But be aware that Gen2 is also available.
 
 ##### Networking
 
+> **NOTE**: The Storage Account gets shipped with its own Firewall
+
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/st/create/networking.png)
 
 **Network access**: Choose _"Enable public access from selected virtual networks and IP Addresses"_.
@@ -124,6 +126,51 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 ![Review](../../../../assets/img/azure/solution/vnets/hub/st/create/review.png)
 
+#### Private Endpoint: Did you forget?
+
+Listen, I get it. We all do mistakes. If you forgot to create the "Private Endpoint" before-hand, or during creation process; you can still do it now.
+
+![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/empty.png)
+
+#### Reconfigure
+
+Having installed the "Storage Explorer" in both your Jumpbox and your local laptop, you should now be able to connect to this storage account from any of the 2 places:
+
+##### Step 1: Upload data
+
+From Either **Your Laptop** or the **Jumpbox**
+
+1. Open Storage Explorer
+1. Create a container
+1. Upload a file from your laptop
+
+![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/public.png)
+
+##### Step 2: Remove Public IP
+
+1. Go to "Security + networking" > "Networking" > "Firewalls and virtual networks" > "Firewall"
+1. Remove the Public IP address you added in the previous step.
+
+**Before**:
+
+![Before](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/firewall_and_virtual_networks/01.png)
+
+**After**:
+
+![After](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/firewall_and_virtual_networks/02.png)
+
+Ideally, we would just change _"Plublic network access"_ to **"Disabled"**. But let's take it 1 step at the time.
+
+###### Step 3: Download data
+
+From your laptop, try to download the file you uploaded in step 1.
+
+You should now see an error like this.-
+
+![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/private.png)
+
+But it should still work from your Jumpbox `=]`
+
 ## Status Check
 
 ### Private Endpoint
@@ -131,3 +178,10 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oint" connected to the "Storage Account". and to the "[N]etwork [I]nterfa[c]e".
 
 ![PEP](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
+
+### Private DNS Zone
+
+1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
+1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
+
+![PEP](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/dns_management/recordsets.png)
