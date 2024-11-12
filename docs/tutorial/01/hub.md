@@ -27,17 +27,17 @@ In this chapter we'll be creating the following resources
 ##### Basic
 
 Create a `{my-prefix}-hub-switzerlandnorth-{id}-rg` resource group in Switzerland North.
-![Basics](../../../assets/img/hub/rg/create/basics.png)
+![Basics](../../../assets/img/azure/solution/vnets/hub/rg/create/basics.png)
 
 ##### Tags
 
 Add tags as needed
 
-![Tags](../../../assets/img/hub/rg/create/tags.png)
+![Tags](../../../assets/img/azure/solution/vnets/hub/rg/create/tags.png)
 
 And the end result should look like this:
 
-![Empty](../../../assets/img/hub/rg/empty.png)
+![Empty](../../../assets/img/azure/solution/vnets/hub/rg/empty.png)
 
 ### [V]irtual [Net]work
 
@@ -45,29 +45,29 @@ And the end result should look like this:
 
 Look for a "Virtual network" in the Azure Portal's market place
 
-![Market place](../../../assets/img/hub/vnet/market/logo.png)
+![Market place](../../../assets/img/azure/market/vnet/logo.png)
 
 Make sure you selected the right one, by `Microsoft | Azure Service`
 
-![Overview](../../../assets/img/hub/vnet/market/overview.png)
+![Overview](../../../assets/img/azure/market/vnet/overview.png)
 
 #### Create
 
-##### Basic
+##### Basics
 
 Create a `{my-prefix}-hub-switzerlandnorth-{id}-vnet` virtual network in Switzerland North.
 
-![Basics](../../../assets/img/hub/vnet/create/basics.png)
+![Basics](../../../assets/img/azure/solution/vnets/hub/vnet/create/basics.png)
 
 ##### Security
 
 Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 
-![Security](../../../assets/img/hub/vnet/create/security.png)
+![Security](../../../assets/img/azure/solution/vnets/hub/vnet/create/security.png)
 
 ###### Bastion
 
-Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
+> NOTE: Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
 1. Toggle ON the _"Enable Azure Bastion"_. Add a `{my-prefix}-hub-switzerlandnorth-{id}-bas` name.
 1. For the **Public address**
@@ -94,7 +94,7 @@ Before we begin, be mindful that this is an expensive resource, which is charged
 
 When you first open the "IP addresses" tab, you'll see following.
 
-![IP Addresses: Before](../../../assets/img/hub/vnet/create/ip/before.png)
+![IP Addresses: Before](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/before.png)
 
 And eventho we'll be working on `10.x.x.x`, we'll make some changes.
 Remember that all VNets will communicate, so planning ahead to not have IP collision is important.
@@ -112,7 +112,7 @@ We'll also need a `default` subnet (for the lack of a better name) to host any o
 
 Now, you might be considering a setup like this
 
-![What-if](../../../assets/img/hub/vnet/create/ip/what-if.png)
+![What-if](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/what-if.png)
 
 But the only problem is
 
@@ -132,23 +132,15 @@ So, we'll end up with 3 subnets:
 
 After our changes, it should look something like this.-
 
-![IP Addresses: After](../../../assets/img/hub/vnet/create/ip/after.png)
+![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/after.png)
 
 ##### Review
 
 Give 1 good look before creating all the resources.
 
-![Review](../../../assets/img/hub/vnet/create/review.png)
+![Review](../../../assets/img/azure/solution/vnets/hub/vnet/create/review.png)
 
 If everything looks good, hit that `[ Create ]` button.
-
-### Firewal
-
-#### Resource visualizer
-
-You can see the relationship between the Firewall `fw` and the Public IP `fw-pip` in the resource visualizer.
-
-![Resource visualizer](../../../assets/img/hub/fw/resources/01.png)
 
 ### [N]etwork [S]ecurity [G]roup
 
@@ -156,3 +148,31 @@ You can see the relationship between the Firewall `fw` and the Public IP `fw-pip
 1. Attach it to the `default` subnet.
 
 We'll configure it later down the road
+
+## Status Check
+
+### Snapshot
+
+Your resources should look like this.-
+
+![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
+
+### Resource visualizer
+
+You can see the relationship between the Firewall `fw` and the Public IP `fw-pip` in the resource visualizer.
+
+![Resource visualizer](../../../assets/img/azure/solution/vnets/hub/fw/resources/01.png)
+
+## Costs
+
+Both **Azure Bastion** & **Azure Firewall** are expensive resources, which are charged by the hour.
+
+So keep an eye on them.
+
+![Costs - 01](../../../assets/img/azure/solution/vnets/hub/costs/01.png)
+
+![Costs - 02](../../../assets/img/azure/solution/vnets/hub/costs/02.png)
+
+## Next Steps
+
+[Go back to module](./README.md)

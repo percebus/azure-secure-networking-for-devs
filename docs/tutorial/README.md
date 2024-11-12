@@ -5,11 +5,11 @@
 - [Before you begin](#before-you-begin)
   - [Additional Resources](#additional-resources)
   - [Azure CLI](#azure-cli)
-  - [Screenshots](#screenshots)
+  - [Inconsistent Screenshots](#inconsistent-screenshots)
   - [Naming conventions](#naming-conventions)
     - [Example](#example)
 - [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
-- [The tutorial](#the-tutorial)
+- [The Tutorial](#the-tutorial)
 
 ## Before you begin
 
@@ -24,7 +24,7 @@ Make sure you check this [Azure CLI](../az/cli.md) guide to get familiar with th
 ### Inconsistent screenshots
 
 There are discrepancies w/ the screenshots and the names used in this tutorial.
-Please use the names provided in the tutorial, we'll work on updating the images as we refine this training w/ each subsequent iterations.
+Please use the names provided in the tutorial, we'll work on updating the images as we refine this training w/ subsequent iterations.
 
 ### Naming conventions
 
@@ -40,9 +40,9 @@ Please use the names provided in the tutorial, we'll work on updating the images
 - `id`: Something to tell it apart, in case you want to have multiple "stacks" in the same region. Start with `1` or `a`. This is also useful, if you went w/ something like `nw-security`, but it collides with a resource someone else created.
 - `resource type`: The type of resource. i.e. `rg`, `vnet`, `firewall`, etc. See [Resource abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations). Some resources will have chained names, like:
   - `*-vm-special`
-  - `*-vm-special-hdd`: Disk
-  - `*-vm-special-nic`: Network interface
-  - `*-vm-special-nic-pep`: Private endpoint
+  - `*-vm-special-hdd`: [H]ard [D]isk [D]rive
+  - `*-vm-special-nic`: [N]etwork [I]nterfa[c]e
+  - `*-vm-special-nic-pep`: [P]rivate [E]nd[p]oint
 
 #### Example
 
@@ -66,7 +66,7 @@ For simplicity of this excercise, your VNets will look something like:
 | US Spoke | `10.2.x.x`    | `westus2`          |                               |
 | EU Spoke | `10.3.x.x`    | `westeurope`       | Not included in this tutorial |
 
-## The tutorial
+## The Tutorial
 
 Throughout this tutorial, you'll be creating the resources via the following modules:
 

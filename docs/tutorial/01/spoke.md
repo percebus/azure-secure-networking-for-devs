@@ -18,7 +18,7 @@ For this excercise we will only create 1 spoke subnet in the region of your choi
 #### Create
 
 1. Create a `{my-prefix}-spoke-westus2-{id}-rg` resource group in West US 2.
-   ![Basics](../../../assets/img/spoke/rg/create/basics.png)
+   ![Basics](../../../assets/img/azure/solution/vnets/spoke/rg/create/basics.png)
 
 ### [V]irtual [Net]work
 
@@ -32,7 +32,7 @@ Name it `{my-prefix}-spoke-westus2-{id}-vnet` in West US 2.
 
 Make sure **Bastion** & **Firewall** remained **Toggled OFF**.
 
-![Security](../../../assets/img/spoke/vnet/create/security.png)
+![Security](../../../assets/img/azure/solution/vnets/spoke/vnet/create/security.png)
 
 ###### IP addresses
 
@@ -40,13 +40,13 @@ Make sure **Bastion** & **Firewall** remained **Toggled OFF**.
 | --------- | --------- | ------------- | ------- | ----- |
 | `default` | `0-3.x`   | `10.2.0.0/22` | `1,024` |       |
 
-![Security](../../../assets/img/spoke/vnet/create/ip/after.png)
+![Security](../../../assets/img/azure/solution/vnets/spoke/vnet/create/ip/after.png)
 
 ##### Review + Create
 
 Review your settings and create the VNet.
 
-![Review + Create](../../../assets/img/spoke/vnet/create/review.png)
+![Review + Create](../../../assets/img/azure/solution/vnets/spoke/vnet/create/review.png)
 
 ### [N]etwork [S]ecurity [G]roup
 
@@ -98,9 +98,13 @@ We can later come back and remove permissions to reinforce security.
 
 Under the "Resource visualizer" you should see something like this:
 
-![Resource visualizer](../../../assets/img/spoke/vnet/resources/01.png)
+![Resource visualizer](../../../assets/img/azure/solution/vnets/spoke/vnet/resources/01.png)
 
 Note that the 2 arrows represent the peering between the 2 VNets.
 
 - [x] Hub > Spoke
 - [x] Spoke > Hub
+
+## Next Steps
+
+[Go back to module](./README.md)
