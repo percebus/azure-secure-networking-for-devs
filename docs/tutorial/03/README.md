@@ -8,7 +8,7 @@
 1. Your laptop (Optional)
    1. [Download and install Storage Explorer](./storage_explorer.md)
 1. [Hub resouces](hub/README.md)
-   1. 1. [Download and install Storage Explorer](./storage_explorer.md) inside the VM
+   1. [Download and install Storage Explorer](./storage_explorer.md) inside the VM
    1. Create Private DNS Zone
    1. Create Storage Account
 1. Spoke
