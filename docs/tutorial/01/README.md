@@ -1,5 +1,11 @@
 # Module 1: Virtual Networks
 
+## Table of Contents
+
+1. [Create Hub VNet & resources](./hub.md)
+1. [Create Spoke VNet & resources](./spoke.md)
+   1. VPN peerings
+
 ## Before you begin
 
 ### Naming Conventions
@@ -28,12 +34,6 @@ Well, you can have multiple environments (Dev, Test, Prod) in the same subscript
 ![Hub & Spokes environments](../../../assets/img/azure/architectures/hub_n_spokes/environments.png)
 
 The above example exceeds the scope of this tutorial, but it's good to know that you can expand on this.
-
-## Table of Contents
-
-1. [Create Hub VNet & resources](./hub.md)
-1. [Create Spoke VNet & resources](./spoke.md)
-   1. VPN peerings
 
 ## Status Check
 
