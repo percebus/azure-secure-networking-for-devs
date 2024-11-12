@@ -21,7 +21,7 @@ This enables more than 1 person connecting at the same time; assuming your VM su
 Where:
 
 - `{some-short-prefix}`: Your username (i.e. `johndoe`)
-- `{region}`: The region of your Hub VNet (i.e. `switcherandnorth`)
+- `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### [V]irtual [M]achine
