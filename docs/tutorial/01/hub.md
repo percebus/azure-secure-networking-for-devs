@@ -88,6 +88,9 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 
 ###### Firewall
 
+> [!WARNING]
+> Be mindful that this is an **expensive resource**, which is **charged by the hour**.
+
 Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
 
 1. Toggle ON the _"Enable Azure Firewall"_. Add a `{my-prefix}-hub-{region}-{id}-fw` name.
