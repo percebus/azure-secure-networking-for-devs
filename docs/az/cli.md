@@ -1,5 +1,9 @@
 # azure-secure-networking-for-devs
 
+## Documentation
+
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
+
 ## Useful Azure CLI commands
 
 - az
