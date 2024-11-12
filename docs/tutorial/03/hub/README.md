@@ -9,6 +9,8 @@
 
 ## Status Check
 
+### Resource Visualizer
+
 ![Resources](../../../../assets/img/azure/solution/vnets/hub/resources/01.png)
 
 ## Next Steps
