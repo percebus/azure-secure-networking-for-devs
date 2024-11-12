@@ -8,7 +8,7 @@ Before creating resources, see [Naming conventions](../README.md#naming-conventi
 
 ### Hub & Spoke architecture
 
-Look at the URLs we've included on [Hub-and-Spoke Architectures](../README.md).
+Look at the URLs we've included on [Hub-and-Spoke Architectures](../../../README.md#hub-spoke).
 
 This module is part of a series of modules that will help you create a Hub & Spoke network architecture.
 
