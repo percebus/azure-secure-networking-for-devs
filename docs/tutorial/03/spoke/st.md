@@ -98,10 +98,6 @@ Since you just created one Storage account at hub, we will skim over some detail
 
 ![Review](../../../../assets/img/azure/solution/vnets/spoke/st/create/review.png)
 
-#### Overview
-
-![Overview](../../../../assets/img/azure/solution/vnets/spoke/st/overview/01.png)
-
 ## Create a Container
 
 Like we did in **Hub**, create a BLOb container.
