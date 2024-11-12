@@ -8,7 +8,7 @@
 
 ## Status Check
 
-![Resources](../../../../assets/img/azure/solution/vnets/hub/resources/03.png)
+![Resources](../../../../assets/img/azure/solution/vnets/hub/resources/01.png)
 
 ## Next Steps
 
