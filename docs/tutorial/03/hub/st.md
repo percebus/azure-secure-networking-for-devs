@@ -38,6 +38,12 @@ You can also skip this step and either:
 1. Go straight to the "Storage Account > Create" and create them from there.
 1. Or add them after the fact, which requires more work.
 
+#### Market Place
+
+Search for "Private Endpoint" in the Azure Portal's Market Place.
+
+![Private Endpoint](../../../../assets/img/azure/market/pep/logo.png)
+
 #### Create
 
 ##### Basics
@@ -82,6 +88,12 @@ IP configurations:
 ![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
 
 ### Storage Account
+
+#### Market Place
+
+Search for "Storage Account" in the Azure Portal's Market Place.
+
+![Storage Account](../../../../assets/img/azure/market/st/logo.png)
 
 #### Create
 

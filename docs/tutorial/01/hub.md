@@ -33,6 +33,7 @@ Where:
 ##### Basic
 
 Create a `{my-prefix}-hub-{region}-{id}-rg` resource group in Switzerland North.
+
 ![Basics](../../../assets/img/azure/solution/vnets/hub/rg/create/basics.png)
 
 ##### Tags
