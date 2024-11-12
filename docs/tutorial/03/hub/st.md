@@ -22,8 +22,8 @@ Where:
 - `{region}`: The region of your spoke VNet (i.e. `westus2`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
-> [!INFO]
-> You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you won't have much control over naming. So We would recommend you start by creating the "Private endpoint".
+> [!TIP]
+> You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you **won't have much control over naming**. So We would recommend you start by creating the "Private endpoint".
 
 ### Private Endpoint
 
@@ -115,7 +115,7 @@ But be aware that Gen2 is also available.
 
 ##### Networking
 
-> [!NFO]
+> [!IMPORTANT]
 > The Storage Account gets shipped with its own Firewall
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/st/create/networking.png)

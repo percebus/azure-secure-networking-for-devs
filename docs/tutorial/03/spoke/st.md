@@ -80,7 +80,7 @@ Since you just created one Storage account at hub, we will skim over some detail
 
 ##### Networking
 
-> [!INFO]
+> [!IMPORTANT]
 > The Storage Account gets shipped with its own Firewall
 
 ![Networking](../../../../assets/img/azure/solution/vnets/spoke/st/create/networking.png)
