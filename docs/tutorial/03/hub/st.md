@@ -14,7 +14,7 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
   - [St]orage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
     - [P]rivate [E]nd[p]oint: `{some-short-prefix}hub{region}{id}st-pep`
       - [N]etwork [I]nterfa[c]e: `{some-short-prefix}hub{region}{id}st-pep-nic`
-    - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}hub{region}{id}st-asg`
+      - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
 Where:
 
@@ -173,7 +173,7 @@ From Either **Your Laptop** or the **Jumpbox**
 1. Create a container
 1. Upload a file from your laptop
 
-![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/public.png)
+![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
 
 ##### Step 2: Remove Public IP
 
@@ -196,9 +196,19 @@ From your laptop, try to download the file you uploaded in step 1.
 
 You should now see an error like this.-
 
-![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/private.png)
+![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/disallowed.png)
 
 But it should still work from your Jumpbox `=]`
+
+### Application Security Group
+
+If you haven't created it so far, you can go ahead and create that now.
+
+#### Market Place
+
+Search for "Application Security Group" in the Azure Portal's Market Place.
+
+![ASG](../../../../assets/img/azure/market/asg/logo.png)
 
 ## Status Check
 
@@ -214,3 +224,27 @@ If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oin
 1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
 
 ![PEP](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/dns_management/recordsets.png)
+
+### Jumpbox (VM)
+
+#### Terminal
+
+Open a PowerShell terminal and run the following command:
+
+```
+$> nslookup {your storage}.blob.core.windows.net
+```
+
+You should see the name getting resolved
+
+#### Storage Explorer
+
+If you installed the "Storage Explorer" in the Jumpbox, you should be able to access the storage account from there.
+
+![Emtpy](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
+
+You should be able to create a text file, and upload it
+
+## Next Steps
+
+[Go back to parent](./README.md)

@@ -10,7 +10,7 @@ The information of each region is stored in a locally-accessible storage account
   - [St]orage Account: `{some-short-prefix}spoke{region}{id}st`. i.e. `jcspokewestus21st`.
     - [P]rivate [E]nd[p]oint: `{some-short-prefix}spoke{region}{id}st-pep`
       - [N]etwork [I]nterfa[c]e: `{some-short-prefix}spoke{region}{id}st-pep-nic`
-    - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}spoke{region}{id}st-asg`
+      - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}spoke{region}{id}st-pep-asg`
 
 Where:
 
@@ -58,7 +58,7 @@ Point to the Private DNS Zone previously created.
 
 You can see the resources you've just created
 
-![Resource Diagram](../../../../assets/img/azure/solution/vnets/spoke/st/pep/resources/01.png)
+![Resource Diagram](../../../../assets/img/azure/solution/vnets/spoke/st/pep/resources/02.png)
 
 ### Settings
 
@@ -98,11 +98,47 @@ Since you just created one Storage account at hub, we will skim over some detail
 
 ![Review](../../../../assets/img/azure/solution/vnets/spoke/st/create/review.png)
 
+#### Overview
+
+![Overview](../../../../assets/img/azure/solution/vnets/spoke/st/overview/01.png)
+
+## Create a Container
+
+Like we did in **Hub**, create a BLOb container.
+
+Note that because this time around we went directly to disallow Public Access of any kind, you WON'T be able to see anything from the portal.
+
+![Forbidden](../../../../assets/img/azure/solution/vnets/spoke/st/containers/container1/private.png)
+
 ## Status Check
 
 ### Resource Group
 
 ![Resource Diagram](../../../../assets/img/azure/solution/vnets/spoke/resources/01.png)
+
+### From Jumpbox (VM)
+
+#### Terminal
+
+Open a PowerShell terminal run the following command:
+
+```
+$> nslookup {your storage}.blob.core.windows.net
+```
+
+You should see the name getting resolved
+
+![nslookup](../../../../assets/img/azure/solution/vnets/spoke/st/shell/nslookup.png)
+
+### Storage explorer
+
+If you installed the "Storage Explorer" in the Jumpbox, you should be able to access the storage account from there.
+
+![Emtpy](../../../../assets/img/azure/solution/vnets/spoke/st/explorer/from_jumpbox/empty.png)
+
+You should be able to create a text file, and upload it
+
+![Uploaded](../../../../assets/img/azure/solution/vnets/spoke/st/explorer/from_jumpbox/uploaded.png)
 
 ## Next Steps
 

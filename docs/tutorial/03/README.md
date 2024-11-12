@@ -1,9 +1,14 @@
 # Module 3: Secure Storage Accounts
 
+> [!IMPORTANT]
+> All Storage containers will get registered under `{name}.blob.core.windows.net`
+
 ## Table of Contents
 
-1. [Download and install Storage Explorer](./storage_explorer.md)
+1. Your laptop
+   1. [Download and install Storage Explorer](./storage_explorer.md)
 1. [Hub resouces](hub/README.md)
+   1. 1. [Download and install Storage Explorer](./storage_explorer.md) inside the VM
    1. Create Private DNS Zone
    1. Create Storage Account
 1. Spoke

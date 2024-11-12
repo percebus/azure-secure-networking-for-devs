@@ -56,12 +56,26 @@ Review your settings and create the VNet.
 
 ### [N]etwork [S]ecurity [G]roup
 
-#### Create
-
 1. Create a Network security group
 1. Attach it to the `default` subnet.
 
+#### Create
+
+##### Basics
+
+![Basics](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/create/basics.png)
+
+##### Review
+
+![Basics](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/create/review.png)
+
 We'll configure it later down the road
+
+#### Associate
+
+Go to the `default` subnet and associate the NSG.
+
+![Associate](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/associate.png)
 
 #### Overview
 

@@ -18,7 +18,7 @@ In this chapter we'll be creating the following resources
       - `AzureBastionSubnet`: `10.1.0.x/26`
       - `AzureFirewallSubnet`: `10.1.1.x/26`
       - `default`: `10.1.4.x/22`
-        - NSG: `{my-prefix}-hub-{region}-{id}-vnet-snet-default-nsg`
+        - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-vnet-snet-default-nsg`
 
 Where:
 
@@ -159,6 +159,12 @@ If everything looks good, hit that `[ Create ]` button.
 1. Attach it to the `default` subnet.
 
 We'll configure it later down the road
+
+#### Market place
+
+Look for a "Network security group" in the Azure Portal's market place
+
+![Network Security Group](../../../assets/img/azure/market/nsg/logo.png)
 
 ## Status Check
 
