@@ -50,10 +50,16 @@ Review your settings and create the VNet.
 
 ### [N]etwork [S]ecurity [G]roup
 
+#### Create
+
 1. Create a Network security group
 1. Attach it to the `default` subnet.
 
 We'll configure it later down the road
+
+#### Overview
+
+![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
 
 ### VNet Peering(s)
 
@@ -63,7 +69,7 @@ Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to conn
 
 Go to Peerings > Add
 
-> > FIXME ADD SCREENSHOT
+![Add Peering](../../../assets/img/azure/solution/vnets/spoke/vnet/peering/add.png)
 
 Note that you can allow traffic:
 
