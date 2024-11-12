@@ -2,10 +2,11 @@
 
 ## Resources
 
-- Private DNS Zone: `privatelink.blob.core.windows.net`
-  - Links to VNets
-    - `privatelink-at-hub`
-    - `privatelink-at-spoke-westus2`
+- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - Private [DNS] [Z]one: `privatelink.blob.core.windows.net`
+    - Links to VNets
+      - `privatelink-at-hub`
+      - `privatelink-at-spoke-westus2`
 
 ### Private DNS Zone
 

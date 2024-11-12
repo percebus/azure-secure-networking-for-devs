@@ -31,7 +31,7 @@ Please use the names provided in the tutorial, we'll work on updating the images
 `{prefix}-(hub|spoke)-{location}-{id}-{resource type}`
 
 - `prefix`: The shared prefix for all resources in the deployment. i.e.
-  - Your username: `jcguerrero`
+  - Your username: `johndoe`
   - `nw-security`
 - `hub|spoke`: The type of network.
   - `hub`: The central resources `vnet`, for things like **Bastion**, **Firewall**, etc.
@@ -48,9 +48,9 @@ Please use the names provided in the tutorial, we'll work on updating the images
 
 For a **resource group** in **Switzerland North**, the name would be:
 
-`jcguerrero-hub-switzerlandnorth-1-rg`
+`johndoe-hub-switzerlandnorth-1-rg`
 
-- `jcguerrero`: The shared prefix for all resources in the deployment.
+- `johndoe`: The shared prefix for all resources in the deployment.
 - `hub`: `hub` or `spoke`
 - `switzerlandnorth`: The regional `location` where the resources are deployed.
 - `1`: Identifier
@@ -74,3 +74,7 @@ Throughout this tutorial, you'll be creating the resources via the following mod
 1. [Jump Box](./02/README.md)
 1. [BLOb Storage accounts](./03/README.md)
 1. [Web App](./04/README.md)
+
+And you will be building and configuring this
+
+![Architecture](../../assets/img/azure/solution/goal.png)

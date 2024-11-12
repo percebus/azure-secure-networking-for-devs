@@ -7,17 +7,23 @@ For this excercise we will only create 1 spoke subnet in the region of your choi
 
 ## Resources
 
-- Resource Group: `{my-prefix}-spoke-westus2-{id}-rg`
-  - VNet: `{my-prefix}-spoke-westus2-{id}-vnet`: `10.2.x.x`
+- [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg`
+  - [V]irtual [Net]work: `{my-prefix}-spoke-{region}-{id}-vnet`: `10.2.x.x`
     - Subnets
       - `default`: `10.2.0.x/22`
-        - NSG: `{my-prefix}-spoke-westus2-{id}-vnet-snet-default-nsg`
+        - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
+
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your spoke VNet (i.e. `westus2`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### Resource Group
 
 #### Create
 
-1. Create a `{my-prefix}-spoke-westus2-{id}-rg` resource group in West US 2.
+1. Create a `{my-prefix}-spoke-{region}-{id}-rg` resource group in West US 2.
    ![Basics](../../../assets/img/azure/solution/vnets/spoke/rg/create/basics.png)
 
 ### [V]irtual [Net]work
@@ -26,7 +32,7 @@ Just like in the [Hub](./hub.md), we'll create a VNet. But this time, it **WILL 
 
 #### Create
 
-Name it `{my-prefix}-spoke-westus2-{id}-vnet` in West US 2.
+Name it `{my-prefix}-spoke-{region}-{id}-vnet` in West US 2.
 
 ##### Security
 

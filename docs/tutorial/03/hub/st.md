@@ -10,11 +10,20 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
 
 ## Resources
 
-- Storage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
-  - Private Endpoint: `{some-short-prefix}hub{region}{id}st-pep`
-    - Network Interface: `{some-short-prefix}hub{region}{id}st-pep-nic`
+- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [St]orage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
+    - [P]rivate [E]nd[p]oint: `{some-short-prefix}hub{region}{id}st-pep`
+      - [N]etwork [I]nterfa[c]e: `{some-short-prefix}hub{region}{id}st-pep-nic`
+    - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}hub{region}{id}st-asg`
 
-> NOTE: You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you won't have much control over naming. So We would recommend you start by creating the "Private endpoint".
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your spoke VNet (i.e. `westus2`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
+
+> [!INFO]
+> You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you won't have much control over naming. So We would recommend you start by creating the "Private endpoint".
 
 ### Private Endpoint
 
@@ -68,6 +77,10 @@ IP configurations:
 
 ![IP configurations](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/ip.png)
 
+### Resources
+
+![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
+
 ### Storage Account
 
 #### Create
@@ -90,7 +103,8 @@ But be aware that Gen2 is also available.
 
 ##### Networking
 
-> **NOTE**: The Storage Account gets shipped with its own Firewall
+> [!NFO]
+> The Storage Account gets shipped with its own Firewall
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/st/create/networking.png)
 
@@ -112,7 +126,8 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 ![Private Endpoint](../../../../assets/img/azure/solution/vnets/hub/st/create/networking-private_endpoint.png).
 
-> NOTE: This view does NOT allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
+> [!WARNING]
+> This view does **NOT** allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
 
 ##### Data protection
 
@@ -130,7 +145,9 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 Listen, I get it. We all do mistakes. If you forgot to create the "Private Endpoint" before-hand, or during creation process; you can still do it now.
 
-![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/empty.png)
+After adding it, you should see something like this:
+
+![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/approved.png)
 
 #### Reconfigure
 
