@@ -153,6 +153,12 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 ![Review](../../../../assets/img/azure/solution/vnets/hub/st/create/review.png)
 
+#### Settings
+
+##### Configuration
+
+![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
+
 #### Private Endpoint: Did you forget?
 
 Listen, I get it. We all do mistakes. If you forgot to create the "Private Endpoint" before-hand, or during creation process; you can still do it now.
@@ -223,7 +229,7 @@ If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oin
 1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
 1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
 
-![PEP](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/dns_management/recordsets.png)
+![PEP](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/recordsets.png)
 
 ### Jumpbox (VM)
 

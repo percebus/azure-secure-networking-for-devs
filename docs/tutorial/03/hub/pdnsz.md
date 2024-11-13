@@ -3,7 +3,7 @@
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
-  - Private [DNS] [Z]one: `privatelink.blob.core.windows.net`
+  - [P]rivate [DNS] [Z]one: `privatelink.blob.core.windows.net`
     - Links to VNets
       - `privatelink-at-hub`
       - `privatelink-at-spoke-westus2`
@@ -14,7 +14,7 @@
 
 Look for a "Private DNS Zone" in the Azure Portal's market place
 
-![Market place](../../../../assets/img/azure/market/dnsz/logo.png)
+![Market place](../../../../assets/img/azure/market/pdnsz/logo.png)
 
 #### Create
 
@@ -22,14 +22,14 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 - **Name**: `privatelink.blob.core.windows.net`
 
-![Basics](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/create/basics.png)
+![Basics](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/create/basics.png)
 
 > [!IMPORTANT]
 > All Storage containers will get registered under `{name}.blob.core.windows.net`
 
 ##### Review + Create
 
-![Review + Create](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/create/review.png)
+![Review + Create](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/create/review.png)
 
 #### Create VNet Links
 
@@ -38,7 +38,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### VNet: Hub
 
-![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/vnet/links/hub.png)
+![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/hub.png)
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
@@ -46,7 +46,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### VNet: Spoke
 
-![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/vnet/links/spoke.png)
+![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/spoke.png)
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
@@ -56,7 +56,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 Go to "DNS Management" > "Virtual Network Links".
 
-![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/vnet/links/all.png)
+![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/all.png)
 
 ## Next Steps
 

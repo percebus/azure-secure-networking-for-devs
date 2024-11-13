@@ -102,7 +102,8 @@ Since you just created one Storage account at hub, we will skim over some detail
 
 Like we did in **Hub**, create a BLOb container.
 
-Note that because this time around we went directly to disallow Public Access of any kind, you WON'T be able to see anything from the portal.
+> [!Warning]
+> You won't be able to access this container from the portal, as we've disallowed **Public Access**.
 
 ![Forbidden](../../../../assets/img/azure/solution/vnets/spoke/st/containers/container1/private.png)
 
