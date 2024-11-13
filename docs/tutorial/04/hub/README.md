@@ -3,9 +3,9 @@
 ## Table of Contents
 
 1. Hub
-    1. [[P]rivate [DNS] [Z]one](./pdnsz.md)
-    1. VNet (already existing)
-        1. [Delegated subnet](./snet.md)
+   1. [[P]rivate [DNS] [Z]one](./pdnsz.md)
+   1. VNet (already existing)
+      1. [Delegated subnet](./snet.md)
 
 ## Next Steps
 
