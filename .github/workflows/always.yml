@@ -4,7 +4,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Linting
     runs-on: ubuntu-latest
     steps:
       - name: checkout
