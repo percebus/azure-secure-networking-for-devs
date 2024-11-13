@@ -10,11 +10,20 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
 
 ## Resources
 
-- Storage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
-  - Private Endpoint: `{some-short-prefix}hub{region}{id}st-pep`
-    - Network Interface: `{some-short-prefix}hub{region}{id}st-pep-nic`
+- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [St]orage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
+    - [P]rivate [E]nd[p]oint: `{some-short-prefix}hub{region}{id}st-pep`
+      - [N]etwork [I]nterfa[c]e: `{some-short-prefix}hub{region}{id}st-pep-nic`
+      - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
-> NOTE: You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you won't have much control over naming. So We would recommend you start by creating the "Private endpoint".
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your spoke VNet (i.e. `westus2`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
+
+> [!TIP]
+> You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you **won't have much control over naming**. So We would recommend you start by creating the "Private endpoint".
 
 ### Private Endpoint
 
@@ -28,6 +37,12 @@ You can also skip this step and either:
 
 1. Go straight to the "Storage Account > Create" and create them from there.
 1. Or add them after the fact, which requires more work.
+
+#### Market Place
+
+Search for "Private Endpoint" in the Azure Portal's Market Place.
+
+![Private Endpoint](../../../../assets/img/azure/market/pep/logo.png)
 
 #### Create
 
@@ -68,7 +83,17 @@ IP configurations:
 
 ![IP configurations](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/ip.png)
 
+### Resources
+
+![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
+
 ### Storage Account
+
+#### Market Place
+
+Search for "Storage Account" in the Azure Portal's Market Place.
+
+![Storage Account](../../../../assets/img/azure/market/st/logo.png)
 
 #### Create
 
@@ -90,7 +115,8 @@ But be aware that Gen2 is also available.
 
 ##### Networking
 
-> **NOTE**: The Storage Account gets shipped with its own Firewall
+> [!IMPORTANT]
+> The Storage Account gets shipped with its own Firewall
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/st/create/networking.png)
 
@@ -112,7 +138,8 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 ![Private Endpoint](../../../../assets/img/azure/solution/vnets/hub/st/create/networking-private_endpoint.png).
 
-> NOTE: This view does NOT allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
+> [!WARNING]
+> This view does **NOT** allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
 
 ##### Data protection
 
@@ -130,7 +157,9 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 Listen, I get it. We all do mistakes. If you forgot to create the "Private Endpoint" before-hand, or during creation process; you can still do it now.
 
-![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/empty.png)
+After adding it, you should see something like this:
+
+![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/approved.png)
 
 #### Reconfigure
 
@@ -144,7 +173,7 @@ From Either **Your Laptop** or the **Jumpbox**
 1. Create a container
 1. Upload a file from your laptop
 
-![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/public.png)
+![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
 
 ##### Step 2: Remove Public IP
 
@@ -167,9 +196,19 @@ From your laptop, try to download the file you uploaded in step 1.
 
 You should now see an error like this.-
 
-![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/private.png)
+![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/disallowed.png)
 
 But it should still work from your Jumpbox `=]`
+
+### Application Security Group
+
+If you haven't created it so far, you can go ahead and create that now.
+
+#### Market Place
+
+Search for "Application Security Group" in the Azure Portal's Market Place.
+
+![ASG](../../../../assets/img/azure/market/asg/logo.png)
 
 ## Status Check
 
@@ -185,3 +224,27 @@ If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oin
 1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
 
 ![PEP](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/dns_management/recordsets.png)
+
+### Jumpbox (VM)
+
+#### Terminal
+
+Open a PowerShell terminal and run the following command:
+
+```
+$> nslookup {your storage}.blob.core.windows.net
+```
+
+You should see the name getting resolved
+
+#### Storage Explorer
+
+If you installed the "Storage Explorer" in the Jumpbox, you should be able to access the storage account from there.
+
+![Emtpy](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
+
+You should be able to create a text file, and upload it
+
+## Next Steps
+
+[Go back to parent](./README.md)

@@ -23,7 +23,6 @@
 #### Useful CLI commands
 
 - [az](./docs/az/cli.md)
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 
 #### Naming Conventions
 

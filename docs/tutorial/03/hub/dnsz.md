@@ -2,10 +2,11 @@
 
 ## Resources
 
-- Private DNS Zone: `privatelink.blob.core.windows.net`
-  - Links to VNets
-    - `privatelink-at-hub`
-    - `privatelink-at-spoke-westus2`
+- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - Private [DNS] [Z]one: `privatelink.blob.core.windows.net`
+    - Links to VNets
+      - `privatelink-at-hub`
+      - `privatelink-at-spoke-westus2`
 
 ### Private DNS Zone
 
@@ -19,9 +20,12 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### Basics
 
+- **Name**: `privatelink.blob.core.windows.net`
+
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/dnsz/st/create/basics.png)
 
-- **Name**: `privatelink.blob.core.windows.net`
+> [!IMPORTANT]
+> All Storage containers will get registered under `{name}.blob.core.windows.net`
 
 ##### Review + Create
 
@@ -56,4 +60,4 @@ Go to "DNS Management" > "Virtual Network Links".
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Go back to parent](./README.md)

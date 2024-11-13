@@ -4,8 +4,14 @@
 
 ### Route Table
 
-- Resource group: `{my-prefix}-hub-switzerlandnorth-{id}-rg` (already exists)
-  - Route table: `{my-prefix}-hub-switzerlandnorth-{id}-rt`
+- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [R]oute [T]able: `{my-prefix}-hub-{region}-{id}-rt`
+
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 #### Market place
 
@@ -15,7 +21,7 @@ Look for a "Route table" in the Azure Portal's market place
 
 #### Create
 
-- **Name**: `{my-prefix}-hub-switzerlandnorth-{id}-rt`
+- **Name**: `{my-prefix}-hub-{region}-{id}-rt`
 - **Propagate gateway routes**: _"Yes"_
 
 ![Create](../../../../assets/img/azure/solution/vnets/hub/rt/create/basics.png)

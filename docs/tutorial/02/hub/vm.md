@@ -12,11 +12,17 @@ This enables more than 1 person connecting at the same time; assuming your VM su
 
 ## Resources
 
-- Resource group: `{my-prefix}-spoke-westus2-{id}-rg` (already exists)
-  - Virtual Machine: `{my-prefix}-spoke-westus2-{id}-vm-jump`
-    - Disks: `{my-prefix}-spoke-westus2-{id}-vm-jump-hdd`
-    - NIC: `{my-prefix}-spoke-westus2-{id}-vm-jump-nic`
-    - NSG: `{my-prefix}-spoke-westus2-{id}-vm-jump-nsg` (Optional, can use the Hub's NSG)
+- [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg` (already exists)
+  - [V]irtual [M]achine: `{my-prefix}-spoke-{region}-{id}-vm-jump`
+    - [H]ard [D]isk [D]rive: `{my-prefix}-spoke-{region}-{id}-vm-jump-hdd`
+    - [N]etwork [I]nterfa[c]e: `{my-prefix}-spoke-{region}-{id}-vm-jump-nic`
+    - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vm-jump-nsg` (Optional, can use the Hub's NSG)
+
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### [V]irtual [M]achine
 
