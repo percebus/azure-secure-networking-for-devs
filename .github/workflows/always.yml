@@ -6,7 +6,8 @@ env:
   # Version Spec of the version to use in SemVer notation.
   # It also admits such aliases as lts/*, latest, nightly and canary builds
   # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
-  NODE_VERSION: 20
+  # LTS: 22, as of 2024-11-13 SRC: https://nodejs.org/en/download/
+  NODE_VERSION: 22
 
 jobs:
   build:
