@@ -1,0 +1,37 @@
+name: Verify
+on:
+  push:
+
+env:
+  # Version Spec of the version to use in SemVer notation.
+  # It also admits such aliases as lts/*, latest, nightly and canary builds
+  # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
+  # LTS: 22, as of 2024-11-13 SRC: https://nodejs.org/en/download/
+  NODE_VERSION: 22
+
+jobs:
+  build:
+    name: Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: ls
+        run: ls -la
+
+      - uses: actions/setup-node@v4
+        name: setup node @ ${{env.NODE_VERSION}}
+        with:
+          node-version: ${{env.NODE_VERSION}}
+      - name: npm run setup:ci
+        run: npm run setup:ci --if-present
+      - name: npm install
+        run: npm ci
+      - name: ls node_modules
+        run: ls -la ./node_modules
+      - name: npm audit
+        run: npm audit
+        continue-on-error: true # XXX?
+
+      - name: npm run lint
+        run: npm run lint

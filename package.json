@@ -1,0 +1,43 @@
+{
+  "name": "azure-secure-networking-for-devs",
+  "version": "0.1.0",
+  "description": "Azure Secure Networking, for Developers",
+  "main": "TODO",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "prettier": "prettier .",
+    "prettier:write": "npm run prettier -- --write",
+    "prettier:check": "npm run prettier -- --check",
+    "lint": "npm run prettier:check",
+    "style": "npm run prettier:write",
+    "poststyle": "npm run lint",
+    "pretest": "npm run lint",
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/percebus/azure-secure-networking-for-devs.git"
+  },
+  "keywords": [
+    "azure",
+    "security",
+    "network",
+    "vnet",
+    "bastion",
+    "firewall",
+    "nsg",
+    "asg",
+    "routing"
+  ],
+  "author": "Microsoft",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/percebus/azure-secure-networking-for-devs/issues"
+  },
+  "homepage": "https://github.com/percebus/azure-secure-networking-for-devs#readme",
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}
