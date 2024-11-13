@@ -2,6 +2,12 @@ name: Verify
 on:
   push:
 
+env:
+  # Version Spec of the version to use in SemVer notation.
+  # It also admits such aliases as lts/*, latest, nightly and canary builds
+  # Examples: 12.x, 10.15.1, >=10.15.0, lts/Hydrogen, 16-nightly, latest, node
+  NODE_VERSION: 20
+
 jobs:
   build:
     name: Linting
@@ -12,6 +18,9 @@ jobs:
       - name: ls
         run: ls -la
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "${NODE_VERSION}"
       - name: setup
         run: npm run setup:ci --if-present
       - name: npm install
