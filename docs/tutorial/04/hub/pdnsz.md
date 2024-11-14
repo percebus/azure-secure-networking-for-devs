@@ -3,6 +3,10 @@
 > [!IMPORTANT]
 > All webapps will get registered under `{name}.azurewebsites.net`
 
+## Summary
+
+Just like we created a Private DNS Zone for the storage account, we need to create one for the webapps. This will allow the webapps to communicate with the storage account using the private endpoint.
+
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
@@ -41,8 +45,6 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### VNet: Hub
 
-![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/hub.png)
-
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
 - [ ] **Enable auto registration**: Leave this unchecked.
@@ -53,8 +55,6 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 ![Error](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/errors/1vnet-to-1pdnsz-auto-registration.png)
 
 ##### VNet: Spoke
-
-![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/spoke.png)
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
@@ -71,4 +71,4 @@ Go to "DNS Management" > "Virtual Network Links".
 
 ## Next Steps
 
-[Go back to parent](./README.md)
+[Go back to parent](../README.md)
