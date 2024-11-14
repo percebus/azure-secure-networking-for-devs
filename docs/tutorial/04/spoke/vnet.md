@@ -18,17 +18,22 @@ Where:
 
 ### Network Security Group
 
-#### Motivation
+#### Description
 
-*"Again, Why do we need another NSG?"*
+> [!Important]
+> *"Again, Why do we need **another** NSG?"*
 
-The Network interfaces for the storage account and the web app will be inside the `default` subnet. But the `webapp` itself, will be in the delegated subnet.
+The Network interfaces for the storage account and the web app will be inside the `default` subnet.
+
+But the `webapp` itself, will be in the **delegated** subnet.
 
 **Subnets**:
 
 - `default`: `{my-prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
-  - `{some-short-prefix}spoke{region}{id}st-pep-nic`
-  - `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-pep-nic`
+  - `{some-short-prefix}spoke{region}{id}st-pep`
+    - `{some-short-prefix}spoke{region}{id}st-pep-nic`
+  - `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-pep`
+    - `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-pep-nic`
 - `webapp`: `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-nsg`
   - The instances that the autoscaling handles
 
@@ -57,6 +62,8 @@ Accordingin to MS Learn
 
 1. Go to Virtual Network > Subnets > Add
 
+![Add Subnet](../../../../assets/img/azure/solution/vnets/spoke/vnet/snets/webapp/add.png)
+
 - **Subnet purpose**: `Default`
 - **Name**: `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp`
 
@@ -79,3 +86,29 @@ As a general rule of thumb, you want your app to be as isolated and self-contain
 
 - **NAT gateway**: None. This becomes important when you want to access the private application from the WWW.
 - **Network security group**: Your newly created `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-nsg`.
+- **Route table**: None.
+
+> [!Important]
+> *"Wait, didn't we have a route table?"*
+
+Yes, but that one is in the `hub` `vnet`.
+
+##### Service Endpoints
+
+- **Service endpoints**: Select `Microsoft.Web`.
+
+##### Subnet Delegation
+
+At last, this is were we will allow WebApp to auto-scale with `serverFarms` when needed.
+
+- **Delegated subnet to a service**: `Microsoft.Web/serverFarms`
+
+##### Network Policy for Private Endpoints
+
+You can ensure that your Private endpoint is also governed by the policies you set for those subnets.
+
+Select
+
+- **Private endpoint network policy**:
+  - [x] Network security groups
+  - [x] Route tables

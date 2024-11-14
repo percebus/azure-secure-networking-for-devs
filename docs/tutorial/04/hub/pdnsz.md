@@ -1,8 +1,5 @@
 # Creating and configuring a Private DNS Zone for WebApps
 
-> [!IMPORTANT]
-> All webapps will get registered under `{name}.azurewebsites.net`
-
 ## Summary
 
 Just like we created a Private DNS Zone for the storage account, we need to create one for the webapps. This will allow the webapps to communicate with the storage account using the private endpoint.
@@ -15,7 +12,16 @@ Just like we created a Private DNS Zone for the storage account, we need to crea
       - `privatelink-at-hub`
       - `privatelink-at-spoke-westus2`
 
+Where:
+
+- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{region}`: The region of your spoke VNet (i.e. `switzerlandnorth`)
+- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
+
 ### Private DNS Zone
+
+> [!IMPORTANT]
+> All webapps will be registered under `{name}.azurewebsites.net`
 
 #### Market place
 
@@ -30,9 +36,6 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 - **Name**: `privatelink.blob.core.windows.net`
 
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/create/basics.png)
-
-> [!IMPORTANT]
-> All webapps will be registered under `{name}.azurewebsites.net`
 
 ##### Review + Create
 
@@ -63,11 +66,17 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 > [!Important]
 > You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
 
-##### Status Check
+## Status Check
+
+### Private DNS Zone
 
 Go to "DNS Management" > "Virtual Network Links".
 
 ![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/all.png)
+
+### Resources
+
+![Snapshot](../../../../assets/img/azure/solution/vnets/hub/snapshots/04.png)
 
 ## Next Steps
 
