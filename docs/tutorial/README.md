@@ -57,8 +57,8 @@ Please use the names provided in the tutorial, we'll work on updating the images
 - `resource type`: The type of resource. i.e. `rg`, `vnet`, `firewall`, etc. See [Resource abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations). Some resources will have chained names, like:
   - `*-vm-special`
   - `*-vm-special-hdd`: [H]ard [D]isk [D]rive
-  - `*-vm-special-nic`: [N]etwork [I]nterfa[c]e
-  - `*-vm-special-nic-pep`: [P]rivate [E]nd[p]oint
+  - `*-vm-special-pep`: [P]rivate [E]nd[p]oint
+  - `*-vm-special-pep-nic`: [N]etwork [I]nterfa[c]e
 
 #### Example
 
