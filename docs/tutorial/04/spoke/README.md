@@ -12,6 +12,10 @@
          1. [N]etwork [I]nterfa[c]e
          1. [A]pplication [S]ecurity [G]roup
 
+## TODO
+
+> > TODO: Add `default` `nsg` `inbound` rules
+
 ## Next Steps
 
 [Go back to parent](../README.md)
