@@ -25,7 +25,7 @@ Throughout this tutorial, you'll be creating the resources via the following mod
 
 And you will be building and configuring this
 
-![Architecture](../../assets/img/azure/solution/diagrams/n.png)
+![Architecture](../../assets/img/azure/solution/diagrams/n.vsdx.png)
 
 ## Before you begin
 
