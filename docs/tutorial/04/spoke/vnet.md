@@ -20,10 +20,8 @@ Where:
 
 #### Description
 
-<!-- prettier-ignore-start -->
 > [!IMPORTANT]
-> _"Again, Why do we need **another** NSG?"_
-<!-- prettier-ignore-end -->
+> "Again, Why do we need **another** NSG?"
 
 The Network interfaces for the storage account and the web app will be inside the `default` subnet.
 
@@ -89,10 +87,8 @@ As a general rule of thumb, you want your app to be as isolated and self-contain
 - **Network security group**: Your newly created `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-nsg`.
 - **Route table**: None.
 
-<!-- prettier-ignore-start -->
 > [!IMPORTANT]
-> _"Wait, didn't we have a route table?"_
-<!-- prettier-ignore-end -->
+> "Wait, didn't we have a route table?"
 
 Yes, but that one is in the `hub` `vnet`.
 
