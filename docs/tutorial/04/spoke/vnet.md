@@ -78,7 +78,7 @@ So it depends what kind of application you're hosting, if it uses public CDNs an
 
 As a general rule of thumb, you want your app to be as isolated and self-contained as possible.
 
-- [x] \*\*Enable private subnet (no default outbound access): Check as enabled
+- [x] **Enable private subnet (no default outbound access)**: Check as enabled
 
 ##### Security
 
