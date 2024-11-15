@@ -1,6 +1,6 @@
 # azure-secure-networking-for-devs
 
-> [!Tip]
+> [!TIP]
 > Be sure to check "Before you begin" section for additional resources and information.
 
 ## Table of Contents

@@ -52,7 +52,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 - **Virtual Network**: Select the **Hub** VNet
 - [ ] **Enable auto registration**: Leave this unchecked.
 
-> [!Important]
+> [!IMPORTANT]
 > You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
 
 ![Error](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/errors/1vnet-to-1pdnsz-auto-registration.png)
@@ -63,7 +63,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 - **Virtual Network**: Select the **Hub** VNet
 - [ ] **Enable auto registration**: Leave this unchecked.
 
-> [!Important]
+> [!IMPORTANT]
 > You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
 
 ## Status Check

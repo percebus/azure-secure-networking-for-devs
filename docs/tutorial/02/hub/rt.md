@@ -44,7 +44,7 @@ The order matters, we want the more specific routes at the top, and the more gen
 | Default | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
 | Default | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
 
-> [!Tip]
+> [!TIP]
 > Quiz: _"What is the IP address for 'Every possible IP ot there'?"_
 
 #### Drive traffic through the Firewall

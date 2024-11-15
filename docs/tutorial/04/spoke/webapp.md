@@ -107,7 +107,7 @@ As of `2024-10-04`
 
 ![WebApp Pricing](../../../../assets/img/azure/market/webapp/pricing/2024-10-04T120811.png)
 
-> [!Important]
+> [!IMPORTANT]
 > Free tier won't allow us to create Private Endpoints.
 
 For this excercise, you will go w/ **Basic**
@@ -140,7 +140,7 @@ Disabled for this excercise
 
 ###### Pricing Plans
 
-> [!Important]
+> [!IMPORTANT]
 > Free tier won't allow us to create Private Endpoints.
 
 - **Linux Plan ({region})**: Add a new plan.
@@ -152,10 +152,10 @@ Disabled. We don't need it for this excercise.
 
 ##### Networking
 
-> [!Note]
+> [!NOTE]
 > It's a private website. If you want to access it from the outside world, we would need to setup something like **Front-door**, or **App Gateway**.
 
-> [!Important]
+> [!IMPORTANT]
 > We could Enable network injection, which would allow us to create the **Private Endpoint** and **Virtual Network Integration**. But we will do that manually, to make sure our **Private Endpoint** uses our **Private DNS Zone**.
 
 - **Enable public access**: Off.
@@ -237,7 +237,7 @@ So creating an `asg` is a good idea, so we can keep a human readable name for th
 
 ##### DNS
 
-> [!Note]
+> [!NOTE]
 > Eventho our `webapp` will use the **delegated** `subnet` for outgoing traffic, we still need to create a Private Endpoint for the `webapp` to use.
 
 ![DNS](../../../../assets/img/azure/solution/vnets/spoke/webapp/pep/create/dns.png)
