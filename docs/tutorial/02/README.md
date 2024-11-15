@@ -9,6 +9,8 @@ Now that we have a Hub VNet enabled w/ **Bastion**, we can create a Virtual mach
    1. [Create a Route Table](./hub/rt.md)
    1. [Add Rules to Azure Firewall](./hub/fw.md)
 
+![Diagram](../../../assets/img/azure/solution/diagrams/02.png)
+
 ## Architecture
 
 This diagram is an oversimpification of what we've built so far. But it give an idea of what we're trying to achieve.-

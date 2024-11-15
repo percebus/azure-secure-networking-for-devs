@@ -4,6 +4,10 @@
 
 The information of each region is stored in a locally-accessible storage account.
 
+## Goal
+
+1. A regional storage account in the `spoke` `vnet`, also accessible the jumpbox in the `hub` `vnet`.
+
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg` (already exists)

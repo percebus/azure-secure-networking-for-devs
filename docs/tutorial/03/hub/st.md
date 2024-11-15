@@ -4,6 +4,11 @@
 
 Sometimes you need to share files between different VNets around the world. In this case, you can use a shared storage account to store the files and share them with different VNets.
 
+## Goal
+
+1. A Shared storage account in the `hub` `vnet`, also accessible from the `spoke` `vnet`.
+1. The Storage account should only be accessible from the jumpbox in the `hub` `vnet`.
+
 ## Naming
 
 Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` or `_`) & unique across ALL Azure. So unlike other modules, we'll need to simplify the naming for the storage account, and the subsequent resources.

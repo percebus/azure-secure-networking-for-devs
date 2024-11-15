@@ -20,8 +20,7 @@ Where:
 
 #### Description
 
-> [!Important]
-> *"Again, Why do we need **another** NSG?"*
+> [!Important] > _"Again, Why do we need **another** NSG?"_
 
 The Network interfaces for the storage account and the web app will be inside the `default` subnet.
 
@@ -55,8 +54,7 @@ Just like we created the NSG for the `default` subnet, we'll create one for the 
 
 Accordingin to MS Learn
 
-> *Subnet delegation enables you to designate a specific subnet for an Azure PaaS service of your choice that needs to be injected into your virtual network.*
-> *Subnet delegation provides full control to the customer on managing the integration of Azure services into their virtual networks.*
+> _Subnet delegation enables you to designate a specific subnet for an Azure PaaS service of your choice that needs to be injected into your virtual network._ > _Subnet delegation provides full control to the customer on managing the integration of Azure services into their virtual networks._
 
 #### Add
 
@@ -80,7 +78,7 @@ So it depends what kind of application you're hosting, if it uses public CDNs an
 
 As a general rule of thumb, you want your app to be as isolated and self-contained as possible.
 
-- [x] **Enable private subnet (no default outbound access): Check as enabled
+- [x] \*\*Enable private subnet (no default outbound access): Check as enabled
 
 ##### Security
 
@@ -88,8 +86,7 @@ As a general rule of thumb, you want your app to be as isolated and self-contain
 - **Network security group**: Your newly created `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-nsg`.
 - **Route table**: None.
 
-> [!Important]
-> *"Wait, didn't we have a route table?"*
+> [!Important] > _"Wait, didn't we have a route table?"_
 
 Yes, but that one is in the `hub` `vnet`.
 
@@ -112,3 +109,7 @@ Select
 - **Private endpoint network policy**:
   - [x] Network security groups
   - [x] Route tables
+
+## Next Steps
+
+[Go back to parent](./README.md)

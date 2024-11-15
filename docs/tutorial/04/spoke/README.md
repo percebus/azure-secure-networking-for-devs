@@ -10,7 +10,7 @@
       1. Service
       1. [P]rivate [E]nd[p]oint
          1. [N]etwork [I]nterfa[c]e
-      1. [A]pplication [S]ecurity [G]roup
+         1. [A]pplication [S]ecurity [G]roup
 
 ## Next Steps
 

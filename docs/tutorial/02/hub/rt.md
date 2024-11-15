@@ -34,9 +34,20 @@ Take a good look at the TERMS
 
 ### Routes
 
-#### Drive traffic through the Firewall
+We'll add the following routes.
+The order matters, we want the more specific routes at the top, and the more general ones at the bottom.
 
+| Source  | IP range   | CIDR          | Next Hop Type     | Details               |
+| ------- | ---------- | ------------- | ----------------- | --------------------- |
+| Default | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
+| Default | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
+| Default | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
+| Default | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
+
+> [!Tip]
 > Quiz: _"What is the IP address for 'Every possible IP ot there'?"_
+
+#### Drive traffic through the Firewall
 
 Go to Settings > Routes > Add
 

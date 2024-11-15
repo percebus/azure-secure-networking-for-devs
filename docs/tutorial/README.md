@@ -1,7 +1,11 @@
 # azure-secure-networking-for-devs
 
+> [!Tip]
+> Be sure to check "Before you begin" section for additional resources and information.
+
 ## Table of Contents
 
+- [The Tutorial](#the-tutorial)
 - [Before you begin](#before-you-begin)
   - [Additional Resources](#additional-resources)
   - [Azure CLI](#azure-cli)
@@ -9,7 +13,19 @@
   - [Naming conventions](#naming-conventions)
     - [Example](#example)
 - [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
-- [The Tutorial](#the-tutorial)
+
+## The Tutorial
+
+Throughout this tutorial, you'll be creating the resources via the following modules:
+
+1. [VNets](./01/README.md)
+1. [Jump Box](./02/README.md)
+1. [BLOb Storage accounts](./03/README.md)
+1. [Web App](./04/README.md)
+
+And you will be building and configuring this
+
+![Architecture](../../assets/img/azure/solution/diagrams/n.png)
 
 ## Before you begin
 
@@ -65,16 +81,3 @@ For simplicity of this excercise, your VNets will look something like:
 | Hub      | `10.1.x.x`    | `switzerlandnorth` |                               |
 | US Spoke | `10.2.x.x`    | `westus2`          |                               |
 | EU Spoke | `10.3.x.x`    | `westeurope`       | Not included in this tutorial |
-
-## The Tutorial
-
-Throughout this tutorial, you'll be creating the resources via the following modules:
-
-1. [VNets](./01/README.md)
-1. [Jump Box](./02/README.md)
-1. [BLOb Storage accounts](./03/README.md)
-1. [Web App](./04/README.md)
-
-And you will be building and configuring this
-
-![Architecture](../../assets/img/azure/solution/goal.png)

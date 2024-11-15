@@ -14,6 +14,8 @@
 1. Spoke
    1. [Create Storage Account](spoke/st.md)
 
+![Diagram](../../../assets/img/azure/solution/diagrams/03.png)
+
 ## Description
 
 **By default**, _Azure Storage Accounts_ expose **public URLs** (with **public IP addresses**)
