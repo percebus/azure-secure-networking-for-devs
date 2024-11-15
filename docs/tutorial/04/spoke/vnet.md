@@ -86,7 +86,8 @@ As a general rule of thumb, you want your app to be as isolated and self-contain
 - **Network security group**: Your newly created `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp-nsg`.
 - **Route table**: None.
 
-> [!Important] > _"Wait, didn't we have a route table?"_
+> [!Important]
+> _"Wait, didn't we have a route table?"_
 
 Yes, but that one is in the `hub` `vnet`.
 
