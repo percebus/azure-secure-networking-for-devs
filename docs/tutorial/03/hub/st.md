@@ -278,9 +278,9 @@ Remember the ASG we created for the jumpboxes (currently only 1)?
 
 ##### Scenario 4: Zero Trust
 
-This is **NOT** *"only **buddies** trust"*, this is **ZERO TRUST**!
+This is **NOT** _"only **buddies** trust"_, this is **ZERO TRUST**!
 
-- *"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"*
+- _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
 - Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
 
 So we end-up with something like this
@@ -290,8 +290,7 @@ So we end-up with something like this
   - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
 - **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
-> [!NOTE]
-> `10.2.x.x`: Will remain TBD
+> [!NOTE] > `10.2.x.x`: Will remain TBD
 
 ## Status Check
 

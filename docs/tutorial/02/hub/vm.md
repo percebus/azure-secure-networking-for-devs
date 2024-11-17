@@ -74,7 +74,7 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 > [!WARNING]
 > we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
 
-*"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."*
+_"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."_
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/subnet.png)
 
