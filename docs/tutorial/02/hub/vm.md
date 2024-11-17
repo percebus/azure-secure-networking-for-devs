@@ -13,10 +13,13 @@ This enables more than 1 person connecting at the same time; assuming your VM su
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - [V]irtual [M]achine: `{my-prefix}-spoke-{region}-{id}-vm-jump`
     - [H]ard [D]isk [D]rive: `{my-prefix}-spoke-{region}-{id}-vm-jump-hdd`
     - [N]etwork [I]nterfa[c]e: `{my-prefix}-spoke-{region}-{id}-vm-jump-nic`
-    - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vm-jump-nsg` (Optional, can use the Hub's NSG)
+    - [A]pplication [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vm-jump-asg`
 
 Where:
 
@@ -79,6 +82,24 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
+
+### Application Security Group
+
+We could have assigned a **static IP** that we know, and then use that in the `nsg` to control traffic. But managing that can very quickly become a nightmare.
+
+So creating an `asg` is a good idea, so we can keep a human readable name for the `nsg` rules.
+
+#### Market Place
+
+Search for "Application Security Group" in the Azure Portal's Market Place.
+
+![ASG](../../../../assets/img/azure/market/asg/logo.png)
+
+#### Create
+
+- **Name**: `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+
+Then link the NIC to the ASG.
 
 ## Status Check
 

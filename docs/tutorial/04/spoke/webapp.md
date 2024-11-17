@@ -83,7 +83,7 @@ Since we want the webapp (i.e. a `python` app written in `django`) to be able to
       - Service: `{my-prefix}-spoke-{region}-{id}-webapp-{os}`
       - [P]rivate [E]nd[p]oint: `{my-prefix}-spoke-{region}-{id}-webapp-pep`
         - [N]etwork [I]nterfa[c]e: `{my-prefix}-spoke-{region}-{id}-webapp-pep-nic`
-        - [A]pplication [S]ecurity [G]roups: `{my-prefix}-spoke-{region}-{id}-webapp-asg`
+        - [A]pplication [S]ecurity [G]roups: `{my-prefix}-spoke-{region}-{id}-webapp-pep-asg`
       - Virtual Network Integration: To `{my-prefix}-spoke-{region}-{id}-vnet-snet-webapp`
 
 Where:
@@ -229,11 +229,7 @@ The **Virtual Network Integrations** helps us with outgoing traffic. But we want
 - [x] Dynamically allocate IP address: Selected
 - [ ] Static IP address
 
-###### [A]pplication [S]ecurity [G]roups
-
-We could assign a static IP that we know, and then use that in the `nsg` to control traffic. But managing that can very quickly become a nightmare.
-
-So creating an `asg` is a good idea, so we can keep a human readable name for the `nsg` rules.
+###### Application Security Groups
 
 ##### DNS
 
