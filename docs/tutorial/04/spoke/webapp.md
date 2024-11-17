@@ -38,8 +38,8 @@ Since we want the jumpbox (`vm` from the `hub`'s `default` `subnet`) to be able 
       1. `nsg`:
          1. **Inbound** traffic rules
       1. WebApp
-         1. `asg`
          1. Private Endpoint
+            1. `asg`
             1. NIC **<<< To HERE**
 
 ### Outbound
@@ -56,7 +56,7 @@ Since we want the webapp (i.e. a `python` app written in `django`) to be able to
 
 1. Spoke VNet
    1. WebApp
-   1. `webapp` **delegated** `snet`
+   1. `webapp` **delegated** `subnet` (not to be confused with `default` `subnet`)
       1. temp IP: **<<< From HERE**
       1. `nsg`:
          1. **Outbound** traffic rules
@@ -65,11 +65,13 @@ Since we want the webapp (i.e. a `python` app written in `django`) to be able to
          1. **Inbound** traffic rules
       1. Storage account
          1. Private Endpoint
+            1. `asg`
             1. NIC: **<<< To HERE #2**
 1. Hub VNet: From Spoke (DNS resolution)
    1. `default` subnet: `10.1.x.x`
       1. `nsg`:
          1. **Inbound** traffic rules
+            1. DNS port protocol: `53`
       1. Private DNS Zone: **<<< To HERE #1**
 
 ## Resources

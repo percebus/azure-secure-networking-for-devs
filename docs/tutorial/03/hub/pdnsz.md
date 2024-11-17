@@ -3,6 +3,9 @@
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - [P]rivate [DNS] [Z]one: `privatelink.blob.core.windows.net`
     - Links to VNets
       - `privatelink-at-hub`
@@ -57,6 +60,18 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 Go to "DNS Management" > "Virtual Network Links".
 
 ![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/all.png)
+
+### Network Security Group
+
+Private Endpoints will need to be able to register with the Private DNS Zone. So you need to take in account
+
+- Hub
+  - **Inbound**: Allow traffic DNS traffic (via port `53`) from `10.x.x.x`
+- Spoke
+  - **Outbound**: Allow DNS traffic to `10.1.x.x`
+    - Storage Account's Private Endpoints registering from `hub` VNet (`10.1.x.x`), as well as other spoke VNets (like `10.2.x.x`).
+
+In this tutorial we won't go to such extense (mainly because we do not know all the ports involved in DNS Zone registration), but you should take this into account in a production environment.
 
 ## Next Steps
 

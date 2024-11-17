@@ -66,10 +66,15 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
 
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
-- **NIC network security group**: _"Advanced"_
-- **Configure network security group**: You can use the NSG we created for all the Hub's `default` `subnet`, or create a new one specific for this VM if you need more level of control.
+- **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
+
 - [x] **Delete NIC when VM is deleted**: Checked
 - **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
+
+> [!WARNING]
+> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+
+*"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."*
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/subnet.png)
 
@@ -83,7 +88,7 @@ Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
 
-### Application Security Group
+### [A]pplication [S]ecurity [G]roup
 
 We could have assigned a **static IP** that we know, and then use that in the `nsg` to control traffic. But managing that can very quickly become a nightmare.
 

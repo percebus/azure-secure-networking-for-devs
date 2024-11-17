@@ -114,7 +114,7 @@ Like we did in **Hub**, create a BLOb container.
 
 ![Forbidden](../../../../assets/img/azure/solution/vnets/spoke/st/containers/container1/private.png)
 
-### Application Security Group
+### [A]pplication [S]ecurity [G]roup
 
 If you haven't created it so far, you can go ahead and create that now.
 
@@ -123,6 +123,20 @@ If you haven't created it so far, you can go ahead and create that now.
 Search for "Application Security Group" in the Azure Portal's Market Place.
 
 ![ASG](../../../../assets/img/azure/market/asg/logo.png)
+
+#### Create
+
+And associate to the Storage Account's Private Endpoint
+
+### [N]etwork [S]ecurity [G]roup
+
+#### Inbound Rules
+
+- **Name**: `allow-hub-jumpbox-to-storage`
+- **Source**:
+  - ~~`{my-prefix}-hub-{region}-{id}-vm-jump-asg`~~ If only it were that simple.
+  - We'll have to use `10.1.x.x`
+- **Destination**: `{some-short-prefix}spoke{region}{id}st-pep-asg`
 
 #### Create
 

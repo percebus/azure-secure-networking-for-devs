@@ -232,8 +232,9 @@ Search for "Application Security Group" in the Azure Portal's Market Place.
 > Keep reading all the following scenarios.
 
 You will be only doing **ONE** of the following scenarios.
+Depending on how venturous you are feeling.
 
-##### Minimum security
+##### Scenario 1: Minimum security
 
 You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
@@ -247,7 +248,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 > [!IMPORTANT]
 > What happens if a bad actor gets access from a `10.3.4.5` ?
 
-##### Minimum explicit security
+##### Scenario 2: More explicit minimum security
 
 You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
@@ -260,7 +261,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
 
-##### More security
+##### Scenario 3: More security
 
 If you want to be more robust, you could
 
@@ -275,7 +276,7 @@ Remember the ASG we created for the jumpboxes (currently only 1)?
 > [!WARNING]
 > What happens if a bad actor creates a VM with an IP `10.2.3.4`?
 
-##### Zero Trust
+##### Scenario 4: Zero Trust
 
 This is **NOT** *"only **buddies** trust"*, this is **ZERO TRUST**!
 
@@ -284,15 +285,13 @@ This is **NOT** *"only **buddies** trust"*, this is **ZERO TRUST**!
 
 So we end-up with something like this
 
-- **Name**: `allow-private-to-storage`
+- **Name**: `allow-jumpbox-to-storage`
 - **Source**:
   - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
 - **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
-1. Allow inbound access
-    1. `{my-prefix}-spoke-{region}-{id}-vm-jump-asg`
-
-`10.2.x.x`: Will remain TBD
+> [!NOTE]
+> `10.2.x.x`: Will remain TBD
 
 ## Status Check
 
