@@ -16,6 +16,9 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - [St]orage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
     - [P]rivate [E]nd[p]oint: `{some-short-prefix}hub{region}{id}st-pep`
       - [N]etwork [I]nterfa[c]e: `{some-short-prefix}hub{region}{id}st-pep-nic`
@@ -220,6 +223,76 @@ If you haven't created it so far, you can go ahead and create that now.
 Search for "Application Security Group" in the Azure Portal's Market Place.
 
 ![ASG](../../../../assets/img/azure/market/asg/logo.png)
+
+### Network Security Group
+
+#### Inbound
+
+> [!IMPORTANT]
+> Keep reading all the following scenarios.
+
+You will be only doing **ONE** of the following scenarios.
+
+##### Minimum security
+
+You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
+
+- **Name**: `allow-private-to-storage`
+- **Source**:
+  - `10.0.0.0/8`: This includes
+    - `hub`'s vnet `10.1.x.x`
+    - `spoke`'s vnet `10.2.x.x`
+- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+
+> [!IMPORTANT]
+> What happens if a bad actor gets access from a `10.3.4.5` ?
+
+##### Minimum explicit security
+
+You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
+
+- **Name**: `allow-private-to-storage`
+- **Source**:
+  - `10.1.0.0/16`
+  - `10.2.0.0/16`
+- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+
+> [!IMPORTANT]
+> What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
+
+##### More security
+
+If you want to be more robust, you could
+
+Remember the ASG we created for the jumpboxes (currently only 1)?
+
+- **Name**: `allow-private-to-storage`
+- **Source**:
+  - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+  - `10.2.0.0/16`
+- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+
+> [!WARNING]
+> What happens if a bad actor creates a VM with an IP `10.2.3.4`?
+
+##### Zero Trust
+
+This is **NOT** *"only **buddies** trust"*, this is **ZERO TRUST**!
+
+- *"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"*
+- Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
+
+So we end-up with something like this
+
+- **Name**: `allow-private-to-storage`
+- **Source**:
+  - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+
+1. Allow inbound access
+    1. `{my-prefix}-spoke-{region}-{id}-vm-jump-asg`
+
+`10.2.x.x`: Will remain TBD
 
 ## Status Check
 

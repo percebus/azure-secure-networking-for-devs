@@ -11,6 +11,9 @@ The information of each region is stored in a locally-accessible storage account
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-spoke-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-nsg` (already exists)
   - [St]orage Account: `{some-short-prefix}spoke{region}{id}st`. i.e. `jcspokewestus21st`.
     - [P]rivate [E]nd[p]oint: `{some-short-prefix}spoke{region}{id}st-pep`
       - [N]etwork [I]nterfa[c]e: `{some-short-prefix}spoke{region}{id}st-pep-nic`
@@ -58,15 +61,15 @@ You can also skip this step and either:
 
 Point to the Private DNS Zone previously created.
 
-### Resource Visualizer
+#### Resource Visualizer
 
 You can see the resources you've just created
 
 ![Resource Diagram](../../../../assets/img/azure/solution/vnets/spoke/st/pep/resources/02.png)
 
-### Settings
+#### Settings
 
-#### DNS Configuration
+##### DNS Configuration
 
 It should be registered to the same Private DNS Zone, like we did w/ the one at hub.
 
@@ -110,6 +113,22 @@ Like we did in **Hub**, create a BLOb container.
 > You won't be able to access this container from the portal, as we've disallowed **Public Access**.
 
 ![Forbidden](../../../../assets/img/azure/solution/vnets/spoke/st/containers/container1/private.png)
+
+### Application Security Group
+
+If you haven't created it so far, you can go ahead and create that now.
+
+#### Market Place
+
+Search for "Application Security Group" in the Azure Portal's Market Place.
+
+![ASG](../../../../assets/img/azure/market/asg/logo.png)
+
+#### Create
+
+- **Name**: `{some-short-prefix}spoke{region}{id}st-pep-asg`
+
+And associate with the Storage Account's Private Endpoint `{some-short-prefix}spoke{region}{id}st-pep`
 
 ## Status Check
 
