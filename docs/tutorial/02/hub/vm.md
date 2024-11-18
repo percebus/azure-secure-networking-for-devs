@@ -58,16 +58,17 @@ Create a `username` and `password` you'll remember. If you forget it, you might 
 
 ![Disks](../../../../assets/img/azure/solution/vnets/hub/vm/create/disks.png)
 
+- **OS disk type**: _"Standard HDD"_ (least expensive)
 - [x] **Delete with VM**: Checked
 - **Key management**: _"Platform-managed key"_
 
 ##### Networking
 
+![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
+
 ###### Network interface
 
 We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023 left).
-
-![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
 
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
 - **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
