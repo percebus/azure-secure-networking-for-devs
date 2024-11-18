@@ -6,7 +6,7 @@
 - [Excercises](#excercises)
 - [Next Steps](#next-steps)
 
-## Description
+## Motivation
 
 **By default**, _Azure Storage Accounts_ expose **public URLs** (with **public IP addresses**)
 
