@@ -3,8 +3,8 @@
 ## Goal
 
 1. Drive all outbound traffic
-    1. Going to the internet: through the **Azure Firewall**
-    1. Going to other VNets
+   1. Going to the internet: through the **Azure Firewall**
+   1. Going to other VNets
 
 ## Resources
 
@@ -40,13 +40,14 @@ Take a good look at the TERMS
 
 ### Routes
 
-We'll add the following routes.
+> [!TIP]
+> By default, Azure routes traffic between subnets.
 
-| Destinaton Type | IP range   | CIDR ranges   | Next hop Type     | Details               |
-| --------------- | ---------- | ------------- | ----------------- | --------------------- |
-| IP Addresses    | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
-| IP Addresses    | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
-| IP Addresses    | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
+We'll add the following route.
+
+| Destinaton Type | IP range  | CIDR ranges | Next hop Type     | Details      |
+| --------------- | --------- | ----------- | ----------------- | ------------ |
+| IP Addresses    | `x.x.x.x` | `0.0.0.0/0` | Virtual Appliance | `fw` > `WWW` |
 
 > [!TIP]
 > QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_

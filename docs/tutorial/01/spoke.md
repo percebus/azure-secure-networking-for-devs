@@ -86,6 +86,9 @@ Go to the `default` subnet and associate the NSG.
 
 Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to connect them so the traffic can flow between them.
 
+> [!TIP]
+> When you create a virtual network peering between two virtual networks, the system adds a route for each address range within the address space of each virtual network involved in the peering.
+
 #### Add Peering
 
 Go to Peerings > Add
