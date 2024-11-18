@@ -13,7 +13,7 @@
 
 ## Additional Resources
 
-Be sure to check the [Additional Resources](../../README.md#additional-resources) section for more information.
+Be sure to check the [Additional Resources](../README.md#additional-resources) section for more information.
 
 ## Azure CLI
 
