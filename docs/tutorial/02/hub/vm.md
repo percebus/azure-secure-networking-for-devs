@@ -8,7 +8,7 @@ Why does Bastion need a delegated subnet? That is how it controls the traffic co
 
 ![Azure Bastion](../../../../assets/img/azure/architectures/bas/subnets.png)
 
-This enables more than 1 person connecting at the same time; assuming your VM supports it, like a properly configured **Windows Server**.
+This enables more than 1 person connecting at the same time against a single/shared public IP address.
 
 ## Resources
 
