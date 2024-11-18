@@ -164,7 +164,7 @@ Now go to the Jump box, and test that in fact you cannot access anything in the 
 
 ![Deny all](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/bing/01.png)
 
-#### Step 4: Add MORE FQDNs
+#### Step 2: Add MORE FQDNs
 
 Yai! \o/
 err... success?
