@@ -6,6 +6,8 @@
 1. [Create Spoke VNet & resources](./spoke.md)
    1. VPN peerings
 
+![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
+
 ## Before you begin
 
 ### Naming Conventions
@@ -47,7 +49,7 @@ You can visualize the progress of your network
 
 You should see something like this.-
 
-![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
+![Diagram](../../../assets/img/azure/solution/vnets/network/01.png)
 
 ## Next Steps
 

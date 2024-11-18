@@ -96,7 +96,7 @@ Note that you can allow traffic:
 - [x] Hub > Spoke
 - [x] Spoke > Hub
 
-For this excercise will check all the boxes.
+For this excercise will check some of the boxes.
 
 ##### Remote virtual network summary
 
@@ -115,8 +115,8 @@ For this excercise will check all the boxes.
 | ------------------------------------------------------------------------------ | ------ | ----- |
 | Allow {that vnet} to access {this vnet}                                        | `x`    | `x`   |
 | Allow {that vnet} to receive forwarded traffic from {this vnet}                | `x`    | `x`   |
-| Allow gateway or route server in {that vnet} to forward traffic to {this vnet} | `x`    | `x`   |
-| Enable {that vnet} tp use {this vnet}'s remote gateway or route server         | `x`    | `x`   |
+| Allow gateway or route server in {that vnet} to forward traffic to {this vnet} | ``     | ``    |
+| Enable {that vnet} tp use {this vnet}'s remote gateway or route server         | ``     | ``    |
 
 We can later come back and remove permissions to reinforce security.
 

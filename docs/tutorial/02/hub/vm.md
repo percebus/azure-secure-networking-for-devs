@@ -13,10 +13,13 @@ This enables more than 1 person connecting at the same time; assuming your VM su
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - [V]irtual [M]achine: `{my-prefix}-spoke-{region}-{id}-vm-jump`
     - [H]ard [D]isk [D]rive: `{my-prefix}-spoke-{region}-{id}-vm-jump-hdd`
     - [N]etwork [I]nterfa[c]e: `{my-prefix}-spoke-{region}-{id}-vm-jump-nic`
-    - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vm-jump-nsg` (Optional, can use the Hub's NSG)
+    - [A]pplication [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vm-jump-asg`
 
 Where:
 
@@ -63,10 +66,15 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
 
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
-- **NIC network security group**: _"Advanced"_
-- **Configure network security group**: You can use the NSG we created for all the Hub's `default` `subnet`, or create a new one specific for this VM if you need more level of control.
+- **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
+
 - [x] **Delete NIC when VM is deleted**: Checked
 - **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
+
+> [!WARNING]
+> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+
+_"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."_
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/subnet.png)
 
@@ -79,6 +87,24 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
+
+### [A]pplication [S]ecurity [G]roup
+
+We could have assigned a **static IP** that we know, and then use that in the `nsg` to control traffic. But managing that can very quickly become a nightmare.
+
+So creating an `asg` is a good idea, so we can keep a human readable name for the `nsg` rules.
+
+#### Market Place
+
+Search for "Application Security Group" in the Azure Portal's Market Place.
+
+![ASG](../../../../assets/img/azure/market/asg/logo.png)
+
+#### Create
+
+- **Name**: `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+
+Then link the NIC to the ASG.
 
 ## Status Check
 

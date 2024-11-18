@@ -11,9 +11,9 @@ In this chapter we'll be creating the following resources
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg`
   - [V]irtual [Net]work: `{my-prefix}-hub-{region}-{id}-vnet`: `10.1.x.x`
     - [Bas]tion: `{my-prefix}-hub-{region}-{id}-bas`
-      - [P]ublic [IP]: `{my-prefix}-hub-{region}-{id}-bas-pip`
+      - Public [IP]: `{my-prefix}-hub-{region}-{id}-bas-ip`
     - [F]ire[w]all: `{my-prefix}-hub-{region}-{id}-fw`
-      - [P]ublic [IP]: `{my-prefix}-hub-{region}-{id}-fw-pip`
+      - Public [IP]: `{my-prefix}-hub-{region}-{id}-fw-ip`
     - Subnets
       - `AzureBastionSubnet`: `10.1.0.x/26`
       - `AzureFirewallSubnet`: `10.1.1.x/26`
@@ -83,7 +83,7 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-bastion` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-bastion`, which is confusing.
 - So, if your OCD is anything like mine, and you are particular about naming, you can
   1. Click on `Create a public IP address`
-  1. Create a new one, naming it `{my-prefix}-hub-{region}-{id}-bas-pip` (see how the suffix just keep adding up?)
+  1. Create a new one, naming it `{my-prefix}-hub-{region}-{id}-bas-ip` (see how the suffix just keep adding up?)
   1. Go back to the previous screen and select the newly created public IP address.
 
 ###### Firewall
@@ -99,7 +99,7 @@ Before we begin, be mindful that this is an expensive resource, which is charged
 1. **Azure Firewall Public IP Address**: Same as above,
 
 - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-firewall`, which is confusing.
-- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-pip` and select it.
+- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it.
 
 ##### IP Address
 
@@ -166,6 +166,18 @@ Look for a "Network security group" in the Azure Portal's market place
 
 ![Network Security Group](../../../assets/img/azure/market/nsg/logo.png)
 
+#### Settings
+
+##### Subnets
+
+> [!IMPORTANT]
+> Associate the `default` subnet to the NSG.
+
+> [!WARNING]
+> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+
+Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting.
+
 ## Status Check
 
 ### Snapshot
@@ -176,7 +188,7 @@ Your resources should look like this.-
 
 ### Resource visualizer
 
-You can see the relationship between the Firewall `fw` and the Public IP `fw-pip` in the resource visualizer.
+You can see the relationship between the Firewall `fw` and the Public IP `fw-ip` in the resource visualizer.
 
 ![Resource visualizer](../../../assets/img/azure/solution/vnets/hub/fw/resources/01.png)
 
