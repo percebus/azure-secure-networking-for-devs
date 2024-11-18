@@ -12,7 +12,7 @@ There will be less hand-holding in this excercise. You will be given a scenario 
 
 Since we want the jumpbox (`vm` from the `hub`'s `default` `subnet`) to be able to reach the `webapp` in the `spoke`, we'll need another Private Endpoint that registers to the `privatelink.azurewebsites.net` Private DNS Zone we created in previous step for webapps (not to be confused with the one for blob storage accounts).
 
-##### Jumps
+##### Network Hops
 
 1. WebApp's Private Endpoint is registered under the Private DNS Zone, with a `10.2.x.x` IP address from the `webapp`'s `default` `subnet`.
 1. Jumpbox Asks Azure DNS Resolver to resolve the webapp's DNS name
@@ -45,7 +45,7 @@ Since we want the jumpbox (`vm` from the `hub`'s `default` `subnet`) to be able 
 
 Since we want the webapp (i.e. a `python` app written in `django`) to be able to reach the regional storage account `{some-short-prefix}spoke{region}{id}st`, which is registered under out Private DNS Zone inside the `hub` VNet, this is how it will go:
 
-##### Jumps
+##### Network Hops
 
 1. Storage Account's Private Endpoint is registered under the Private DNS Zone, with a `10.2.x.x` IP address from the `spoke`'s `default` subnet.
 1. Go to the Hub to transform DNS to Private IP
