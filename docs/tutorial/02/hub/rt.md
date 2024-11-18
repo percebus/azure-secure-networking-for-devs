@@ -47,7 +47,7 @@ We'll add the following routes.
 | Default | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
 
 > [!TIP]
-> Quiz: _"What is the IP address for 'Every possible IP ot there'?"_
+> QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_
 
 #### Drive traffic through the Firewall
 

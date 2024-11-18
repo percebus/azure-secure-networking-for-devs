@@ -115,7 +115,8 @@ Both **Azure Bastion** and **Azure Firewall** need to have their own **delegated
 - `AzureBastionSubnet`
 - `AzureFirewallSubnet`
 
-> Quiz: _"How many IP addresses does Bastion need'?"_
+> [!TIP]
+> QUIZ: _"How many IP addresses does Bastion need'?"_
 
 We'll also need a `default` subnet (for the lack of a better name) to host any other resource we want (NIC interfaces, VMs, etc).
 
@@ -131,7 +132,8 @@ But the only problem is
 Because of this, we'll push the smaller/well known subnets to the beginning of our IP address planning, and let the `default` subnet take some of the larger range.
 We'll reserve all the `10.1.4-7.x` addresses for this subnet, w/ `1024` IP addresses.
 
-> [!TIP] > **QUIZ**: Could we use `10.1.2.0/22`?
+> [!TIP]
+> QUIZ: Could we use `10.1.2.0/22`?
 
 So, we'll end up with 3 subnets:
 
@@ -149,7 +151,8 @@ After our changes, it should look something like this.-
 
 ![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/after.png)
 
-> [!TIP] > **QUIZ**: How could we put both Bastion and Firewall under `10.1.0.x`?
+> [!TIP]
+> QUIZ: How could we put both Bastion and Firewall under `10.1.0.x`?
 
 ##### Review
 
