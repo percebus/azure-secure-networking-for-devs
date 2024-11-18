@@ -91,15 +91,13 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 > [!CAUTION]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
-Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
-
 1. Toggle ON the _"Enable Azure Firewall"_. Add a `{my-prefix}-hub-{region}-{id}-fw` name.
 1. **Tier**: You'll need at least **Standard** for this exercise.
 1. **Policy**: _"None (Use classic firewall rules)"_
 1. **Azure Firewall Public IP Address**: Same as above,
 
 - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-firewall`, which is confusing.
-- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it.
+- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it, just like we did with Bastion.
 
 ##### IP Address
 
@@ -169,14 +167,15 @@ Create a Network security group
 
 ##### Subnets
 
-> [!IMPORTANT]
+> [!TIP]
 > Associate the `default` subnet to the NSG.
 
 Associating a NSG to a subnet, allows it to assume "intra-subnet" communication.
 
-Network Security Groups associate with a `subnet` does not make it into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
+Network Security Groups associated with a `subnet` does not turn the `subnet` into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
 
-It is important to note that EACH RESOURCE will treat rules inbound/outbound rules for each network jump, even if they are "part of the same subnet".
+> [!IMPORTANT]
+> EACH RESOURCE will treat rules inbound/outbound rules for each network jump, even if they are "part of the same subnet".
 
 Don't believe me? just add a "deny all" rule to the NSG and see how your resources will stop communicating, even if they are in the same `subnet`.
 
