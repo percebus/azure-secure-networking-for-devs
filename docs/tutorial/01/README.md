@@ -2,19 +2,18 @@
 
 ## Table of Contents
 
+1. [Hub & Spoke architecture](#hub--spoke-architecture)
+1. [Topics](#topics)
+
+## Topics
+
 1. [Create Hub VNet & resources](./hub.md)
 1. [Create Spoke VNet & resources](./spoke.md)
    1. VPN peerings
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
 
-## Before you begin
-
-### Naming Conventions
-
-Before creating resources, see [Naming conventions](../README.md#naming-conventions).
-
-### Hub & Spoke architecture
+## Hub & Spoke architecture
 
 Look at the URLs we've included on [Hub-and-Spoke Architectures](../../../README.md#hub-spoke).
 

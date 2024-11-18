@@ -1,11 +1,10 @@
 # azure-secure-networking-for-devs
 
-> [!TIP]
-> Be sure to check "Before you begin" section for additional resources and information.
-
 ## Table of Contents
 
-- [The Tutorial](#the-tutorial)
+> [!TIP]
+> Please fully read the following sections before starting the tutorial.
+
 - [Before you begin](#before-you-begin)
   - [Additional Resources](#additional-resources)
   - [Azure CLI](#azure-cli)
@@ -13,6 +12,7 @@
   - [Naming conventions](#naming-conventions)
     - [Example](#example)
 - [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
+- [The Tutorial](#the-tutorial)
 
 ## The Tutorial
 
