@@ -35,9 +35,9 @@ Look for the `Virtual machine` service Azure Portal's Market place.
 
 ##### Basics
 
-###### Project details
-
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/vm/create/basics.png)
+
+###### Project details
 
 - **Security Type**: _"Standard"_
 - **VM Architecture**: x64
