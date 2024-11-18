@@ -72,7 +72,7 @@ Private Endpoints will need to be able to register with the Private DNS Zone. So
   - **Inbound**: Allow traffic DNS traffic (via port `53`) from `10.x.x.x`
 
 > [!NOTE]
-> In this tutorial we won't go to such extense)
+> In this tutorial we won't go to such extense
 
 Mainly because we're (I'm) NOT 100% sure that working on port `53` would suffice :p
 
