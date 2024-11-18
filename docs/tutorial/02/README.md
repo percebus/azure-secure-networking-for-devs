@@ -11,7 +11,7 @@ Now that we have a Hub VNet enabled w/ **Bastion**, we can create a Virtual mach
 
 ## Architecture
 
-This diagram is an oversimpification of what we've built so far. But it give an idea of what we're trying to achieve.-
+This diagram is an oversimpification of what we've built so far. But it paints a picture of what we're trying to achieve.-
 
 ![Bastion](../../../assets/img/azure/architectures/hub_n_spokes/bas.png)
 
