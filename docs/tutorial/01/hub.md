@@ -155,16 +155,15 @@ If everything looks good, hit that `[ Create ]` button.
 
 ### [N]etwork [S]ecurity [G]roup
 
-1. Create a Network security group
-1. Attach it to the `default` subnet.
-
-We'll configure it later down the road
-
 #### Market place
 
 Look for a "Network security group" in the Azure Portal's market place
 
 ![Network Security Group](../../../assets/img/azure/market/nsg/logo.png)
+
+#### Create
+
+Create a Network security group
 
 #### Settings
 
@@ -173,10 +172,32 @@ Look for a "Network security group" in the Azure Portal's market place
 > [!IMPORTANT]
 > Associate the `default` subnet to the NSG.
 
-> [!WARNING]
-> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+Associating a NSG to a subnet, allows it to assume "intra-subnet" communication.
 
-Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting.
+Network Security Groups associate with a `subnet` does not make it into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
+
+It is important to note that EACH RESOURCE will treat rules inbound/outbound rules for each network jump, even if they are "part of the same subnet".
+
+Don't believe me? just add a "deny all" rule to the NSG and see how your resources will stop communicating, even if they are in the same `subnet`.
+
+So associating the NSG to the subnet merely helps us avoid to have to explicitly add each resource hosted in the subnet to the NSG.
+
+1. Settings > Subnets > [ + Associate ]
+
+> [!WARNING]
+> We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+
+_Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting._
+
+##### Rules
+
+###### Inbound
+
+Get familiarized with the default rules.
+
+These are standard, to ensure connectivity with a minimum level of security on resources you create under that subnet.
+
+![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/01.png)
 
 ## Status Check
 

@@ -16,6 +16,8 @@
       1. [P]rivate [E]nd[p]oint
          1. [N]etwork [I]nterfa[c]e
          1. [A]pplication [S]ecurity [G]roup
+1. Networking
+   1. [Configure NSGs](./nsg.md)
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/04.png)
 

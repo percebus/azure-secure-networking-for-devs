@@ -35,7 +35,9 @@ Take a good look at the TERMS
 ### Routes
 
 We'll add the following routes.
-The order matters, we want the more specific routes at the top, and the more general ones at the bottom.
+
+- More specific routes at the top
+- And the more general ones at the bottom.
 
 | Source  | IP range   | CIDR          | Next Hop Type     | Details               |
 | ------- | ---------- | ------------- | ----------------- | --------------------- |

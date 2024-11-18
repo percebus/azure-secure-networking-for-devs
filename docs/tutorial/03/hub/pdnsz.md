@@ -65,13 +65,19 @@ Go to "DNS Management" > "Virtual Network Links".
 
 Private Endpoints will need to be able to register with the Private DNS Zone. So you need to take in account
 
-- Hub
-  - **Inbound**: Allow traffic DNS traffic (via port `53`) from `10.x.x.x`
 - Spoke
   - **Outbound**: Allow DNS traffic to `10.1.x.x`
     - Storage Account's Private Endpoints registering from `hub` VNet (`10.1.x.x`), as well as other spoke VNets (like `10.2.x.x`).
+- Hub
+  - **Inbound**: Allow traffic DNS traffic (via port `53`) from `10.x.x.x`
 
-In this tutorial we won't go to such extense (mainly because we do not know all the ports involved in DNS Zone registration), but you should take this into account in a production environment.
+> [!NOTE]
+> In this tutorial we won't go to such extense)
+
+Mainly because we're (I'm) NOT 100% sure that working on port `53` would suffice :p
+
+> [!IMPORTANT]
+> You should take this into account in a **Zero Trust** Production Environment.
 
 ## Next Steps
 

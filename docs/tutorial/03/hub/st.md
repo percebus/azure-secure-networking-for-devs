@@ -245,6 +245,8 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
     - `spoke`'s vnet `10.2.x.x`
 - **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
+![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/02.png)
+
 > [!IMPORTANT]
 > What happens if a bad actor gets access from a `10.3.4.5` ?
 
@@ -261,16 +263,17 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
 
+![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/03.png)
+
 ##### Scenario 3: More security
 
-If you want to be more robust, you could
-
-Remember the ASG we created for the jumpboxes (currently only 1)?
+1. Remember the ASG we created for the jumpboxes (currently only 1)? We'll use that instead of the entire `10.1.x.x`.
+1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` subnet is only 1K IPs? `10.2.4.0/22`
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
-  - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
-  - `10.2.0.0/16`
+  - ~~`10.1.0.0/16`~~ `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+  - ~~`10.2.0.0/16`~~ `10.2.4.0/22`
 - **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
 > [!WARNING]
@@ -278,7 +281,7 @@ Remember the ASG we created for the jumpboxes (currently only 1)?
 
 ##### Scenario 4: Zero Trust
 
-This is **NOT** _"only **buddies** trust"_, this is **ZERO TRUST**!
+This is **NOT** _"trust only **buddies**"_, this is **ZERO TRUST**!
 
 - _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
 - Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
