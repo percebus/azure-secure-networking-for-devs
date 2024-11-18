@@ -77,11 +77,9 @@ In the most basic scenario, we can
 1. Assume `allow` **all traffic** by default (no additional rule needed)
 1. And then manage a disallow list were we add things we DON'T want.
 
-Do you know long it would be to basically keep an inventory of all the WWW?
+Do you know how time consuming it could be to basically keep an inventory of all the WWW?
 
-Who wants that kind of headache?
-
-Any who...
+Who wants that kind of headache? Any who...
 
 #### Step 1: Check access
 
