@@ -1,5 +1,11 @@
 # Creating a Route Table
 
+## Goal
+
+1. Drive all outbound traffic
+    1. Going to the internet: through the **Azure Firewall**
+    1. Going to other VNets
+
 ## Resources
 
 ### Route Table
@@ -36,14 +42,10 @@ Take a good look at the TERMS
 
 We'll add the following routes.
 
-- More specific routes at the top
-- And the more general ones at the bottom.
-
 | Destinaton Type | IP range   | CIDR ranges   | Next hop Type     | Details               |
 | --------------- | ---------- | ------------- | ----------------- | --------------------- |
 | IP Addresses    | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
 | IP Addresses    | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
-| IP Addresses    | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
 | IP Addresses    | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
 
 > [!TIP]
