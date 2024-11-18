@@ -37,7 +37,9 @@ We'll work on updating the images as we refine this training w/ subsequent itera
   - `hub`: The central resources `vnet`, for things like **Bastion**, **Firewall**, etc.
   - `spoke`: The regional resources `vnet`, etc.
 - `location`: The regional `location` where the resources are deployed. See [locations](./az/locations.md).
-- `id`: Something to tell it apart, in case you want to have multiple "stacks" in the same region. Start with `1` or `a`. This is also useful, if you went w/ something like `nw-security`, but it collides with a resource someone else created.
+- `id`: Something to tell it apart, in case you want to have multiple "stacks" in the same region. Start with `1` or `a`.
+  - In case we want to deploy **another** `hub` stack (i.e. `2`), before we delete this one (`1`).
+  - This is also useful, if you went w/ something like `nw-security`, but it collides with a resource someone else created.
 - `resource type`: The type of resource. i.e. `rg`, `vnet`, `firewall`, etc. See [Resource abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations). Some resources will have chained names, like:
   - `*-vm-special`
   - `*-vm-special-hdd`: [H]ard [D]isk [D]rive
@@ -53,7 +55,7 @@ For a **resource group** in **Switzerland North**, the name would be:
 - `johndoe`: The shared prefix for all resources in the deployment.
 - `hub`: `hub` or `spoke`
 - `switzerlandnorth`: The regional `location` where the resources are deployed.
-- `1`: Unique Identifier. This is important! In case we want to deploy **another** `hub` stack (i.e. `2`), before we delete this one (`1`).
+- `1`: Unique Identifier.
 - `rg`: **Resource type**: Resource Group
 
 ## Next Steps
