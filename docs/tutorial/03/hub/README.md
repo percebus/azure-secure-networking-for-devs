@@ -18,7 +18,6 @@
 | ----------------------------------------------------- | -------------------------- | ----------------- |
 | {prefix}-hub-{location}-{id}-rt                       | Route table                | Switzerland North |
 | {prefix}-hub-{location}-{id}-vm-jump-1                | Virtual machine            | Switzerland North |
-| {prefix}-hub-{location}-{id}-vm-jump-{id}-ip-78550576 | Public IP address          | Switzerland North |
 | {prefix}-hub-{location}-{id}-vm-jump-133-78550576     | Network Interface          | Switzerland North |
 | {prefix}-hub-{location}-{id}-vm-jump-asg              | Application security group | Switzerland North |
 | {prefix}-hub-{location}-{id}-vm-jumpOS\_{hash}        | Disk                       | Switzerland North |

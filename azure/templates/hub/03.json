@@ -54,10 +54,6 @@
       "defaultValue": "johndoe-hub-switzerlandnorth-1-vm-jump-133-78550576",
       "type": "String"
     },
-    "publicIPAddresses_johndoe_hub_switzerlandnorth_1_vm_jump_1_ip_78550576_name": {
-      "defaultValue": "johndoe-hub-switzerlandnorth-1-vm-jump-1-ip-78550576",
-      "type": "String"
-    },
     "systemTopics_jdoeswitzerlandn1st_41365c09_c8af_46f2_8ad3_1481847e49a9_name": {
       "defaultValue": "jdoeswitzerlandn1st-41365c09-c8af-46f2-8ad3-1481847e49a9",
       "type": "String"
