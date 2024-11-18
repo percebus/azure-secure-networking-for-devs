@@ -15,7 +15,7 @@ This diagram is an oversimpification of what we've built so far. But it paints a
 
 ![Bastion](../../../assets/img/azure/architectures/hub_n_spokes/bas.png)
 
-So if an external user like yourself, want to access a private resource from one of the private spoke-VNets (like a webapp, or a storage account), we need to use the Bastion service to proxy into the Jump box, and then access the private resource.
+So if an external user [like yourself], wants to access a private resource from one of the private spoke-VNets (like a webapp, or a storage account), we need to use the Bastion service to proxy into the Jump box, and then access the private resource.
 
 ## Excercises
 
