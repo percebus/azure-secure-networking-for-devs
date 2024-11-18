@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Description](#description)
+- [Motivation](#motivation)
 - [Excercises](#excercises)
 - [Next Steps](#next-steps)
 
