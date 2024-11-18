@@ -29,7 +29,7 @@ Uhm, it seems we missed something...
 
 ![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
 
-Oh, so we need to enable the DNS Proxy first!
+Oh, so we need to enable the **DNS Proxy** first!
 
 1. Navigate do DNS
 

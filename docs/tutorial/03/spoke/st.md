@@ -14,7 +14,7 @@ The information of each region is stored in a locally-accessible storage account
   - [V]irtual [N]etwork: `{my-prefix}-spoke-{region}-{id}-vnet` (already exists)
     - [S]ubnet: `default` (already exists)
       - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-nsg` (already exists)
-  - [St]orage Account: `{some-short-prefix}spoke{region}{id}st`. i.e. `jcspokewestus21st`.
+  - [St]orage Account: `{some-short-prefix}spoke{region}{id}st`. i.e. `jcspoke{short-location}{short-id}st`.
     - [P]rivate [E]nd[p]oint: `{some-short-prefix}spoke{region}{id}st-pep`
       - [N]etwork [I]nterfa[c]e: `{some-short-prefix}spoke{region}{id}st-pep-nic`
       - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}spoke{region}{id}st-pep-asg`
@@ -145,6 +145,22 @@ And associate to the Storage Account's Private Endpoint
 And associate with the Storage Account's Private Endpoint `{some-short-prefix}spoke{region}{id}st-pep`
 
 ## Status Check
+
+### Exported
+
+#### CSV
+
+| NAME                                                      | TYPE                       | LOCATION  |
+| --------------------------------------------------------- | -------------------------- | --------- |
+| {short-prefix}{short-location}{short-id}st                | Storage account            | West US 2 |
+| {short-prefix}{short-location}{short-id}st-{guid}         | Event Grid System Topic    | West US 2 |
+| {short-prefix}{short-location}{short-id}st-pep            | Private endpoint           | West US 2 |
+| {short-prefix}{short-location}{short-id}st-pep-asg        | Application security group | West US 2 |
+| {short-prefix}{short-location}{short-id}st-pep.nic.{guid} | Network Interface          | West US 2 |
+
+#### Template
+
+[JSON Template](../../../../azure/templates/spoke/03.json)
 
 ### Resource Group
 

@@ -88,6 +88,10 @@ Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
 
+### Overview
+
+![Overview](../../../../assets/img/azure/solution/vnets/hub/vm/overview.png)
+
 ### [A]pplication [S]ecurity [G]roup
 
 We could have assigned a **static IP** that we know, and then use that in the `nsg` to control traffic. But managing that can very quickly become a nightmare.
@@ -106,18 +110,9 @@ Search for "Application Security Group" in the Azure Portal's Market Place.
 
 Then link the NIC to the ASG.
 
-## Status Check
+## Connect
 
-Note that some names will be auto-generated with randomized characters.
-If you want to avoid this, you would need to create those resources manually and then attaching them.
-
-![Snapshot 01](../../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
-
-### Overview
-
-![Overview](../../../../assets/img/azure/solution/vnets/hub/vm/overview.png)
-
-### Connect
+### Via Bastion
 
 1. Select Connect > Bastion
 
@@ -131,6 +126,24 @@ If you want to avoid this, you would need to create those resources manually and
 Finally, Windows Server should come up
 
 ![Windows Server](../../../../assets/img/azure/solution/vnets/hub/vm/inside/01.png)
+
+## Configure
+
+### Download
+
+> [!TIP]
+> Installing SW before starting to create Firewall rules is a good idea.
+
+1. [Download and install Storage Explorer](./storage_explorer.md)
+
+## Status Check
+
+### Resources
+
+Note that some names will be auto-generated with randomized characters.
+If you want to avoid this, you would need to create those resources manually and then attaching them.
+
+![Snapshot 01](../../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
 
 ## Next Steps
 
