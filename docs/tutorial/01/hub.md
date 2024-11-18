@@ -74,7 +74,7 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 
 ###### Bastion
 
-> [!CAUTION]
+> [!WARNING]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
 1. Toggle ON the _"Enable Azure Bastion"_. Add a `{my-prefix}-hub-{region}-{id}-bas` name.
@@ -129,19 +129,27 @@ But the only problem is
 - You cannot extend your subnet past `10.1.1.x` into `10.1.2.x`, because it would collide with `AzureBastionSubnet`
 
 Because of this, we'll push the smaller/well known subnets to the beginning of our IP address planning, and let the `default` subnet take some of the larger range.
-We'll reserve all the `10.1.4.x` addresses for this subnet, w/ `1024` IP addresses.
+We'll reserve all the `10.1.4-7.x` addresses for this subnet, w/ `1024` IP addresses.
+
+> [!TIP] > **QUIZ**: Could we use `10.1.2.0/22`?
 
 So, we'll end up with 3 subnets:
 
-| Subnet                | IP family | CIDR Block    | Size    | Notes    |
-| --------------------- | --------- | ------------- | ------- | -------- |
-| `AzureBastionSubnet`  | `0.x`     | `10.1.0.0/26` | `64`    | Needs 50 |
-| `AzureFirewallSubnet` | `1.x`     | `10.1.1.0/26` | `64`    |          |
-| `default`             | `4-7.x`   | `10.1.4.0/22` | `1,024` |          |
+| Subnet                | IP family  | CIDR Block    | Size    | Notes    |
+| --------------------- | ---------- | ------------- | ------- | -------- |
+| `AzureBastionSubnet`  | `0.0-63`   | `10.1.0.0/26` | `64`    | Needs 50 |
+|                       | `0.64-255` |               |         | Wasted   |
+| `AzureFirewallSubnet` | `1.1-63`   | `10.1.1.0/26` | `64`    |          |
+|                       | `1.64-255` |               |         | Wasted   |
+|                       | `2-3.x`    |               |         | Wasted   |
+| `default`             | `4-7.x`    | `10.1.4.0/22` | `1,024` |          |
+|                       | `8-255.x`  |               |         | TBD      |
 
 After our changes, it should look something like this.-
 
 ![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/after.png)
+
+> [!TIP] > **QUIZ**: How could we put both Bastion and Firewall under `10.1.0.x`?
 
 ##### Review
 

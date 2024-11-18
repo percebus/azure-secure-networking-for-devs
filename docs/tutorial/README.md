@@ -69,7 +69,7 @@ For a **resource group** in **Switzerland North**, the name would be:
 - `johndoe`: The shared prefix for all resources in the deployment.
 - `hub`: `hub` or `spoke`
 - `switzerlandnorth`: The regional `location` where the resources are deployed.
-- `1`: Identifier
+- `1`: Unique Identifier. This is important! In case we want to deploy **another** `hub` stack (i.e. `2`), before we delete this one (`1`).
 - `rg`: **Resource type**: Resource Group
 
 ## Virtual Networks & IP addresses
