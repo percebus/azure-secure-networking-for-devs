@@ -172,10 +172,10 @@ Create a Network security group
 
 Associating a NSG to a subnet, allows it to assume "intra-subnet" communication.
 
-Network Security Groups associated with a `subnet` does not turn the `subnet` into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
-
 > [!IMPORTANT]
-> EACH RESOURCE will treat rules inbound/outbound rules for each network jump, even if they are "part of the same subnet".
+> EACH RESOURCE will treat inbound/outbound rules for **each network jump**, even if they are "part of the same subnet".
+
+Network Security Groups associated with a `subnet` does not turn the `subnet` into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
 
 Don't believe me? just add a "deny all" rule to the NSG and see how your resources will stop communicating, even if they are in the same `subnet`.
 
