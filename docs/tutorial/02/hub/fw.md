@@ -40,8 +40,8 @@ Oh, so we need to enable the **DNS Proxy** first!
 
 Now try to go back to the rules and add the rule again.
 
-> [!TIP]
-> Note how it says that DNS Proxy works on port `53`.
+> [!NOTE]
+> DNS Proxy works on port `53`.
 
 You should take this into account, when securing Network Security Groups
 
