@@ -232,4 +232,4 @@ So keep an eye on them.
 
 ## Next Steps
 
-[Go back to module](./README.md)
+[Go to parent](../README.md)

@@ -4,7 +4,7 @@
 
 ## Tutorial
 
-[Head to the tutorial](./docs/tutorial/README.md).
+[Head to the tutorial](./docs/README.md).
 
 ## Additional Resources
 

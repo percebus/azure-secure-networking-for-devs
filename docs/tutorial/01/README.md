@@ -2,18 +2,11 @@
 
 ## Table of Contents
 
-1. [Hub & Spoke architecture](#hub--spoke-architecture)
-1. [Networks](#networks)
-1. [Topics](#topics)
-1. [Status Check](#status-check)
-
-## Topics
-
-1. [Create Hub VNet & resources](./hub.md)
-1. [Create Spoke VNet & resources](./spoke.md)
-   1. VPN peerings
-
-![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
+- [Hub & Spoke architecture](#hub--spoke-architecture)
+- [Networks](#networks)
+- [Excercises](#excercises)
+- [Status Check](#status-check)
+- [Next Steps](#next-steps)
 
 ## Hub & Spoke architecture
 
@@ -48,6 +41,14 @@ The above example exceeds the scope of this tutorial, but it's good to know that
   - `2.x.x`: US Spoke
     - `0.x/22`: `default` subnet
   - `3.x.x`: TBD
+
+## Excercises
+
+1. [Create Hub VNet & resources](./hub.md)
+1. [Create Spoke VNet & resources](./spoke.md)
+   1. VPN peerings
+
+![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
 
 ## Status Check
 

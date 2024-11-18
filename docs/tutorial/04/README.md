@@ -1,9 +1,13 @@
 # Module 4: Web applications
 
+## Table of Contents
+
+- [Excercises](#excercises)
+
+## Excersices
+
 > [!IMPORTANT]
 > All webapps will get registered under `{name}.azurewebsites.net`
-
-## Table of Contents
 
 1. Hub resources
    1. [[P]rivate [DNS] [Z]one](./hub/pdnsz.md)
