@@ -50,6 +50,10 @@ Look for the `Virtual machine` service Azure Portal's Market place.
 
 Create a `username` and `password` you'll remember. If you forget it, you might need to completely recreate the VM.
 
+###### Inbound port rules
+
+- **Public inbound ports**: _"None"_
+
 ##### Disks
 
 ![Disks](../../../../assets/img/azure/solution/vnets/hub/vm/create/disks.png)
@@ -68,13 +72,13 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
 - **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
 
-- [x] **Delete NIC when VM is deleted**: Checked
-- **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
-
-> [!WARNING]
-> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+> [!CRITICAL]
+> We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
 
 _"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."_
+
+- [x] **Delete NIC when VM is deleted**: Checked
+- **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/subnet.png)
 
