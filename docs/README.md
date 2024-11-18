@@ -17,7 +17,7 @@ Be sure to check the [Additional Resources](../README.md#additional-resources) s
 
 ## Azure CLI
 
-Make sure you check this [Azure CLI](../az/cli.md) guide to get familiar with the commands you'll be using.
+Make sure you check this [Azure CLI](./az/cli.md) guide to get familiar with the commands you'll be using.
 
 ## Inconsistent screenshots
 
@@ -36,7 +36,7 @@ We'll work on updating the images as we refine this training w/ subsequent itera
 - `hub|spoke`: The type of network.
   - `hub`: The central resources `vnet`, for things like **Bastion**, **Firewall**, etc.
   - `spoke`: The regional resources `vnet`, etc.
-- `location`: The regional `location` where the resources are deployed. See [locations](../az/locations.md).
+- `location`: The regional `location` where the resources are deployed. See [locations](./az/locations.md).
 - `id`: Something to tell it apart, in case you want to have multiple "stacks" in the same region. Start with `1` or `a`. This is also useful, if you went w/ something like `nw-security`, but it collides with a resource someone else created.
 - `resource type`: The type of resource. i.e. `rg`, `vnet`, `firewall`, etc. See [Resource abbreviations](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations). Some resources will have chained names, like:
   - `*-vm-special`
