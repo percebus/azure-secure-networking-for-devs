@@ -39,12 +39,12 @@ We'll add the following routes.
 - More specific routes at the top
 - And the more general ones at the bottom.
 
-| Source  | IP range   | CIDR          | Next Hop Type     | Details               |
-| ------- | ---------- | ------------- | ----------------- | --------------------- |
-| Default | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
-| Default | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
-| Default | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
-| Default | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
+| Destinaton Type | IP range   | CIDR ranges   | Next hop Type     | Details               |
+| --------------- | ---------- | ------------- | ----------------- | --------------------- |
+| IP Addresses    | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
+| IP Addresses    | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
+| IP Addresses    | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
+| IP Addresses    | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
 
 > [!TIP]
 > QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_
