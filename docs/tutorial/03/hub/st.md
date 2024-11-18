@@ -268,12 +268,12 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 ##### Scenario 3: More security
 
 1. Remember the ASG we created for the jumpboxes (currently only 1)? We'll use that instead of the entire `10.1.x.x`.
-1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` subnet is only 1K IPs? `10.2.4.0/22`
+1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` subnet is only 1K IPs? `10.2.0-3.0/22`
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
   - ~~`10.1.0.0/16`~~ `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
-  - ~~`10.2.0.0/16`~~ `10.2.4.0/22`
+  - ~~`10.2.0.0/16`~~ `10.2.0.0/22`
 - **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
 
 > [!WARNING]
