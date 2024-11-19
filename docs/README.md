@@ -10,6 +10,7 @@
 - [Inconsistent Screenshots](#inconsistent-screenshots)
 - [Naming conventions](#naming-conventions)
   - [Example](#example)
+- [The Tutorial](#the-tutorial)
 
 ## Additional Resources
 
@@ -58,6 +59,6 @@ For a **resource group** in **Switzerland North**, the name would be:
 - `1`: Unique Identifier.
 - `rg`: **Resource type**: Resource Group
 
-## Next Steps
+## The Tutorial
 
 [Head to the tutorial](./tutorial/README.md)
