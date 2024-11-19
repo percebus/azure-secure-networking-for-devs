@@ -1,9 +1,21 @@
 # Module 3: Secure Storage Accounts
 
+## Table of Contents
+
+- [Motivation](#motivation)
+- [Excercises](#excercises)
+- [Next Steps](#next-steps)
+
+## Motivation
+
+**By default**, _Azure Storage Accounts_ expose **public URLs** (with **public IP addresses**)
+
+It doesn't matter how **private** our VNets are, if we constantly redirect traffic via **public networks**.
+
+## Excercises
+
 > [!IMPORTANT]
 > All Storage containers will get registered under `{name}.blob.core.windows.net`
-
-## Table of Contents
 
 1. Your laptop (Optional)
    1. [Download and install Storage Explorer](./storage_explorer.md)
@@ -15,12 +27,6 @@
    1. [Create Storage Account](spoke/st.md)
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/03.png)
-
-## Description
-
-**By default**, _Azure Storage Accounts_ expose **public URLs** (with **public IP addresses**)
-
-It doesn't matter how **private** our VNets are, if we constantly redirect traffic via **public networks**.
 
 ## Next Steps
 

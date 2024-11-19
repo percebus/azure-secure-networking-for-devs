@@ -2,28 +2,22 @@
 
 ## Table of Contents
 
-1. [Create Hub VNet & resources](./hub.md)
-1. [Create Spoke VNet & resources](./spoke.md)
-   1. VPN peerings
+- [Hub & Spoke architecture](#hub--spoke-architecture)
+- [Networks](#networks)
+- [Excercises](#excercises)
+- [Status Check](#status-check)
+- [Next Steps](#next-steps)
 
-![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
+## Hub & Spoke architecture
 
-## Before you begin
-
-### Naming Conventions
-
-Before creating resources, see [Naming conventions](../README.md#naming-conventions).
-
-### Hub & Spoke architecture
-
-Look at the URLs we've included on [Hub-and-Spoke Architectures](../../../README.md#hub-spoke).
+Look at the URL(s) we've included on [Hub-and-Spoke Architectures](../../../README.md#hub-spoke).
 
 This module is part of a series of modules that will help you create a Hub & Spoke network architecture.
 
 The idea is that we can centralize some services to:
 
 - Reduce maintenance loads
-- Reduce operational costs (services like **Azure Firewall** and **Azure Bastion** can be expensive!)
+- Reduce **operational costs** (services like **Azure Firewall** and **Azure Bastion** can be expensive!)
 
 At a high level, it looks like this.-
 
@@ -36,6 +30,25 @@ Well, you can have multiple environments (Dev, Test, Prod) in the same subscript
 ![Hub & Spokes environments](../../../assets/img/azure/architectures/hub_n_spokes/environments.png)
 
 The above example exceeds the scope of this tutorial, but it's good to know that you can expand on this.
+
+## Networks
+
+- `10.x.x.x`: Our virtual networks
+  - `1.x.x`: Hub
+    - `0.0-63`: Azure Bastion
+    - `1.0-63`: Azure Firewall
+    - `4-7.x`: `default` subnet
+  - `2.x.x`: US Spoke
+    - `0.x/22`: `default` subnet
+  - `3.x.x`: TBD
+
+## Excercises
+
+1. [Create Hub VNet & resources](./hub.md)
+1. [Create Spoke VNet & resources](./spoke.md)
+   1. VPN peerings
+
+![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
 
 ## Status Check
 

@@ -74,7 +74,7 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 
 ###### Bastion
 
-> [!CAUTION]
+> [!WARNING]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
 1. Toggle ON the _"Enable Azure Bastion"_. Add a `{my-prefix}-hub-{region}-{id}-bas` name.
@@ -91,15 +91,13 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 > [!CAUTION]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
-Before we begin, be mindful that this is an expensive resource, which is charged by the hour.
-
 1. Toggle ON the _"Enable Azure Firewall"_. Add a `{my-prefix}-hub-{region}-{id}-fw` name.
 1. **Tier**: You'll need at least **Standard** for this exercise.
 1. **Policy**: _"None (Use classic firewall rules)"_
 1. **Azure Firewall Public IP Address**: Same as above,
 
 - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-firewall`, which is confusing.
-- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it.
+- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it, just like we did with Bastion.
 
 ##### IP Address
 
@@ -117,7 +115,8 @@ Both **Azure Bastion** and **Azure Firewall** need to have their own **delegated
 - `AzureBastionSubnet`
 - `AzureFirewallSubnet`
 
-> Quiz: _"How many IP addresses does Bastion need'?"_
+> [!TIP]
+> QUIZ: _"How many IP addresses does Bastion need'?"_
 
 We'll also need a `default` subnet (for the lack of a better name) to host any other resource we want (NIC interfaces, VMs, etc).
 
@@ -131,19 +130,29 @@ But the only problem is
 - You cannot extend your subnet past `10.1.1.x` into `10.1.2.x`, because it would collide with `AzureBastionSubnet`
 
 Because of this, we'll push the smaller/well known subnets to the beginning of our IP address planning, and let the `default` subnet take some of the larger range.
-We'll reserve all the `10.1.4.x` addresses for this subnet, w/ `1024` IP addresses.
+We'll reserve all the `10.1.4-7.x` addresses for this subnet, w/ `1024` IP addresses.
+
+> [!TIP]
+> QUIZ: Could we use `10.1.2.0/22`?
 
 So, we'll end up with 3 subnets:
 
-| Subnet                | IP family | CIDR Block    | Size    | Notes    |
-| --------------------- | --------- | ------------- | ------- | -------- |
-| `AzureBastionSubnet`  | `0.x`     | `10.1.0.0/26` | `64`    | Needs 50 |
-| `AzureFirewallSubnet` | `1.x`     | `10.1.1.0/26` | `64`    |          |
-| `default`             | `4-7.x`   | `10.1.4.0/22` | `1,024` |          |
+| Subnet                | IP family  | CIDR Block    | Size    | Notes    |
+| --------------------- | ---------- | ------------- | ------- | -------- |
+| `AzureBastionSubnet`  | `0.0-63`   | `10.1.0.0/26` | `64`    | Needs 50 |
+|                       | `0.64-255` |               |         | Wasted   |
+| `AzureFirewallSubnet` | `1.1-63`   | `10.1.1.0/26` | `64`    |          |
+|                       | `1.64-255` |               |         | Wasted   |
+|                       | `2-3.x`    |               |         | Wasted   |
+| `default`             | `4-7.x`    | `10.1.4.0/22` | `1,024` |          |
+|                       | `8-255.x`  |               |         | TBD      |
 
 After our changes, it should look something like this.-
 
 ![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/after.png)
+
+> [!TIP]
+> QUIZ: How could we put both Bastion and Firewall under `10.1.0.x`?
 
 ##### Review
 
@@ -155,28 +164,50 @@ If everything looks good, hit that `[ Create ]` button.
 
 ### [N]etwork [S]ecurity [G]roup
 
-1. Create a Network security group
-1. Attach it to the `default` subnet.
-
-We'll configure it later down the road
-
 #### Market place
 
 Look for a "Network security group" in the Azure Portal's market place
 
 ![Network Security Group](../../../assets/img/azure/market/nsg/logo.png)
 
+#### Create
+
+Create a Network security group
+
 #### Settings
 
 ##### Subnets
 
-> [!IMPORTANT]
+> [!TIP]
 > Associate the `default` subnet to the NSG.
 
-> [!WARNING]
-> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+Associating a NSG to a subnet, allows it to assume "intra-subnet" communication.
 
-Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting.
+> [!IMPORTANT]
+> EACH RESOURCE will treat inbound/outbound rules for **each network jump**, even if they are "part of the same subnet".
+
+Network Security Groups associated with a `subnet` does not turn the `subnet` into "a fence". Is more like a "shared configuration" that each resource inside that `subnet` will comply with.
+
+Don't believe me? just add a "deny all" rule to the NSG and see how your resources will stop communicating, even if they are in the same `subnet`.
+
+So associating the NSG to the subnet merely helps us avoid to have to explicitly add each resource hosted in the subnet to the NSG.
+
+1. Settings > Subnets > [ + Associate ]
+
+> [!WARNING]
+> We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+
+_Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting._
+
+##### Rules
+
+###### Inbound
+
+Get familiarized with the default rules.
+
+These are standard, to ensure connectivity with a minimum level of security on resources you create under that subnet.
+
+![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/01.png)
 
 ## Status Check
 
@@ -204,4 +235,4 @@ So keep an eye on them.
 
 ## Next Steps
 
-[Go back to module](./README.md)
+[Go to parent](../README.md)

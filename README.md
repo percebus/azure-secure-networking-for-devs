@@ -4,7 +4,7 @@
 
 ## Tutorial
 
-[Head to the tutorial](./docs/tutorial/README.md).
+[Head to the tutorial](./docs/README.md).
 
 ## Additional Resources
 
@@ -90,6 +90,7 @@
 
 - [What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
 - [Quickstart: Use the Azure portal to create a virtual network](https://learn.microsoft.com/en-us/azure/virtual-network/quick-create-portal)
+- [Azure Virtual Network concepts and best practices](https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices)
 
 ##### [VNet] Peering
 
@@ -101,6 +102,7 @@
 
 ##### [VNet] Route table
 
+- [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
 - [Create, change, or delete a route table](https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table)
 
 ##### [VNet] Subnet

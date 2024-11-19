@@ -8,7 +8,7 @@ Why does Bastion need a delegated subnet? That is how it controls the traffic co
 
 ![Azure Bastion](../../../../assets/img/azure/architectures/bas/subnets.png)
 
-This enables more than 1 person connecting at the same time; assuming your VM supports it, like a properly configured **Windows Server**.
+This enables more than 1 person connecting at the same time against a single/shared public IP address.
 
 ## Resources
 
@@ -35,9 +35,9 @@ Look for the `Virtual machine` service Azure Portal's Market place.
 
 ##### Basics
 
-###### Project details
-
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/vm/create/basics.png)
+
+###### Project details
 
 - **Security Type**: _"Standard"_
 - **VM Architecture**: x64
@@ -50,31 +50,36 @@ Look for the `Virtual machine` service Azure Portal's Market place.
 
 Create a `username` and `password` you'll remember. If you forget it, you might need to completely recreate the VM.
 
+###### Inbound port rules
+
+- **Public inbound ports**: _"None"_
+
 ##### Disks
 
 ![Disks](../../../../assets/img/azure/solution/vnets/hub/vm/create/disks.png)
 
+- **OS disk type**: _"Standard HDD"_ (least expensive)
 - [x] **Delete with VM**: Checked
 - **Key management**: _"Platform-managed key"_
 
 ##### Networking
 
+![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
+
 ###### Network interface
 
 We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023 left).
 
-![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/networking.png)
-
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
 - **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
 
-- [x] **Delete NIC when VM is deleted**: Checked
-- **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
-
-> [!WARNING]
-> we recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
+> [!CRITICAL]
+> We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
 
 _"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."_
+
+- [x] **Delete NIC when VM is deleted**: Checked
+- **Subnet**: `default`. Note that the other 2 **delegated subnets**, are listed, but not available for selection.
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/vm/create/subnet.png)
 
@@ -87,6 +92,10 @@ _"Unless you have a specific reason to, since rules in a network security group 
 Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/vm/create/review.png)
+
+### Overview
+
+![Overview](../../../../assets/img/azure/solution/vnets/hub/vm/overview.png)
 
 ### [A]pplication [S]ecurity [G]roup
 
@@ -106,18 +115,9 @@ Search for "Application Security Group" in the Azure Portal's Market Place.
 
 Then link the NIC to the ASG.
 
-## Status Check
+## Connect
 
-Note that some names will be auto-generated with randomized characters.
-If you want to avoid this, you would need to create those resources manually and then attaching them.
-
-![Snapshot 01](../../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
-
-### Overview
-
-![Overview](../../../../assets/img/azure/solution/vnets/hub/vm/overview.png)
-
-### Connect
+### Via Bastion
 
 1. Select Connect > Bastion
 
@@ -131,6 +131,24 @@ If you want to avoid this, you would need to create those resources manually and
 Finally, Windows Server should come up
 
 ![Windows Server](../../../../assets/img/azure/solution/vnets/hub/vm/inside/01.png)
+
+## Configure
+
+### Download
+
+> [!TIP]
+> Installing SW before starting to create Firewall rules is a good idea.
+
+1. [Download and install Storage Explorer](./storage_explorer.md)
+
+## Status Check
+
+### Resources
+
+Note that some names will be auto-generated with randomized characters.
+If you want to avoid this, you would need to create those resources manually and then attaching them.
+
+![Snapshot 01](../../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
 
 ## Next Steps
 

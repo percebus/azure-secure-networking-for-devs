@@ -10,7 +10,7 @@ For this excercise we will only create 1 spoke subnet in the region of your choi
 - [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg`
   - [V]irtual [Net]work: `{my-prefix}-spoke-{region}-{id}-vnet`: `10.2.x.x`
     - Subnets
-      - `default`: `10.2.0.x/22`
+      - `default`: `10.2.0-3.x/22`
         - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
 
 Where:
@@ -23,8 +23,9 @@ Where:
 
 #### Create
 
+Just like we did on the `hub`, we will create a Resource group for the `spoke` VNet.
+
 1. Create a `{my-prefix}-spoke-{region}-{id}-rg` resource group in West US 2.
-   ![Basics](../../../assets/img/azure/solution/vnets/spoke/rg/create/basics.png)
 
 ### [V]irtual [Net]work
 
@@ -85,6 +86,9 @@ Go to the `default` subnet and associate the NSG.
 
 Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to connect them so the traffic can flow between them.
 
+> [!TIP]
+> When you create a virtual network peering between two virtual networks, the system adds a route for each address range within the address space of each virtual network involved in the peering.
+
 #### Add Peering
 
 Go to Peerings > Add
@@ -115,8 +119,8 @@ For this excercise will check some of the boxes.
 | ------------------------------------------------------------------------------ | ------ | ----- |
 | Allow {that vnet} to access {this vnet}                                        | `x`    | `x`   |
 | Allow {that vnet} to receive forwarded traffic from {this vnet}                | `x`    | `x`   |
-| Allow gateway or route server in {that vnet} to forward traffic to {this vnet} | ``     | ``    |
-| Enable {that vnet} tp use {this vnet}'s remote gateway or route server         | ``     | ``    |
+| Allow gateway or route server in {that vnet} to forward traffic to {this vnet} |        |       |
+| Enable {that vnet} tp use {this vnet}'s remote gateway or route server         |        |       |
 
 We can later come back and remove permissions to reinforce security.
 

@@ -2,4 +2,5 @@
 
 ## To-Do's
 
-- [ ] Translate slides into docs
+- [ ] Translate slides into docs?
+- [ ] Move naming conventions to `docs/az/naming.md`?

@@ -7,6 +7,9 @@ Just like we created a Private DNS Zone for the storage account, we need to crea
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+    - [S]ubnet: `default` (already exists)
+      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - [P]rivate [DNS] [Z]one: `privatelink.azurewebsites.net`
     - Links to VNets
       - `privatelink-at-hub`
@@ -65,6 +68,10 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 > [!IMPORTANT]
 > You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
+
+### Network Security Group
+
+Since you already configured a DNS Zone for storage accounts, it should benefit from the same configuration. So no further action is needed at this point.
 
 ## Status Check
 

@@ -1,5 +1,11 @@
 # Creating a Route Table
 
+## Goal
+
+1. Drive all outbound traffic
+   1. Going to the internet: through the **Azure Firewall**
+   1. Going to other VNets
+
 ## Resources
 
 ### Route Table
@@ -34,18 +40,17 @@ Take a good look at the TERMS
 
 ### Routes
 
-We'll add the following routes.
-The order matters, we want the more specific routes at the top, and the more general ones at the bottom.
+> [!TIP]
+> By default, Azure routes traffic between subnets.
 
-| Source  | IP range   | CIDR          | Next Hop Type     | Details               |
-| ------- | ---------- | ------------- | ----------------- | --------------------- |
-| Default | `10.1.x.x` | `10.1.0.0/16` | Virtual network   | `hub`                 |
-| Default | `10.2.x.x` | `10.2.0.0/16` | Virtual network   | peering > `spoke`     |
-| Default | `10.x.x.x` | `10.0.0.0/8`  | None              | Avoids security risks |
-| Default | `x.x.x.x`  | `0.0.0.0/0`   | Virtual Appliance | `fw` > `WWW`          |
+We'll add the following route.
+
+| Destinaton Type | IP range  | CIDR ranges | Next hop Type     | Details      |
+| --------------- | --------- | ----------- | ----------------- | ------------ |
+| IP Addresses    | `x.x.x.x` | `0.0.0.0/0` | Virtual Appliance | `fw` > `WWW` |
 
 > [!TIP]
-> Quiz: _"What is the IP address for 'Every possible IP ot there'?"_
+> QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_
 
 #### Drive traffic through the Firewall
 
