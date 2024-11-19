@@ -72,12 +72,12 @@ _"In politics, there are no solutions, only trade-offs."_
 
 ### Scenario 1: Allow All, except...
 
+![meme](../../../../assets/img/memes/lazy-security.gif)
+
 In the most basic scenario, we can
 
 1. Assume `allow` **all traffic** by default (no additional rule needed)
 1. And then manage a disallow list were we add things we DON'T want.
-
-![meme](../../../../assets/img/memes/lazy-security.gif)
 
 Do you know how time consuming it could be to basically keep an inventory of all the WWW?
 
