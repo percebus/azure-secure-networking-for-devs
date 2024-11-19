@@ -59,7 +59,7 @@
       "type": "String"
     },
     "networkSecurityGroups_johndoe_hub_switzerlandnorth_1_vnet_snets_default_nsg_name": {
-      "defaultValue": "johndoe-hub-switzerlandnorth-1-vnet-snets-default-nsg",
+      "defaultValue": "johndoe-hub-switzerlandnorth-1-vnet-snet-default-nsg",
       "type": "String"
     },
     "virtualNetworks_johndoe_spoke_westus2_1_vnet_externalid": {

@@ -14,25 +14,25 @@
 
 #### CSV
 
-| NAME                                                | TYPE                       | LOCATION          |
-| --------------------------------------------------- | -------------------------- | ----------------- |
-| {prefix}-hub-{location}-{id}-rt                     | Route table                | Switzerland North |
-| {prefix}-hub-{location}-{id}-vm-jump-1              | Virtual machine            | Switzerland North |
-| {prefix}-hub-{location}-{id}-vm-jump-133-78550576   | Network Interface          | Switzerland North |
-| {prefix}-hub-{location}-{id}-vm-jump-asg            | Application security group | Switzerland North |
-| {prefix}-hub-{location}-{id}-vm-jumpOS\_{hash}      | Disk                       | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet                   | Virtual network            | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet-bas               | Bastion                    | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet-bas-pip           | Public IP address          | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet-fw                | Firewall                   | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet-fw-pip            | Public IP address          | Switzerland North |
-| {prefix}-hub-{location}-{id}-vnet-snets-default-nsg | Network security group     | Switzerland North |
-| {short-prefix}{short-location}1st                   | Storage account            | Switzerland North |
-| {short-prefix}{short-location}1st-\_{guid}          | Event Grid System Topic    | Switzerland North |
-| {short-prefix}{short-location}1st-pep               | Private endpoint           | Switzerland North |
-| {short-prefix}{short-location}1st-pep-asg           | Application security group | Switzerland North |
-| {short-prefix}{short-location}1st-pep.nic.{guid}    | Network Interface          | Switzerland North |
-| privatelink.blob.core.windows.net                   | Private DNS zone           | Global            |
+| NAME                                               | TYPE                       | LOCATION          |
+| -------------------------------------------------- | -------------------------- | ----------------- |
+| {prefix}-hub-{location}-{id}-rt                    | Route table                | Switzerland North |
+| {prefix}-hub-{location}-{id}-vm-jump-1             | Virtual machine            | Switzerland North |
+| {prefix}-hub-{location}-{id}-vm-jump-133-78550576  | Network Interface          | Switzerland North |
+| {prefix}-hub-{location}-{id}-vm-jump-asg           | Application security group | Switzerland North |
+| {prefix}-hub-{location}-{id}-vm-jumpOS\_{hash}     | Disk                       | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet                  | Virtual network            | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet-bas              | Bastion                    | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet-bas-pip          | Public IP address          | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet-fw               | Firewall                   | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet-fw-pip           | Public IP address          | Switzerland North |
+| {prefix}-hub-{location}-{id}-vnet-snet-default-nsg | Network security group     | Switzerland North |
+| {short-prefix}{short-location}1st                  | Storage account            | Switzerland North |
+| {short-prefix}{short-location}1st-\_{guid}         | Event Grid System Topic    | Switzerland North |
+| {short-prefix}{short-location}1st-pep              | Private endpoint           | Switzerland North |
+| {short-prefix}{short-location}1st-pep-asg          | Application security group | Switzerland North |
+| {short-prefix}{short-location}1st-pep.nic.{guid}   | Network Interface          | Switzerland North |
+| privatelink.blob.core.windows.net                  | Private DNS zone           | Global            |
 
 #### Template
 
