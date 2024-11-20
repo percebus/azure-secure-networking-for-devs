@@ -82,48 +82,6 @@ Go to the `default` subnet and associate the NSG.
 
 ![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
 
-### VNet Peering(s)
-
-Now we have 2 VNets with address spaces `10.1.x.x` & `10.2.x.x`. We need to connect them so the traffic can flow between them.
-
-> [!TIP]
-> When you create a virtual network peering between two virtual networks, the system adds a route for each address range within the address space of each virtual network involved in the peering.
-
-#### Add Peering
-
-Go to Peerings > Add
-
-![Add Peering](../../../assets/img/azure/solution/vnets/spoke/vnet/peering/add.png)
-
-Note that you can allow traffic:
-
-- [x] Hub > Spoke
-- [x] Spoke > Hub
-
-For this excercise will check some of the boxes.
-
-##### Remote virtual network summary
-
-- Peering link name: `hub-switzerlandnorth-{id}_to_spoke-westus2-{id}`
-- Virtual network deployment model: `Resource Manager` (leave it as is)
-- Subscription: `{Your subscription}`
-- Virtual network: `{my-prefix}-hub-switzerlandnorth-{id}-vnet`
-
-##### Local virtual network summary
-
-- Peering link name: `spoke-westus2-{id}_to_hub-switzerlandnorth-{id}`
-
-##### Remote|Local virtual network peering settings
-
-| Permission                                                                     | Remote | Local |
-| ------------------------------------------------------------------------------ | ------ | ----- |
-| Allow {that vnet} to access {this vnet}                                        | `x`    | `x`   |
-| Allow {that vnet} to receive forwarded traffic from {this vnet}                | `x`    | `x`   |
-| Allow gateway or route server in {that vnet} to forward traffic to {this vnet} |        |       |
-| Enable {that vnet} tp use {this vnet}'s remote gateway or route server         |        |       |
-
-We can later come back and remove permissions to reinforce security.
-
 ## Resource Visualizer
 
 Under the "Resource visualizer" you should see something like this:
