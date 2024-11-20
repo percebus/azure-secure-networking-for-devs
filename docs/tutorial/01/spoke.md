@@ -81,6 +81,7 @@ Go to the `default` subnet and associate the NSG.
 #### Overview
 
 ![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
+
 ## Next Steps
 
 [Go back to module](./README.md)
