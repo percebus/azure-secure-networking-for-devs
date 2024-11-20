@@ -58,7 +58,7 @@ Review your settings and create the VNet.
 ### [N]etwork [S]ecurity [G]roup
 
 1. Create a Network security group
-1. Attach it to the `default` subnet.
+1. **Associate** it to the `default` subnet.
 
 #### Create
 
@@ -81,18 +81,6 @@ Go to the `default` subnet and associate the NSG.
 #### Overview
 
 ![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
-
-## Resource Visualizer
-
-Under the "Resource visualizer" you should see something like this:
-
-![Resource visualizer](../../../assets/img/azure/solution/vnets/spoke/vnet/resources/01.png)
-
-Note that the 2 arrows represent the peering between the 2 VNets.
-
-- [x] Hub > Spoke
-- [x] Spoke > Hub
-
 ## Next Steps
 
 [Go back to module](./README.md)

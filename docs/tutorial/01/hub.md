@@ -158,7 +158,9 @@ After our changes, it should look something like this.-
 
 Give 1 good look before creating all the resources.
 
+<!-- FIXME it lies!
 ![Review](../../../assets/img/azure/solution/vnets/hub/vnet/create/review.png)
+-->
 
 If everything looks good, hit that `[ Create ]` button.
 
