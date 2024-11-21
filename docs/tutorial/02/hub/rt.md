@@ -74,6 +74,14 @@ We will now redirect Any traffic other than `10.x.x.x` to the WWW through the **
 
 ![Add](../../../../assets/img/azure/solution/vnets/hub/rt/routes/exit-vnet-thru-fw.png)
 
+### Associate Route Table with Subnet 
+
+1. On the route table > **Settings** > **Associate** 
+
+Use the hub network and `default` subnet 
+
+![Associate](../../../../assets/img/azure/solution/vnets/hub/rt/routes/associate.png)
+
 ## Next Steps
 
 [Go back to parent](../README.md)

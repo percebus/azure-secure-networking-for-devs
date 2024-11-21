@@ -173,7 +173,7 @@ Well, Yeah! like THE REST OF THE INTERNET! (Why are we screaming?!)
 Add a rule to disallow all traffic.
 
 - Name: `disallow-all`
-- Priority: `100,000`
+- Priority: `64000`
 - Action: _"Deny"_
 - Rules
   - IP Addresses:
