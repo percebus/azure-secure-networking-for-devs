@@ -145,7 +145,7 @@ Finally, Windows Server should come up
 > [!TIP]
 > Installing SW before starting to create Firewall rules is a good idea.
 
-1. [Download and install Storage Explorer](./storage_explorer.md)
+1. [Download and install Storage Explorer](../../03/storage_explorer.md)
 
 ## Status Check
 

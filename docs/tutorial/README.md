@@ -30,7 +30,7 @@ Throughout this tutorial, you'll be creating the resources via the following mod
 
 1. [VNets](./01/README.md)
 1. [Jump Box](./02/README.md)
-1. [BLOb Storage accounts](./03/README.md)
+1. [Blob Storage accounts](./03/README.md)
 1. [Web App](./04/README.md)
 
 Each will contain a series of Excercises that will guide you through the process of creating the resources.
