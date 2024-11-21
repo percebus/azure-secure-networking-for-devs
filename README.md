@@ -1,6 +1,6 @@
 # azure-secure-networking-for-devs
 
-[`TODO`](./TODO.md) | [`LICENSE`](./LICENSE.md) | [`CONTRIBUTING`](./CONTRIBUTING.md) | [`HISTORY`](./HISTORY.md)
+[`TODO`s](./TODO.md) | [`LICENSE`](./LICENSE.md) | [`CONTRIBUTING`](./CONTRIBUTING.md) | [`HISTORY`](./HISTORY.md)
 
 ## Tutorial
 
