@@ -46,7 +46,7 @@ The above example exceeds the scope of this tutorial, but it's good to know that
 
 1. [Create Hub VNet & resources](./hub.md)
 1. [Create Spoke VNet & resources](./spoke.md)
-   1. VPN peerings
+1. [Create VPN peerings](./peering.md)
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
 

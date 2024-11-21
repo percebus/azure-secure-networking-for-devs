@@ -113,7 +113,13 @@ Search for "Application Security Group" in the Azure Portal's Market Place.
 
 - **Name**: `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
 
-Then link the NIC to the ASG.
+Then link the VM to the ASG.
+
+#### Associate
+
+1. Navigate to the VM
+1. Select **Networking** > **Application security groups**
+1. Click on [ **+ Add application security group** ]
 
 ## Connect
 

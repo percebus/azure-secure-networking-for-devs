@@ -49,21 +49,30 @@ We'll add the following route.
 | --------------- | --------- | ----------- | ----------------- | ------------ |
 | IP Addresses    | `x.x.x.x` | `0.0.0.0/0` | Virtual Appliance | `fw` > `WWW` |
 
+#### Drive traffic through the Firewall
+
+First, we need to get the **Private IP** address of the **Azure Firewall**.
+
+1. Go to Firewall > **Overview**
+1. Copy the **Private IP** address (in notepad or something)
+
+![Private IP](../../../../assets/img/azure/solution/vnets/hub/fw/overview.png)
+
+We will now redirect Any traffic other than `10.x.x.x` to the WWW through the **Azure Firewall**.
+
 > [!TIP]
 > QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_
 
-#### Drive traffic through the Firewall
-
-Go to Settings > Routes > Add
-
-![Add](../../../../assets/img/azure/solution/vnets/hub/rt/routes/exit-vnet-thru-fw.png)
+1. Go to **Settings** > **Routes**
+1. Click on [ **+ Add** ]
 
 - **Route name**: `exit-vnet-thru-fw`
 - **Destination type**: _"IP Addresses"_
-- **Destination IP addresses/CIDR ranges**: ???
+- **Destination IP addresses/CIDR ranges**: `0.0.0.0/0`
 - **Next hop type**: _"Virtual appliance"_ (as in the **Azure Firewall**)
-- **Next hop address**: In a new tab, go to the **Azure Firewall** and copy the **Private IP** address
-  ![Private IP](../../../../assets/img/azure/solution/vnets/hub/fw/overview.png)
+- **Next hop address**: Use the **Private IP** address of the **Azure Firewall**
+
+![Add](../../../../assets/img/azure/solution/vnets/hub/rt/routes/exit-vnet-thru-fw.png)
 
 ## Next Steps
 
