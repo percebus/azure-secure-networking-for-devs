@@ -62,7 +62,7 @@ You can visualize the progress of your network
 
 You should see something like this.-
 
-![Diagram](../../../assets/img/azure/solution/vnets/network/02.png)
+![Diagram](../../../assets/img/azure/solution/vnets/network/01.png)
 
 ## Next Steps
 

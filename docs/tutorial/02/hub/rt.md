@@ -8,8 +8,6 @@
 
 ## Resources
 
-### Route Table
-
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
   - [R]oute [T]able: `{my-prefix}-hub-{region}-{id}-rt`
 
@@ -18,6 +16,8 @@ Where:
 - `{some-short-prefix}`: Your username (i.e. `johndoe`)
 - `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
+
+### Route Table
 
 #### Market place
 
