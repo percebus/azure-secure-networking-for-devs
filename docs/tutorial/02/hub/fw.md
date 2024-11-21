@@ -214,7 +214,7 @@ These are all the rules we ended up adding:
 
 ![rules](../../../../assets/img/azure/solution/vnets/hub/fw/rules/n.png)
 
-**Zero Trust** can sure be exausting!
+**Zero Trust** can sure be exhausting!
 
 But hey, you're worth it!
 

@@ -63,7 +63,7 @@ We will now redirect Any traffic other than `10.x.x.x` to the WWW through the **
 > [!TIP]
 > QUIZ: _"What is the IP address for 'Every possible IP ot there'?"_
 
-1. Go to **Settings** > **Routes**
+1. Back in the new route table go to **Settings** > **Routes**
 1. Click on [ **+ Add** ]
 
 - **Route name**: `exit-vnet-thru-fw`
