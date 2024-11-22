@@ -1,4 +1,5 @@
 <!-- omit in toc -->
+
 # Bicep Commands
 
 - [Initialize](#initialize)
