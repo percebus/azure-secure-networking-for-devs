@@ -1,7 +1,12 @@
 param prefix string
 param id string
 param hubLocation string = resourceGroup().location
+param jumpBoxUsername string
+@secure()
+param jumpBoxPassword string
+
 var basename = '${prefix}-hub-${hubLocation}-${id}'
+var vmName = '${prefix}-hub-${hubLocation}-${id}-vm-jump'
 
 resource hubNsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
   name: '${basename}-vnet-snet-default-nsg'
@@ -116,6 +121,81 @@ resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
         }
       }
     ]
+  }
+}
+
+resource defaultSubnet 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' existing = {
+  parent: hubVNet
+  name: 'default'
+}
+
+resource asg 'Microsoft.Network/applicationSecurityGroups@2024-03-01' = {
+  name: '${vmName}-asg'
+  location: hubLocation
+}
+
+resource nic 'Microsoft.Network/networkInterfaces@2024-03-01' = {
+  name: '${vmName}-nic'
+  location: hubLocation
+  properties: {
+    ipConfigurations: [
+      {
+        name: 'IPConf'
+        properties: {
+          subnet: {
+            id: defaultSubnet.id
+          }
+          applicationSecurityGroups: [
+            {
+              id:asg.id
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+resource jumpBox 'Microsoft.Compute/virtualMachines@2024-07-01' = {
+  name: vmName
+  location: hubLocation
+  properties: {
+    storageProfile: {
+      imageReference: {
+        publisher: 'MicrosoftWindowsServer'
+        offer: 'WindowsServer'
+        sku: '2022-datacenter-azure-edition-hotpatch'
+        version: 'latest'
+      }
+      osDisk: {
+        name: '${vmName}-hdd'
+        createOption: 'FromImage'
+        deleteOption: 'Delete'
+        diskSizeGB: 127
+        managedDisk: {
+          storageAccountType: 'Standard_LRS'
+        }
+        osType: 'Windows'
+      }
+    }
+    hardwareProfile: {
+      vmSize: 'Standard_D2s_v3'
+    }
+    osProfile: {
+      computerName: '${prefix}-hub'
+      adminUsername: jumpBoxUsername
+      adminPassword: jumpBoxPassword
+    }
+    networkProfile: {
+      networkInterfaces: [
+        {
+          id: nic.id
+          properties: {
+            deleteOption: 'Delete'
+          }
+        }
+      ]
+    }
   }
 }
 

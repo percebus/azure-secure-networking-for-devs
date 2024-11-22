@@ -4,6 +4,13 @@ param prefix string
 @description('The unique identifier of the current copy, deployment, env, or stack')
 param id string
 
+@description('The username to use with the jumpbox')
+param jumpBoxUsername string
+
+@description('The password to use with the jumpbox username')
+@secure()
+param jumpBoxPassword string
+
 @description('The Azure region to deploy the hub to')
 param hubLocation string = 'switzerlandnorth'
 
@@ -24,6 +31,8 @@ module hubVNet 'modules/hubVNet.bicep' = {
     prefix: prefix
     id: id
     hubLocation: hubLocation
+    jumpBoxUsername: jumpBoxUsername
+    jumpBoxPassword: jumpBoxPassword
     // addresses start at 10.1.0.0
   }
 }
