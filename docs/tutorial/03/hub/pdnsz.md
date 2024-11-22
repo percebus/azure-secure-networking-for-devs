@@ -51,8 +51,8 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/spoke.png)
 
-- **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
-- **Virtual Network**: Select the **Hub** VNet
+- **Link name**: Give a meaningful name to the link, like `privatelink-at-spoke`
+- **Virtual Network**: Select the **Spoke** VNet
 - [x] **Enable auto registration**: Click on this checkbox.
 
 ##### Status Check
