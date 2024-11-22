@@ -1,4 +1,9 @@
+<!-- omit in toc -->
 # Bicep Commands
+
+- [Initialize](#initialize)
+- [Deploy](#deploy)
+- [Destroy](#destroy)
 
 ## Initialize
 
@@ -13,7 +18,7 @@ Install bicep:
 az bicep install
 ```
 
-or
+or upgrade bicep:
 
 ```bash
 az upgrade
@@ -34,13 +39,21 @@ Since we are deploying resource groups, we must deploy at the subscription scope
 To test the deployment:
 
 ```bash
-az deployment sub what-if --location $LOCATION --template-file $PATH_TO_MAIN_FILE --parameters prefix=$PREFIX
+az deployment sub what-if --location $LOCATION --template-file $PATH_TO_MAIN_FILE --parameters prefix=$PREFIX id=$ID
 ```
 
 To actually deploy:
 
 ```bash
-az deployment sub create --location $LOCATION --name $NAME --template-file $PATH_TO_MAIN_FILE --parameters prefix=$PREFIX
+az deployment sub create --location $LOCATION --name $NAME --template-file $PATH_TO_MAIN_FILE --parameters prefix=$PREFIX id=$ID
+```
+
+Optionally, [create a parameters file](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameter-files?tabs=Bicep) to use instead of inline parameters.
+
+```bash
+az deployment sub create --location $LOCATION --name $NAME --template-file $PATH_TO_MAIN_FILE --parameters main.bicepparam
+#  or
+az deployment sub create --location $LOCATION --name $NAME --template-file $PATH_TO_MAIN_FILE --parameters main.parameters.json
 ```
 
 ## Destroy
