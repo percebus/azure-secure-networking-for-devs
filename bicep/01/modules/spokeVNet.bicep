@@ -1,6 +1,6 @@
 param prefix string
+param id string
 param spokeLocation string = resourceGroup().location
-param id int
 param addressPrefix string
 
 var basename = '${prefix}-spoke-${spokeLocation}-${id}'

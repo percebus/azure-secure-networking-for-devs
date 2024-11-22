@@ -1,6 +1,7 @@
 param prefix string
+param id string
 param hubLocation string = resourceGroup().location
-var basename = '${prefix}-hub-${hubLocation}-0'
+var basename = '${prefix}-hub-${hubLocation}-${id}'
 
 resource hubNsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
   name: '${basename}-vnet-snet-default-nsg'
