@@ -34,6 +34,18 @@ Your resources should look like something this.-
 
 ![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/02.png)
 
+### Diagram
+
+You can visualize the progress of your network
+
+1. Go to any VNet
+1. Go to Monitoring > Diagram
+1. Expand the components
+
+You should see something like this.-
+
+![Diagram](../../../assets/img/azure/solution/vnets/network/02.png)
+
 ## Next Steps
 
 [Go back to parent](../README.md)

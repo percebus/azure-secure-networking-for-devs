@@ -5,23 +5,43 @@ Now that all traffic is going through the **Azure Firewall**, we can start addin
 > [!TIP]
 > Everytime you add a rule, the firewall takes like 1+ full minute(s) to apply the rule.
 
+We're going to add **Network Rules Collection**
+
+1. Go to **Settings** > **Rules (Classic)**
+1. Go to second tab **Network Rules Collection**
+1. Click on **+ Add network rule collection**
+
 ## Pre-requisites: DNS Proxy
 
 ### Step 1: Try to add any FDQN rule
 
 Try to add an allow rule.
 
-- Name: `allow-bing`
+- Name: `allow-github`
 - Priority: `100`
 - Action: _"Allow"_
 - Rules
   - FQDNS:
 
-| name       | Protocol | Source Type | Source | Destination FQDNs | Destination Ports |
-| ---------- | -------- | ----------- | ------ | ----------------- | ----------------- |
-| `bing.com` | Any      | Any         | `*`    | `bing.com`        | `*`               |
+| name           | Protocol | Source Type | Source | Destination FQDNs | Destination Ports |
+| -------------- | -------- | ----------- | ------ | ----------------- | ----------------- |
+| `GitHub.com`   | Any      | Any         | `*`    | `Github.com`      | `*`               |
+| `*.GitHub.com` | Any      | Any         | `*`    | `*.GitHub.com`    | `*`               |
 
-If you get a "You must enable DNS Proxy" error, go to the **Azure Firewall**, go to the next section
+> [!TIP]
+> Domain are case-insensitive
+
+You should get a couple of errors
+
+<!-- prettier-ignore-start -->
+> [!CRITICAL]
+> * is not allowed
+
+> [!CRITICAL]
+> You must enable DNS Proxy
+<!-- prettier-ignore-end -->
+
+Proceed to next section
 
 ### Step 2: Enable DNS Proxy
 
@@ -49,15 +69,15 @@ You should take this into account, when securing Network Security Groups
 
 Now try again to add the `allow` rule mentioned above.
 
-- Name: `allow-bing`
+- Name: `allow-github`
 - Priority: `100`
 - Action: _"Allow"_
 - Rules
   - FQDNS:
 
-| name       | Protocol | Source Type | Source | Destination FQDNs | Destination Ports |
-| ---------- | -------- | ----------- | ------ | ----------------- | ----------------- |
-| `bing.com` | Any      | Any         | `*`    | `bing.com`        | `*`               |
+| name         | Protocol | Source Type | Source | Destination FQDNs | Destination Ports |
+| ------------ | -------- | ----------- | ------ | ----------------- | ----------------- |
+| `GitHub.com` | Any      | Any         | `*`    | `GitHub.com`      | `*`               |
 
 ## Scenarios
 
@@ -153,7 +173,7 @@ Well, Yeah! like THE REST OF THE INTERNET! (Why are we screaming?!)
 Add a rule to disallow all traffic.
 
 - Name: `disallow-all`
-- Priority: `100,000`
+- Priority: `64000`
 - Action: _"Deny"_
 - Rules
   - IP Addresses:
@@ -194,7 +214,7 @@ These are all the rules we ended up adding:
 
 ![rules](../../../../assets/img/azure/solution/vnets/hub/fw/rules/n.png)
 
-**Zero Trust** can sure be exausting!
+**Zero Trust** can sure be exhausting!
 
 But hey, you're worth it!
 
