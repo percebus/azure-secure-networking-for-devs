@@ -13,6 +13,14 @@ resource hubNsg 'Microsoft.Network/networkSecurityGroups@2024-03-01' = {
   location: hubLocation
 }
 
+resource routeTable 'Microsoft.Network/routeTables@2024-03-01' = {
+  name: '${basename}-rt'
+  location: hubLocation
+  properties: {
+    disableBgpRoutePropagation: false
+  }
+}
+
 resource hubVNet 'Microsoft.Network/virtualNetworks@2023-09-01' = {
   name: '${basename}-vnet'
   location: hubLocation
@@ -41,6 +49,9 @@ resource hubVNet 'Microsoft.Network/virtualNetworks@2023-09-01' = {
           addressPrefix: '10.1.4.0/22' // 10.1.4.0 - 10.1.7.255
           networkSecurityGroup: {
             id: hubNsg.id
+          }
+          routeTable:{
+            id: routeTable.id
           }
         }
       }
@@ -100,6 +111,16 @@ resource firewallPublicIP 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
   }
 }
 
+resource firewallPolicy 'Microsoft.Network/firewallPolicies@2024-03-01' = {
+  name: 'enable-DNS'
+  location: hubLocation
+  properties: {
+    dnsSettings: {
+      enableProxy: true
+    }
+  }
+}
+
 resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
   name: '${basename}-fw'
   location: hubLocation
@@ -121,6 +142,47 @@ resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
         }
       }
     ]
+    firewallPolicy:{
+      id: firewallPolicy.id
+    }
+    // TODO: 1 - fix deployment and 2 - implement one or the other scenario
+    networkRuleCollections: [
+      {
+        name: 'allow-github'
+        properties: {
+          action: {
+            type: 'Allow'
+          }
+          priority: 100
+          rules: [
+            {
+              name: 'GitHub.com'
+              protocols: ['Any']
+              sourceAddresses: ['*']
+              destinationFqdns: ['GitHub.com']
+              destinationPorts: ['*']
+            }
+            {
+              name: '*.GitHub.com'
+              protocols: ['Any']
+              sourceAddresses: ['*']
+              destinationFqdns: ['*.GitHub.com']
+              destinationPorts: ['*']
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+resource wwwRoute 'Microsoft.Network/routeTables/routes@2024-03-01' = {
+  parent: routeTable
+  name: 'exit-vnet-thru-fw'
+  properties: {
+    addressPrefix: '0.0.0.0/0'
+    nextHopType: 'VirtualAppliance'
+    nextHopIpAddress: firewall.properties.ipConfigurations[0].properties.privateIPAddress
   }
 }
 
