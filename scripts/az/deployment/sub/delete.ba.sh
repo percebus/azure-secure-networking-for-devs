@@ -23,6 +23,8 @@ for rg in $(az deployment sub show --name $deployment_name --query properties.ou
 do az group delete --name $rg --no-wait --yes
 done
 
+# After deleting resources
+# We removes the deployment by name
 echo "Deleting deployment '${deployment_name}'"
 az deployment sub delete --name ${deployment_name}
 

@@ -41,7 +41,6 @@ fi
 set -x
 
 file_path=${project_folder}/main.bicep
-params_file_path=${project_folder}/main.bicepparam
 
 az deployment sub ${cmd} \
   --name ${deployment_name} \
