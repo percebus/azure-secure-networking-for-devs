@@ -1,5 +1,12 @@
 !installers/**
 
+# sample
+!**.sample
+
+# env files
+env/*.sh
+
+
 ##############################
 ### VisualStudio.gitignore ### SRC: https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 ##############################
