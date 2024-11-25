@@ -6,6 +6,11 @@ deployment_name=${1}
 project_folder=${2}
 errors=0
 
+if [ -z "${AZURE_DEPLOYMENT_LOCATION}" ]; then
+  echo "AZURE_DEPLOYMENT_LOCATION is unset"
+  errors=$((errors + 1))
+fi
+
 if [ -z "${AZURE_RESOURCES_NAME_PREFIX}" ]; then
   echo "AZURE_RESOURCES_NAME_PREFIX is unset"
   errors=$((errors + 1))
@@ -44,6 +49,7 @@ file_path=${project_folder}/main.bicep
 
 # SRC: https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub-create
 az deployment sub ${cmd} \
+  --location ${AZURE_DEPLOYMENT_LOCATION} \
   --name ${deployment_name} \
   --template-file ${file_path} \
   --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID

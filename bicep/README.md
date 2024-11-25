@@ -5,6 +5,7 @@
 - [Initialize](#initialize)
 - [Deploy](#deploy)
 - [Destroy](#destroy)
+- [Automation](#automation)
 
 ## Initialize
 
@@ -40,21 +41,37 @@ Since we are deploying resource groups, we must deploy at the subscription scope
 To test the deployment:
 
 ```bash
-az deployment sub what-if --location $AZURE_LOCATION --template-file $PATH_TO_MAIN_FILE --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID
+az deployment sub what-if \
+  --location $AZURE_DEPLOYMENT_LOCATION \
+  --template-file $PATH_TO_MAIN_FILE \
+  --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID
 ```
 
 To actually deploy:
 
 ```bash
-az deployment sub create --location $AZURE_LOCATION --name $AZURE_DEPLOYMENT_NAME --template-file $PATH_TO_MAIN_FILE --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID
+az deployment sub create \
+  --location $AZURE_DEPLOYMENT_LOCATION \
+  --name $AZURE_DEPLOYMENT_NAME \
+  --template-file $PATH_TO_MAIN_FILE \
+  --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID
 ```
 
 Optionally, [create a parameters file](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/parameter-files?tabs=Bicep) to use instead of inline parameters.
 
 ```bash
-az deployment sub create --location $AZURE_LOCATION --name $AZURE_DEPLOYMENT_NAME --template-file $PATH_TO_MAIN_FILE --parameters main.bicepparam
+az deployment sub create \
+  --location $AZURE_DEPLOYMENT_LOCATION \
+  --name $AZURE_DEPLOYMENT_NAME \
+  --template-file $PATH_TO_MAIN_FILE \
+  --parameters main.bicepparam
+
 #  or
-az deployment sub create --location $AZURE_LOCATION --name $AZURE_DEPLOYMENT_NAME --template-file $PATH_TO_MAIN_FILE --parameters main.parameters.json
+az deployment sub create \
+  --location $AZURE_DEPLOYMENT_LOCATION \
+  --name $AZURE_DEPLOYMENT_NAME \
+  --template-file $PATH_TO_MAIN_FILE \
+  --parameters main.parameters.json
 ```
 
 ## Destroy
@@ -78,3 +95,9 @@ To delete the resource groups using that output, run the following:
 # add -y to the az group delete command if you don't want to be prompted on each delete
 for rg in $(az deployment sub show --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.rgNames.value -o tsv); do az group delete --name $rg --no-wait; done
 ```
+
+## Automation
+
+We've included some `scripts` to help automate the deployment process.
+
+[See `scripts/az/deployment/sub/README`](../scripts/az/deployment/sub/README.md) for more information.

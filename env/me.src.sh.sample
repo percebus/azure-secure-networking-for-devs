@@ -1,4 +1,4 @@
-export GIT_REPOSITORY_NAME="azure-secure-networking-for-devs"
+export AZURE_DEPLOYMENT_LOCATION=FIXME
 export AZURE_RESOURCES_NAME_PREFIX=FIXME
 export AZURE_RESOURCES_NAME_ID="1"
 
