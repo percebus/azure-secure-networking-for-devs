@@ -6,10 +6,21 @@
 
 ## Useful Azure CLI commands
 
-- az
-  - account
+- `az`
+  - upgrade
+  - `account`
     - [list-locations](https://learn.microsoft.com/en-us/cli/azure/account?view=azure-cli-latest#az-account-list-locations)
-  - network
+  - `bicep`
+    - install
+    - upgrade
+  - [deployment](https://learn.microsoft.com/en-us/cli/azure/deployment?view=azure-cli-latest)
+    - [sub](https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest)
+      - create
+      - show
+      - delete
+  - `group`
+    - [delete](https://learn.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-delete)
+  - `network`
     - asg
       - [create](https://learn.microsoft.com/en-us/cli/azure/network/asg?view=azure-cli-latest#az-network-asg-create)
     - bastion
@@ -47,8 +58,8 @@
       - [peering](<https://learn.microsoft.com/en-us/cli/azure/network/vnet/peering?view=azure-cli-latest#az-network-vnet-peering-create()>)
       - subnet
         - [create](https://learn.microsoft.com/en-us/cli/azure/network/vnet/subnet?view=azure-cli-latest#az-network-vnet-subnet-create)
-  - resource
+  - `resource`
     - [update](https://learn.microsoft.com/en-us/cli/azure/resource?view=azure-cli-latest#az-resource-update)
-  - webapp
+  - `webapp`
     - vnet-integration
       - [add](https://learn.microsoft.com/en-us/cli/azure/webapp/vnet-integration?view=azure-cli-latest#az-webapp-vnet-integration-add)

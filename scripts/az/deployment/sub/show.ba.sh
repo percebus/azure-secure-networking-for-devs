@@ -18,6 +18,7 @@ fi
 
 set -x
 
+# SRC: https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub-show
 az deployment sub show --name ${deployment_name}
 
 set +x

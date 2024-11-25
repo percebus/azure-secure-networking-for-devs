@@ -20,11 +20,14 @@ set -x
 
 echo "Deleting Resource Groups inside deployment '${deployment_name}'"
 for rg in $(az deployment sub show --name $deployment_name --query properties.outputs.rgNames.value -o tsv | tr -d '\r')
-do az group delete --name $rg --no-wait --yes
+do
+  # SRC: https://learn.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-delete
+  az group delete --name $rg --no-wait --yes
 done
 
 # After deleting resources
 # We removes the deployment by name
+# SRC: https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub-delete
 echo "Deleting deployment '${deployment_name}'"
 az deployment sub delete --name ${deployment_name}
 

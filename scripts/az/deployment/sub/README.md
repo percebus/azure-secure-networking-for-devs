@@ -64,3 +64,8 @@ i.e.
 ```bash
 $> bash scripts/az/deployment/sub/delete.sh azure-secure-networking-for-devs-module01
 ```
+
+## Resources
+
+- [az deployment](https://learn.microsoft.com/en-us/cli/azure/deployment?view=azure-cli-latest)
+- [az deployment sub](https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub)

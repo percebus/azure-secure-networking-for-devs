@@ -42,6 +42,7 @@ set -x
 
 file_path=${project_folder}/main.bicep
 
+# SRC: https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub-create
 az deployment sub ${cmd} \
   --name ${deployment_name} \
   --template-file ${file_path} \
