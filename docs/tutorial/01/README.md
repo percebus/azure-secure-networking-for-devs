@@ -64,6 +64,12 @@ You should see something like this.-
 
 ![Diagram](../../../assets/img/azure/solution/vnets/network/01.png)
 
+## Bicep
+
+There are some [`bicep` files](../../../bicep/01/) that you can use to create the resources.
+
+Make sure to [read the `README`](../../../bicep/README.md) before you start.
+
 ## Next Steps
 
 [Go back to parent](../README.md)
