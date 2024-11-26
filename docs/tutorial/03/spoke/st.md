@@ -33,10 +33,8 @@ Where:
 
 Since you just created one **Storage account** at `hub`, we will skim over some details in this part.
 
-
 - **Storage account name**: `{short_prefix}spoke{short_region}{short_id}st`
 - **Redundancy**: Choose "Geo-redundant storage (GRS)", since this will be shared between US and EU.
-
 
 ![Create Storage Account](../../../../assets/img/azure/solution/vnets/spoke/st/create/basics.png)
 
