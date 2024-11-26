@@ -7,8 +7,8 @@ param prefix = FIXME
 param id = FIXME
 
 // your jumpbox username and password
-param jumpBoxPassword = FIXME
-param jumpBoxUsername =  FIXME
+param jumpBoxUsername = FIXME
+param jumpBoxPassword =  FIXME
 
 // Override the default values
 // param hubLocation = 'switzerlandnorth'

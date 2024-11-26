@@ -31,24 +31,6 @@ resource firewallRules 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@
     ruleCollections: [
       {
         ruleCollectionType:'FirewallPolicyFilterRuleCollection'
-        name: 'disallow-all'
-        action: {
-          type: 'Deny'
-        }
-        priority: 64000
-        rules: [
-          {
-            ruleType: 'NetworkRule'
-            name: 'Any'
-            ipProtocols: ['Any']
-            sourceAddresses: ['*']
-            destinationAddresses: ['*']
-            destinationPorts: ['*']
-          }
-        ]
-      }
-      {
-        ruleCollectionType:'FirewallPolicyFilterRuleCollection'
         name: 'allow-github'
         action: {
           type: 'Allow'
