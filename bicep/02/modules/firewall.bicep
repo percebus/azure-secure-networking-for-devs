@@ -1,0 +1,81 @@
+param name string
+param location string
+param subnetId string
+
+resource firewallPublicIP 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
+  name: '${name}-ip'
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+  properties: {
+    publicIPAllocationMethod: 'Static'
+  }
+}
+
+resource firewallPolicy 'Microsoft.Network/firewallPolicies@2024-03-01' = {
+  name: '${name}-policy'
+  location: location
+  properties: {
+    dnsSettings: {
+      enableProxy: true
+    }
+  }
+}
+
+resource firewallRules 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@2024-03-01' = {
+  parent: firewallPolicy
+  name: '${name}-rules'
+  properties: {
+    priority: 100
+    ruleCollections: [
+      {
+        ruleCollectionType:'FirewallPolicyFilterRuleCollection'
+        name: 'disallow-all'
+        action: {
+          type: 'Deny'
+        }
+        priority: 64000
+        rules: [
+          {
+            ruleType: 'NetworkRule'
+            name: 'Any'
+            ipProtocols: ['Any']
+            sourceAddresses: ['*']
+            destinationAddresses: ['*']
+            destinationPorts: ['*']
+          }
+        ]
+      }
+    ]
+  }
+}
+
+resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
+  name: name
+  location: location
+  properties: {
+    sku:{
+      name: 'AZFW_VNet'
+      tier: 'Standard'
+    }
+    ipConfigurations: [
+      {
+        name: 'fwIpConf'
+        properties: {
+          subnet:{
+            id: subnetId
+          }
+          publicIPAddress:{
+            id: firewallPublicIP.id
+          }
+        }
+      }
+    ]
+    firewallPolicy:{
+      id: firewallPolicy.id
+    }
+  }
+}
+
+output privateIp string = firewall.properties.ipConfigurations[0].properties.privateIPAddress

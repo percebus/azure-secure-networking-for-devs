@@ -48,34 +48,12 @@ resource bastionSubNet 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' ex
   name: 'AzureBastionSubnet'
 }
 
-resource bastionPublicIP 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
-  name: '${basename}-bas-ip'
-  location: hubLocation
-  sku: {
-    name: 'Standard'
-  }
-  properties: {
-    publicIPAllocationMethod: 'Static'
-  }
-}
-
-resource bastionHost 'Microsoft.Network/bastionHosts@2024-03-01' = {
-  name: '${basename}-bas'
-  location: hubLocation
-  properties: {
-    ipConfigurations: [
-      {
-        name: 'IpConf'
-        properties: {
-          subnet:{
-            id: bastionSubNet.id
-          }
-          publicIPAddress:{
-            id: bastionPublicIP.id
-          }
-        }
-      }
-    ]
+module bastion 'bastion.bicep' = {
+  name: 'bastion'
+  params: {
+    name: '${basename}-bas'
+    location: hubLocation
+    subnetId: bastionSubNet.id
   }
 }
 
@@ -84,38 +62,12 @@ resource firewallSubNet 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' e
   name: 'AzureFirewallSubnet'
 }
 
-resource firewallPublicIP 'Microsoft.Network/publicIPAddresses@2024-03-01' = {
-  name: '${basename}-fw-ip'
-  location: hubLocation
-  sku: {
-    name: 'Standard'
-  }
-  properties: {
-    publicIPAllocationMethod: 'Static'
-  }
-}
-
-resource firewall 'Microsoft.Network/azureFirewalls@2024-03-01' = {
-  name: '${basename}-fw'
-  location: hubLocation
-  properties: {
-    sku:{
-      name: 'AZFW_VNet'
-      tier: 'Standard'
-    }
-    ipConfigurations: [
-      {
-        name: 'fwIpConf'
-        properties: {
-          subnet:{
-            id: firewallSubNet.id
-          }
-          publicIPAddress:{
-            id: firewallPublicIP.id
-          }
-        }
-      }
-    ]
+module firewall 'firewall.bicep' = {
+  name: 'firewall'
+  params: {
+    name: '${basename}-fw'
+    location: hubLocation
+    subnetId: firewallSubNet.id
   }
 }
 
