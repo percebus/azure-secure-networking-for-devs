@@ -68,7 +68,7 @@ Search for "Storage Account" in the Azure Portal's Market Place.
 > [!TIP]
 > You can also choose _"From storage accounts that have a private endpoint to the same virtual network"_.
 
-![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/avanced-security.png)
+![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/advanced-security.png)
 
 ##### Networking
 
@@ -88,7 +88,7 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 <!-- prettier-ignore-start -->
 > [!CRITICAL]
-> **Virtual networks**: This is ONLY for **Service Endpoints**, the old way, which will redirect traffic to the Public IP address of the Storage Account. **NOT** for **Private Endpoints**.
+> **Virtual networks**: This is ONLY for **Service Endpoints** (the old way), which will redirect traffic to the Public IP address of the Storage Account. **NOT** for **Private Endpoints**.
 <!-- prettier-ignore-end -->
 
 ##### IP Addresses
@@ -134,6 +134,15 @@ You should enable this only when the data requires that level of durability.
 Make sure that all the naming is solid, and that it is in the expected location region.
 
 ![Review](../../../../assets/img/azure/solution/vnets/hub/st/create/review.png)
+
+#### Settings
+
+##### Configuration
+
+Ensure that **Access Keys** are allowed
+
+![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
+
 
 ### Private Endpoint
 
@@ -187,6 +196,8 @@ Point to the **Private DNS Zone** created in the previous step.
 
 #### Resources
 
+If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oint" connected to the "Storage Account". and to the "[N]etwork [I]nterfa[c]e".
+
 ![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
 
 #### Settings
@@ -198,10 +209,6 @@ Now that the **Private Endpoint** is created, it should have self-registered aga
 ![DNS configuration](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/dns.png)
 
 ## Reconfigure Storage Account
-
-##### Configuration
-
-![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
 
 #### Reconfigure
 
@@ -217,20 +224,31 @@ From Either **Your Laptop** or the **Jumpbox**
 
 ![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
 
-##### Step 2: Remove Public IP
+##### Step 2: Disable access from Public IP
 
-1. Go to "Security + networking" > "Networking" > "Firewalls and virtual networks" > "Firewall"
-1. Remove the Public IP address you added in the previous step.
+> [!WARNING]
+> After Ignite Microsoft '24, this section changed
 
-**Before**:
+1. Go to "Security + networking" > "Networking" > "Public access"
+1. Click on **[ Manage ]** under "Public network access"
+1. Change "Public network access" to **"Disable"**
 
-![Before](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/firewall_and_virtual_networks/01.png)
+**Disable**:
+
+![Disable](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/public_access/public_network_access/disable.png)
 
 **After**:
 
-![After](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/firewall_and_virtual_networks/02.png)
+![After](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/public_access/after.png)
 
-Ideally, we would just change _"Plublic network access"_ to **"Disabled"**. But let's take it 1 step at the time.
+1. Go to "Security + networking" > "Networking" > "Public access"
+1. Now, if you check **[ View ]** under "Resource settings: ..."
+1. Everything should be grayed out
+
+![Resource Access Settings](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/public_access/resource_settings/disabled.png)
+
+> [!TIP]
+> Remove the IP Address **BEFORE** Disabling the Public Access
 
 ###### Step 3: Download data
 
@@ -261,7 +279,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
   - `10.0.0.0/8`: This includes
     - `hub`'s vnet `10.1.x.x`
     - `spoke`'s vnet `10.2.x.x`
-- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
+- **Destination**: `{storage_account_name}-pep-asg`
 
 ![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/02.png)
 
@@ -270,13 +288,13 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
 ##### Scenario 2: More explicit minimum security
 
-You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
+You could add an **inbound** rule to allow traffic from `10.1.x.x` and `10.2.x.x` explicitly.
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
   - `10.1.0.0/16`
   - `10.2.0.0/16`
-- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
+- **Destination**: `{storage_account_name}-pep-asg`
 
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
@@ -286,13 +304,13 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 ##### Scenario 3: More security
 
 1. Remember the ASG we created for the jumpboxes (currently only 1)? We'll use that instead of the entire `10.1.x.x`.
-1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` subnet is only 1K IPs? `10.2.0-3.0/22`
+1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` `subnet` is only 1K IPs? `10.2.0-3.0/22`
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
-  - ~~`10.1.0.0/16`~~ `{prefix}-hub-{short_region}-{short_id}-vm-jump-asg`
+  - ~~`10.1.0.0/16`~~ `{jumpbox_name}-pep-asg`
   - ~~`10.2.0.0/16`~~ `10.2.0.0/22`
-- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
+- **Destination**: `{storage_account_name}-pep-asg`
 
 > [!WARNING]
 > What happens if a bad actor creates a VM with an IP `10.2.3.4`?
@@ -308,18 +326,12 @@ So we end-up with something like this
 
 - **Name**: `allow-jumpbox-to-storage`
 - **Source**:
-  - `{prefix}-hub-{short_region}-{short_id}-vm-jump-asg`
-- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
+  - `{jumpbox_name}-pep-asg`
+- **Destination**: `{storage_account_name}-pep-asg`
 
 > [!NOTE] > `10.2.x.x`: Will remain TBD
 
 ## Status Check
-
-### Private Endpoint
-
-If you navigate "Resource visualizer", it should show the "[P]rivate [E]nd[p]oint" connected to the "Storage Account". and to the "[N]etwork [I]nterfa[c]e".
-
-![PEP](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
 
 ### Private DNS Zone
 
