@@ -1,4 +1,6 @@
-# Creating and Configuring a Private DNS Zone for Azure Storage Accounts
+# Private DNS Zone for Azure Storage Accounts
+
+Here is how to Create and Configure a **Private DNS Zone** for Azure **Storage Accounts**.
 
 ## Resources
 

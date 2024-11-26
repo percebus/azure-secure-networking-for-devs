@@ -36,8 +36,8 @@ If you haven't already, please go through the following:
 1. [Hub resources](hub/README.md)
    1. Create Private DNS Zone
    1. Create Storage Account
-1. Spoke
-   1. [Create Storage Account](spoke/st.md)
+1. [Spoke resources](spoke/README.md)
+   1. Create Storage Account
 1. [Network Security Groups](nsg.md)
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/03.png)

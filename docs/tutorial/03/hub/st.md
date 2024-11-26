@@ -26,8 +26,8 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
 
 Where:
 
-- `{short_prefix}`: Your username (i.e. `johndoe`)
-- `{short_region}`: The region of your spoke VNet (i.e. `westus2`)
+- `{short_prefix}`: Your username (i.e. `johnd`)
+- `{short_region}`: The region of your spoke VNet (i.e. `switzerlandn`)
 - `{short_id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### Storage Account
@@ -179,7 +179,10 @@ Search for "Private Endpoint" in the Azure Portal's Market Place.
 
 - **Subnet**: Choose the `default` subnet.
 - **Private IP Configuration**: Choose _"Dynamically allocate an IP address"_.
-- **Application Security Groups**: You can go ahead and create one. We will use this to control which resources/IP addresses can access this storage account.
+- **Application Security Groups**: Create one: `{storage_account_name}-pep-asg`
+
+> [!NOTE]
+> We will use the ASG to control which resources/IP addresses can access this **storage account**.
 
 ![Virtual Network](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/virtual_network.png)
 
@@ -218,7 +221,7 @@ Having installed the "Storage Explorer" in both your Jumpbox and your local lapt
 From Either **Your Laptop** or the **Jumpbox**
 
 1. Open Storage Explorer
-1. Create a container
+1. Create a container (if you have not done so already)
 1. Upload a file from your laptop
 
 ![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
@@ -228,15 +231,17 @@ From Either **Your Laptop** or the **Jumpbox**
 > [!WARNING]
 > After Ignite Microsoft '24, this section changed
 
-1. Go to "Security + networking" > "Networking" > "Public access"
-1. Click on **[ Manage ]** under "Public network access"
-1. Change "Public network access" to **"Disable"**
+1. Go to _"Security + networking"_ > _"Networking"_ > _"Public access"_
+1. Click on **[ Manage ]** under _"Public network access"_
+1. Change _"Public network access"_ to **"Disable"**
 
 **Disable**:
 
 ![Disable](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/public_access/public_network_access/disable.png)
 
 **After**:
+
+Notice how it says _"Public network access **Disabled**"_
 
 ![After](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/public_access/after.png)
 
@@ -257,7 +262,7 @@ You should now see an error like this.-
 
 ![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/disallowed.png)
 
-But it should still work from your Jumpbox `=]`
+But it should still work from your Jumpbox 🥷
 
 ### Network Security Group
 
@@ -324,7 +329,9 @@ This is **NOT** _"trust only **buddies**"_, this is **ZERO TRUST**!
 
 - Remember the ASG we created for the jumpbox(es) (currently only 1)? We'll use that instead.
 - As for spoke: _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
-  - Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
+  - Well, **ONLY THEN** you would add the excemption to allow it, **NEVER BEFORE**.
+
+[Read about YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
 
 So we end-up with something like this
 
