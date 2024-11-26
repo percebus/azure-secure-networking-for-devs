@@ -47,6 +47,32 @@ resource firewallRules 'Microsoft.Network/firewallPolicies/ruleCollectionGroups@
           }
         ]
       }
+      {
+        ruleCollectionType:'FirewallPolicyFilterRuleCollection'
+        name: 'allow-github'
+        action: {
+          type: 'Allow'
+        }
+        priority: 100
+        rules: [
+          {
+            ruleType: 'NetworkRule'
+            name: 'Github.com'
+            ipProtocols: ['Any']
+            sourceAddresses: ['*']
+            destinationFqdns: ['Github.com']
+            destinationPorts: ['*']
+          }
+          {
+            ruleType: 'NetworkRule'
+            name: 'Github.GitHubAssets.com'
+            ipProtocols: ['Any']
+            sourceAddresses: ['*']
+            destinationFqdns: ['Github.GitHubAssets.com']
+            destinationPorts: ['*']
+          }
+        ]
+      }
     ]
   }
 }
