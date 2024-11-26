@@ -14,7 +14,7 @@
 ### Private DNS Zone
 
 > [!NOTE]
-> Unlike other resources, **Private DNS Zone** is "Global".
+> Unlike other resources, **Private DNS Zone** is "**Global**".
 
 #### Market place
 
@@ -91,4 +91,4 @@ We'll create Virtual Network Links for `hub` and `spoke` VNets.
 
 ## Next Steps
 
-[Go back to parent](./README.md)
+[Create Storage Account resources](./st.md)

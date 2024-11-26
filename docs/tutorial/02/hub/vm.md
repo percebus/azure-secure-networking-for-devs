@@ -158,4 +158,4 @@ If you want to avoid this, you would need to create those resources manually and
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Create a Route Table](./rt.md)

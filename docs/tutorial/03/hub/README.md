@@ -47,4 +47,4 @@ Your resources should look like something this.-
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Create Spoke Storage Account resources](../spoke/st.md)

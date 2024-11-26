@@ -75,4 +75,4 @@ You should see something like this.-
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Go to Module 02](../02/README.md)

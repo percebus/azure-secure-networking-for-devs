@@ -143,7 +143,6 @@ Ensure that **Access Keys** are allowed
 
 ![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
 
-
 ### Private Endpoint
 
 In this step, we will end up with the following names:
@@ -276,10 +275,11 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
-  - `10.0.0.0/8`: This includes
+  - IP Addresses: `10.0.0.0/8`, this includes.-
     - `hub`'s vnet `10.1.x.x`
     - `spoke`'s vnet `10.2.x.x`
-- **Destination**: `{storage_account_name}-pep-asg`
+- **Destination**:
+  - Application Security Group: `{storage_account_name}-pep-asg`
 
 ![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/02.png)
 
@@ -288,13 +288,15 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
 ##### Scenario 2: More explicit minimum security
 
-You could add an **inbound** rule to allow traffic from `10.1.x.x` and `10.2.x.x` explicitly.
+You could add an **inbound** rule to allow traffic from VNets `10.1.x.x` (hub) and `10.2.x.x` (spoke) explicitly.
 
-- **Name**: `allow-private-to-storage`
-- **Source**:
-  - `10.1.0.0/16`
-  - `10.2.0.0/16`
-- **Destination**: `{storage_account_name}-pep-asg`
+- **Name**: `allow-private-vnets-to-storage`
+  - **Source**:
+    - IP Addresses:
+      - `10.1.0.0/16`: `10.1.x.x` hub vnet
+      - `10.2.0.0/16`: `10.2.x.x` spoke vnet
+  - **Destination**:
+    - Application Security Group: `{storage_account_name}-pep-asg`
 
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
@@ -303,14 +305,15 @@ You could add an **inbound** rule to allow traffic from `10.1.x.x` and `10.2.x.x
 
 ##### Scenario 3: More security
 
-1. Remember the ASG we created for the jumpboxes (currently only 1)? We'll use that instead of the entire `10.1.x.x`.
-1. Also, why allow the entirety of `10.2.x.x`, when we know the `default` `subnet` is only 1K IPs? `10.2.0-3.0/22`
+Instead of allowing the entire IP Address space of each VNet, we could only allow the `default` `subnet` for each VNet`.
 
-- **Name**: `allow-private-to-storage`
-- **Source**:
-  - ~~`10.1.0.0/16`~~ `{jumpbox_name}-pep-asg`
-  - ~~`10.2.0.0/16`~~ `10.2.0.0/22`
-- **Destination**: `{storage_account_name}-pep-asg`
+- **Name**: `allow-private-vnets-to-storage`
+  - **Source**:
+    - IP Addresses:
+      - ~~`10.1.0.0/16`~~ `10.1.4.0/22`: `10.1.4-7.x` `subnet` `default` @ `hub` vnet
+      - ~~`10.2.0.0/16`~~ `10.2.0.0/22`: `10.2.0-3.x` `subnet` `default` @ `spoke` vnet
+  - **Destination**:
+    - Application Security Group: `{storage_account_name}-pep-asg`
 
 > [!WARNING]
 > What happens if a bad actor creates a VM with an IP `10.2.3.4`?
@@ -319,17 +322,23 @@ You could add an **inbound** rule to allow traffic from `10.1.x.x` and `10.2.x.x
 
 This is **NOT** _"trust only **buddies**"_, this is **ZERO TRUST**!
 
-- _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
-- Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
+- Remember the ASG we created for the jumpbox(es) (currently only 1)? We'll use that instead.
+- As for spoke: _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
+  - Well, then you would add the excemption THEN to allow it. [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
 
 So we end-up with something like this
 
-- **Name**: `allow-jumpbox-to-storage`
-- **Source**:
-  - `{jumpbox_name}-pep-asg`
-- **Destination**: `{storage_account_name}-pep-asg`
+- **Name**: `allow-hub-jumpbox-to-storage`
+  - **Source**:
+    - Application Security Group:
+      - ~~`10.1.4.0/22`~~ `{jumpbox_name}-pep-asg`
+  - **Destination**:
+    - Application Security Group: `{storage_account_name}-pep-asg`
 
-> [!NOTE] > `10.2.x.x`: Will remain TBD
+<!-- prettier-ignore-start -->
+> [!NOTE]
+> `10.2.x.x`: Will remain TBD
+<!-- prettier-ignore-end  -->
 
 ## Status Check
 
@@ -337,8 +346,6 @@ So we end-up with something like this
 
 1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
 1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
-
-![PEP](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/recordsets.png)
 
 ### Jumpbox (VM)
 

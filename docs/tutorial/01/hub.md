@@ -237,4 +237,4 @@ So keep an eye on them.
 
 ## Next Steps
 
-[Go to parent](../README.md)
+[Create Spoke VNet](./spoke.md)

@@ -36,7 +36,7 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ##### Basics
 
-- **Name**: `privatelink.blob.core.windows.net`
+- **Name**: `privatelink.azurewebsites.net`
 
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/create/basics.png)
 
@@ -44,30 +44,43 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/create/review.png)
 
-#### Create VNet Links
+#### DNS Management
+
+##### Virtual Network Links
+
+Just like we storage accounts, We'll create Virtual Network Links for `hub` and `spoke` VNets.
 
 1. Go to "DNS Management" > "Virtual Network Links".
-1. Click on "Add" and select the VNet to link.
+1. Click on **[ + Add ]** and select the VNet to link.
 
-##### VNet: Hub
+###### VNet: Hub
+
+**Virtual network details**
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
+
+**Configuration**
+
 - [ ] **Enable auto registration**: Leave this unchecked.
+- [ ] **Enable fallback to the internet**: Leave this unchecked.
 
-> [!IMPORTANT]
-> You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
+<!-- prettier-ignore-start -->
+> [!TIP]
+> **Auto-registration** Is only used when you have VM scalesets or other services that need to register themselves.
+<!-- prettier-ignore-end -->
 
-![Error](../../../../assets/img/azure/solution/vnets/hub/pdnsz/web/vnet/links/errors/1vnet-to-1pdnsz-auto-registration.png)
+###### VNet: Spoke
 
-##### VNet: Spoke
+**Virtual network details**
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-spoke`
 - **Virtual Network**: Select the **Spoke** VNet
-- [ ] **Enable auto registration**: Leave this unchecked.
 
-> [!IMPORTANT]
-> You won't be able to register another Private DNS zone under the same VNet if you "enable auto-registration".
+**Configuration**
+
+- [ ] **Enable auto registration**: Leave this unchecked.
+- [ ] **Enable fallback to the internet**: Leave this unchecked.
 
 ### Network Security Group
 
