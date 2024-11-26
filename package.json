@@ -7,10 +7,14 @@
     "doc": "docs"
   },
   "scripts": {
+    "az:bicep:install": "bash scripts/az/bicep/install.ba.sh",
+    "setup": "npm run az:bicep:install",
+    "setup:ci": "npm run setup:ci",
     "prettier": "prettier .",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
-    "lint": "npm run prettier:check",
+    "bicep:lint": "bash scripts/az/bicep/lint.ba.sh",
+    "lint": "npm run prettier:check && npm run bicep:lint",
     "style": "npm run prettier:write",
     "poststyle": "npm run lint",
     "pretest": "npm run lint",

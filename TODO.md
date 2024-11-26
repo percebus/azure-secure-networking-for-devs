@@ -8,4 +8,4 @@
 
 ### bicep
 
-- [ ] Add `bicep` linting/validation
+- [x] ~~Add `bicep` linting/validation~~
