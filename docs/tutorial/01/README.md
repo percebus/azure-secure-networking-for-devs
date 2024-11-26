@@ -5,6 +5,7 @@
 - [Hub & Spoke architecture](#hub--spoke-architecture)
 - [Networks](#networks)
 - [Excercises](#excercises)
+- [Got stuck?](#bicep)
 - [Status Check](#status-check)
 - [Next Steps](#next-steps)
 
@@ -49,6 +50,14 @@ The above example exceeds the scope of this tutorial, but it's good to know that
 1. [Create VPN peerings](./peering.md)
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/01.png)
+
+## Bicep
+
+If you got stuck for some reason, no worries!
+
+There are some [`bicep` files](../../../bicep/01/) that you can use to create the resources.
+
+Make sure to [read the `README`](../../../bicep/README.md) before you start.
 
 ## Status Check
 
