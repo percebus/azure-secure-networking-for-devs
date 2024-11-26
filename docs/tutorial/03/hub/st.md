@@ -15,85 +15,20 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
 
 ## Resources
 
-- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
-  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+- [R]esource [G]roup: `{prefix}-hub-{short_region}-{short_id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{prefix}-hub-{short_region}-{short_id}-vnet` (already exists)
     - [S]ubnet: `default` (already exists)
-      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
-  - [St]orage Account: `{some-short-prefix}hub{region}{id}st`. i.e. `jchubswitzerlandnorth1st`.
-    - [P]rivate [E]nd[p]oint: `{some-short-prefix}hub{region}{id}st-pep`
-      - [N]etwork [I]nterfa[c]e: `{some-short-prefix}hub{region}{id}st-pep-nic`
-      - [A]pplication [S]ecurity [G]roup: `{some-short-prefix}hub{region}{id}st-pep-asg`
+      - [N]etwork [S]ecurity [G]roup: `{prefix}-hub-{short_region}-{short_id}-nsg` (already exists)
+  - (🌟 **new**) [St]orage Account: `{short_prefix}hub{short_region}{short_id}st`. i.e. `jchubswitzerlandnorth1st`.
+    - (🌟 **new**) [P]rivate [E]nd[p]oint: `{short_prefix}hub{short_region}{short_id}st-pep`
+      - (🌟 **new**) [N]etwork [I]nterfa[c]e: `{short_prefix}hub{short_region}{short_id}st-pep-nic`
+      - (🌟 **new**) [A]pplication [S]ecurity [G]roup: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
 
 Where:
 
-- `{some-short-prefix}`: Your username (i.e. `johndoe`)
-- `{region}`: The region of your spoke VNet (i.e. `westus2`)
-- `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
-
-> [!TIP]
-> You can create "Private Endpoint" and "Network interface" in the same step as the "Storage Account" creation, but you **won't have much control over naming**. So We would recommend you start by creating the "Private endpoint".
-
-### Private Endpoint
-
-Creating the "Private Endpoint" and "Network Interface" before-hand will ensure that we end up with the following names:
-
-- `{name}st`
-  - `{name}st-pep`
-    - `{name}st-pep-nic`
-
-You can also skip this step and either:
-
-1. Go straight to the "Storage Account > Create" and create them from there.
-1. Or add them after the fact, which requires more work.
-
-#### Market Place
-
-Search for "Private Endpoint" in the Azure Portal's Market Place.
-
-![Private Endpoint](../../../../assets/img/azure/market/pep/logo.png)
-
-#### Create
-
-##### Basics
-
-![Create](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/basics.png)
-
-- **Name**: `hub{region}st-pep`
-- **Network Interface Name**: `hub{region}st-pep-nic`
-
-##### Resource
-
-- **Target sub-resource**: Choose _"blob"_.
-
-![Resource](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/resource.png)
-
-##### Virtual Network
-
-![Virtual Network](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/virtual_network.png)
-
-- **Subnet**: Choose the `default` subnet.
-- **Private IP Configuration**: Choose _"Dynamically allocate an IP address"_.
-- **Application Security Groups**: You can go ahead and create one. We will use this to control which resources/IP addresses can access this storage account.
-
-###### DNS
-
-Point to the Private DNS Zone created in the previous step.
-
-![DNS](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/dns.png)
-
-#### Settings
-
-DNS configuration:
-
-![DNS configuration](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/dns.png)
-
-IP configurations:
-
-![IP configurations](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/ip.png)
-
-### Resources
-
-![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
+- `{short_prefix}`: Your username (i.e. `johndoe`)
+- `{short_region}`: The region of your spoke VNet (i.e. `westus2`)
+- `{short_id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### Storage Account
 
@@ -109,17 +44,31 @@ Search for "Storage Account" in the Azure Portal's Market Place.
 
 ![Create Storage Account](../../../../assets/img/azure/solution/vnets/hub/st/create/basics.png)
 
-**Storage account name**: `{short-prefix}hub{region}{id}st`
+**Storage account name**: `{short_prefix}hub{short_region}{short_id}st`
 
-**Primary Service**: Choose "Azure Files".
+**Primary Service**: Choose "**Azure Files**".
 
-But be aware that Gen2 is also available.
+<!-- prettier-ignore-start -->
+> [!NOTE]
+> **Gen2** is also available.
+<!-- prettier-ignore-end -->
 
 ![Primary Service](../../../../assets/img/azure/solution/vnets/hub/st/create/basics-primary_service-gen2.png)
 
 **Redundancy**: Choose "Geo-redundant storage (GRS)", since this will be shared between US and EU.
 
 ![Redundancy](../../../../assets/img/azure/solution/vnets/hub/st/create/basics-redundancy.png)
+
+##### Advanced
+
+![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/advanced.png)
+
+- **Permitted scope of copy operations**: Choose _"Same Microsoft Entra tenant"_.
+
+> [!TIP]
+> You can also choose _"From storage accounts that have a private endpoint to the same virtual network"_.
+
+![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/avanced-security.png)
 
 ##### Networking
 
@@ -128,52 +77,131 @@ But be aware that Gen2 is also available.
 
 ![Networking](../../../../assets/img/azure/solution/vnets/hub/st/create/networking.png)
 
-**Network access**: Choose _"Enable public access from selected virtual networks and IP Addresses"_.
+###### Public access
 
 We will start by "poking a hole" and adding our Public IP address to test connectivity, and then proceed to lock it down to the VNet.
 
-**Subnets**: Choose all the subnets available.
+- **Public Network access**
+  - [x] Enable: Choose
 
-![Subnets](../../../../assets/img/azure/solution/vnets/hub/st/create/networking-subnets.png)
+##### Virtual networks
 
-- `default`: We want any service from the VNet to be able to access the storage account. We can add more security with ([A]pplication) [S]ecurity [G]roups.
-- `AzureBastionSubnet`: We want to be able to access & test the storage account from the Jump box accessible from Bastion.
-- ~~`AzureFirewallSubnet`~~: N/A
+<!-- prettier-ignore-start -->
+> [!CRITICAL]
+> **Virtual networks**: This is ONLY for **Service Endpoints**, the old way, which will redirect traffic to the Public IP address of the Storage Account. **NOT** for **Private Endpoints**.
+<!-- prettier-ignore-end -->
 
-**IP Addresses**: **TEMPORARY!** Add your current Public IP address. We will be removing this later on.
-
-**Private Endpoints**: If you have created the "Private Endpoint" before-hand, you can just link it here. If not, this is the step where you could create it:
-
-![Private Endpoint](../../../../assets/img/azure/solution/vnets/hub/st/create/networking-private_endpoint.png).
+##### IP Addresses
 
 > [!WARNING]
-> This view does **NOT** allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
+> The following is just to test connectivity. We will be removing this soon enough.
+
+- **Allow select public internet IP addresses to access your resource**
+  - Add your \_current) **Public IP address**
+
+##### Private Endpoints
+
+> [!WARNING]
+> As of **2024-11-26**, Creating a **Private Endpoint** against an existing **Private DNS Zone** via the Storage Account wizard will fail.
+
+**Leave empty**. We need the storage account to be created first.
+
+##### IP Addresses
 
 ##### Data protection
+
+We can remove all the "soft delete" protections, as it will only increase our costs.
+
+You should enable this only when the data requires that level of durability.
 
 ![Data protection](../../../../assets/img/azure/solution/vnets/hub/st/create/data_protection.png)
 
 ##### Encryption
 
+> [!WARNING]
+> There are options that you **cannot change after** creating the resource
+
+**You won't be changing ANYTHING here**, but we include it to make you aware that , like.-
+
+- [C]ustomer [M]anaged [K]eys
+  - Tables
+  - Queues
+
 ![Encryption](../../../../assets/img/azure/solution/vnets/hub/st/create/encryption.png)
 
-##### Review
+##### Review + create
+
+Make sure that all the naming is solid, and that it is in the expected location region.
 
 ![Review](../../../../assets/img/azure/solution/vnets/hub/st/create/review.png)
 
+### Private Endpoint
+
+In this step, we will end up with the following names:
+
+- `{storage_account_name}` (already exists)
+  - (🌟 **new**) `{storage_account_name}-pep`
+    - (🌟 **new**) `{storage_account_name}-pep-nic`
+    - (🌟 **new**) `{storage_account_name}-pep-asg`
+
+#### Market Place
+
+Search for "Private Endpoint" in the Azure Portal's Market Place.
+
+![Private Endpoint](../../../../assets/img/azure/market/pep/logo.png)
+
+#### Create
+
+##### Basics
+
+- **Name**: `{storage_account_name}-pep`
+- **Network Interface Name**: `{storage_account_name}-pep-nic`
+
+![Create](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/basics.png)
+
+##### Resource
+
+- **Resource type**: Choose `Microsoft.Storage/storageAccounts`
+- **Resource**: Choose the **storage account** you created in the previous step.
+- **Target sub-resource**: Choose _"blob"_.
+
+![Resource](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/resource.png)
+
+##### Virtual Network
+
+- **Subnet**: Choose the `default` subnet.
+- **Private IP Configuration**: Choose _"Dynamically allocate an IP address"_.
+- **Application Security Groups**: You can go ahead and create one. We will use this to control which resources/IP addresses can access this storage account.
+
+![Virtual Network](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/virtual_network.png)
+
+##### DNS
+
+Point to the **Private DNS Zone** created in the previous step.
+
+![DNS](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/dns.png)
+
+##### Review + create
+
+![Review + create](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/review.png)
+
+#### Resources
+
+![Resource Diagram](../../../../assets/img/azure/solution/vnets/hub/st/pep/resources/01.png)
+
 #### Settings
+
+Now that the **Private Endpoint** is created, it should have self-registered against the **Private DNS Zone**.
+
+##### DNS configuration
+
+![DNS configuration](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/dns.png)
+
+## Reconfigure Storage Account
 
 ##### Configuration
 
 ![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
-
-#### Private Endpoint: Did you forget?
-
-Listen, I get it. We all do mistakes. If you forgot to create the "Private Endpoint" before-hand, or during creation process; you can still do it now.
-
-After adding it, you should see something like this:
-
-![Private endpoint connections](../../../../assets/img/azure/solution/vnets/hub/st/security_n_networking/networking/private_endpoint_connections/approved.png)
 
 #### Reconfigure
 
@@ -214,16 +242,6 @@ You should now see an error like this.-
 
 But it should still work from your Jumpbox `=]`
 
-### Application Security Group
-
-If you haven't created it so far, you can go ahead and create that now.
-
-#### Market Place
-
-Search for "Application Security Group" in the Azure Portal's Market Place.
-
-![ASG](../../../../assets/img/azure/market/asg/logo.png)
-
 ### Network Security Group
 
 #### Inbound
@@ -243,7 +261,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
   - `10.0.0.0/8`: This includes
     - `hub`'s vnet `10.1.x.x`
     - `spoke`'s vnet `10.2.x.x`
-- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
 
 ![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/02.png)
 
@@ -258,7 +276,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 - **Source**:
   - `10.1.0.0/16`
   - `10.2.0.0/16`
-- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
 
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
@@ -272,9 +290,9 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 
 - **Name**: `allow-private-to-storage`
 - **Source**:
-  - ~~`10.1.0.0/16`~~ `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
+  - ~~`10.1.0.0/16`~~ `{prefix}-hub-{short_region}-{short_id}-vm-jump-asg`
   - ~~`10.2.0.0/16`~~ `10.2.0.0/22`
-- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
 
 > [!WARNING]
 > What happens if a bad actor creates a VM with an IP `10.2.3.4`?
@@ -290,8 +308,8 @@ So we end-up with something like this
 
 - **Name**: `allow-jumpbox-to-storage`
 - **Source**:
-  - `{my-prefix}-hub-{region}-{id}-vm-jump-asg`
-- **Destination**: `{some-short-prefix}hub{region}{id}st-pep-asg`
+  - `{prefix}-hub-{short_region}-{short_id}-vm-jump-asg`
+- **Destination**: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
 
 > [!NOTE] > `10.2.x.x`: Will remain TBD
 

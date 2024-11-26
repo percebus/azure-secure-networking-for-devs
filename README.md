@@ -8,6 +8,10 @@
 
 ## Additional Resources
 
+### Vulnerabilities
+
+- [Known Vulnerabilities](./docs/vulnerabilities.md)
+
 ### Networking
 
 - [CIDR to IP v4 Conversion](https://www.ipaddressguide.com/cidr)
