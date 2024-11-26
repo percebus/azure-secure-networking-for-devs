@@ -7,7 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "az:bicep:install": "bash scripts/az/bicep/install.ba.sh",
+    "az:bicep:install": "az bicep install",
+    "az:bicep:postinstall": "az bicep version",
     "az:bicep:lint": "bash scripts/az/bicep/lint.ba.sh",
     "setup": "npm run az:bicep:install",
     "setup:ci": "npm run setup",
