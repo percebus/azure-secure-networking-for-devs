@@ -100,4 +100,4 @@ Go to "DNS Management" > "Virtual Network Links".
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Create Spoke resources](../spoke/README.md)
