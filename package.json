@@ -9,7 +9,7 @@
   "scripts": {
     "az:bicep:install": "bash scripts/az/bicep/install.ba.sh",
     "setup": "npm run az:bicep:install",
-    "setup:ci": "npm run setup:ci",
+    "setup:ci": "npm run setup",
     "prettier": "prettier .",
     "prettier:write": "npm run prettier -- --write",
     "prettier:check": "npm run prettier -- --check",
