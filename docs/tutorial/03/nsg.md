@@ -108,6 +108,13 @@ So we end-up with something like this.-
 > `10.2.x.x`: Will remain TBD
 <!-- prettier-ignore-end  -->
 
+#### Inbound Rules
+
+| Order  | Action | Name                    | Source                   | Destination                      |
+| ------ | ------ | ----------------------- | ------------------------ | -------------------------------- |
+| `100`  | Allow  | `st-from-jumpbox-allow` | `{jumpbox_name}-pep-asg` | `{storage_account_name}-pep-asg` |
+| `1000` | Deny   | `st-deny-all`           | Any                      | `{storage_account_name}-pep-asg` |
+
 ### Storage @ Spoke
 
 #### Inbound: Deny ALL
@@ -140,6 +147,13 @@ Unfortunately, we can't use **Application Security Group** from other VNets to c
 
 Altho in most corportate environments you would connect through a VPN connection and not a JumpBox,
 it serves as an educational example in the importance of properly designing CIDR blocks and IP address spaces.
+
+#### Inbound Rules
+
+| Order  | Action | Name                    | Source        | Destination                      |
+| ------ | ------ | ----------------------- | ------------- | -------------------------------- |
+| `100`  | Allow  | `st-from-jumpbox-allow` | `10.1.4.0/22` | `{storage_account_name}-pep-asg` |
+| `1000` | Deny   | `st-deny-all`           | Any           | `{storage_account_name}-pep-asg` |
 
 ## Other Test Cases
 
