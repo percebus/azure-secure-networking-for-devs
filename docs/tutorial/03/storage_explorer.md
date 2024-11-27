@@ -6,7 +6,7 @@ We'll be using the Storage Explorer to trouble-shoot the Storage Accounts.
 
 ### How
 
-[Go to `azure.microsoft.com/{lang}/products/storage/storage-explorer/?`](https://azure.microsoft.com/en-us/products/storage/storage-explorer/?msockid=2f1cf2046f1769f8340ae3c86e1668c1#Download-4)
+[Go to `azure.microsoft.com/{lang}/products/storage/storage-explorer/`](https://azure.microsoft.com/en-us/products/storage/storage-explorer/?msockid=2f1cf2046f1769f8340ae3c86e1668c1#Download-4)
 
 ![Storage Explorer](../../../assets/img/azure/tools/storage_explorer/download.png)
 
