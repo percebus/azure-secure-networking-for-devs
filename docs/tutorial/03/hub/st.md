@@ -217,9 +217,44 @@ You can use any of the following methods to create a container:
   - From your laptop
   - From the Jumpbox
 
-#### Status Check
+## Status Check
 
-![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
+### Private DNS Zone
+
+1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
+1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
+
+### From Laptop
+
+#### nslookup
+
+Open a PowerShell|bash terminal and run the following command:
+
+```
+$> nslookup {your storage}.blob.core.windows.net
+```
+
+You should see the name getting resolved to a **public IP**
+
+#### Storage Explorer
+
+![Publicly Accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
+
+### From Jumpbox
+
+#### nslookup
+
+Open a PowerShell terminal and run the following command:
+
+```
+$> nslookup {your storage}.blob.core.windows.net
+```
+
+You should see the name getting resolved to a private IP inside the `default` subnet, where we placed the **Private Endpoint**
+
+#### Storage Explorer
+
+![From JumpBox](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
 
 ## Reconfigure Storage Account
 
@@ -271,33 +306,6 @@ You should now see an error like this.-
 ![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/disallowed.png)
 
 But it should still work from your Jumpbox 🥷
-
-## Status Check
-
-### Private DNS Zone
-
-1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
-1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
-
-### Jumpbox (VM)
-
-#### Terminal
-
-Open a PowerShell terminal and run the following command:
-
-```
-$> nslookup {your storage}.blob.core.windows.net
-```
-
-You should see the name getting resolved
-
-#### Storage Explorer
-
-If you installed the "Storage Explorer" in the Jumpbox, you should be able to access the storage account from there.
-
-![Emtpy](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/uploaded.png)
-
-You should be able to create a text file, and upload it
 
 ## Next Steps
 
