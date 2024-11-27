@@ -14,15 +14,15 @@ We'll be using the Storage Explorer to trouble-shoot the Storage Accounts.
 
 #### Your Laptop (Optional)
 
-The excercise opens up the Storage Account, and then closes it, so you can ensure that is not publicly accessible.
+The excercise guides you to opening up the Storage Account to your Public IP (insecure), But then has you to close it.
 
-But you can skip this step.
+This helps troubleshooting the storage account when you cannot connect from the jumpbox.
 
 #### Jumpbox
 
 You will need to install it in the Jumpbox, so you can manage your spoke-VNet's Storage account.
 
-##### Troubleshoot
+### Troubleshoot
 
 Having trouble accessing the URL above? Remember our FireWall FDQNs rules? Time to add some more :/
 
