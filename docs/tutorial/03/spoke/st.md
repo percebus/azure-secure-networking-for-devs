@@ -40,10 +40,10 @@ Since you just created one **Storage account** at `hub`, we will skim over some 
 
 ##### Advanced
 
+![Advanced](../../../../assets/img/azure/solution/vnets/spoke/st/create/advanced.png)
+
 - [x] **Enable storage account key access**: Checked/Selected.
 - **Permitted scope of copy operations**: Choose _"Same Microsoft Entra tenant"_.
-
-![Advanced](../../../../assets/img/azure/solution/vnets/spoke/st/create/advanced.png)
 
 > [!TIP]
 > You can also choose _"From storage accounts that have a **private endpoint** to the same **virtual network**"_.
