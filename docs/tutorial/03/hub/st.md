@@ -224,9 +224,11 @@ You can use any of the following methods to create a container:
 1. Go to {Your private DNS Zone} > "DNS Management" > "Recordsets"
 1. You should see the "A" record pointing to the Private IP address of the "Private Endpoint".
 
-### From Laptop
+#### Shared Storage Account
 
-#### nslookup
+##### From Laptop
+
+###### nslookup
 
 Open a PowerShell|bash terminal and run the following command:
 
@@ -236,13 +238,13 @@ $> nslookup {your storage}.blob.core.windows.net
 
 You should see the name getting resolved to a **public IP**
 
-#### Storage Explorer
+###### Storage Explorer
 
 ![Publicly Accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
 
-### From Jumpbox
+##### From Jumpbox
 
-#### nslookup
+###### nslookup
 
 Open a PowerShell terminal and run the following command:
 
@@ -252,7 +254,7 @@ $> nslookup {your storage}.blob.core.windows.net
 
 You should see the name getting resolved to a private IP inside the `default` subnet, where we placed the **Private Endpoint**
 
-#### Storage Explorer
+###### Storage Explorer
 
 ![From JumpBox](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
 
