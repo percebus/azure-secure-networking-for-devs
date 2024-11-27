@@ -204,23 +204,36 @@ Now that the **Private Endpoint** is created, it should have self-registered aga
 
 ![DNS configuration](../../../../assets/img/azure/solution/vnets/hub/st/pep/settings/dns.png)
 
+### Storage Account Container
+
+#### Create
+
+You can use any of the following methods to create a container:
+
+- Azure Portal
+  - Storage Account > Storage Browser > Containers
+- Storage Explorer
+  - From your laptop
+  - From the Jumpbox
+
+#### Status Check
+
+![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/empty.png)
+
 ## Reconfigure Storage Account
 
-#### Reconfigure
+### Step 1: Upload data
 
-Having installed the "Storage Explorer" in both your Jumpbox and your local laptop, you should now be able to connect to this storage account from any of the 2 places:
+Having installed the "Storage Explorer" in both your **Jumpbox** and your local **laptop**, you should now be able to connect to this storage account from any of the 2 places:
 
-##### Step 1: Upload data
 
 From Either **Your Laptop** or the **Jumpbox**
 
-1. Open Storage Explorer
-1. Create a container (if you have not done so already)
 1. Upload a file from your laptop
 
 ![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/allowed.png)
 
-##### Step 2: Disable access from Public IP
+### Step 2: Disable access from Public IP
 
 > [!WARNING]
 > After Ignite Microsoft '24, this section changed
@@ -248,7 +261,7 @@ Notice how it says _"Public network access **Disabled**"_
 > [!TIP]
 > Remove the IP Address **BEFORE** Disabling the Public Access
 
-###### Step 3: Download data
+### Step 3: Publicly INACCESSIBLE
 
 From your laptop, try to download the file you uploaded in step 1.
 
@@ -281,7 +294,7 @@ You should see the name getting resolved
 
 If you installed the "Storage Explorer" in the Jumpbox, you should be able to access the storage account from there.
 
-![Emtpy](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
+![Emtpy](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/uploaded.png)
 
 You should be able to create a text file, and upload it
 
