@@ -135,6 +135,12 @@ Unfortunately, we can't use **Application Security Group** from other VNets to c
   - **Destination**:
     - **Application Security Group**: `{storage_account_name}-pep-asg`
 
+> [!TIP]
+> When designing subnets, is important to take these details into account
+
+Altho in most corportate environments you would connect through a VPN connection and not a JumpBox,
+it serves as an educational example in the importance of properly designing CIDR blocks and IP address spaces.
+
 ## Other Test Cases
 
 <!-- prettier-ignore-start -->
