@@ -238,6 +238,7 @@ From either **Your Laptop** or the **Jumpbox**
 > [!WARNING]
 > After Ignite Microsoft '24, this section changed
 
+1. Go to `{storage_account}`
 1. Go to _"Security + networking"_ > _"Networking"_ > _"Public access"_
 1. Click on **[ Manage ]** under _"Public network access"_
 1. Change _"Public network access"_ to **"Disable"**
