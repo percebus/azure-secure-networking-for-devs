@@ -111,7 +111,7 @@ Just like in the hub, we will end up with the following names:
 - **Resource**: Choose the **storage account** you created in the previous step.
 - **Target sub-resource**: Choose _"blob"_.
 
-![Resource](../../../../assets/img/azure/solution/vnets/hub/st/pep/create/resource.png)
+![Resource](../../../../assets/img/azure/solution/vnets/spoke/st/pep/create/resource.png)
 
 ##### Virtual Network
 
