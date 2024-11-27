@@ -87,7 +87,7 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 ##### Virtual networks
 
 <!-- prettier-ignore-start -->
-> [!CRITICAL]
+> [!CAUTION]
 > **Virtual networks**: This is ONLY for **Service Endpoints** (the old way), which will redirect traffic to the Public IP address of the Storage Account. **NOT** for **Private Endpoints**.
 <!-- prettier-ignore-end -->
 
