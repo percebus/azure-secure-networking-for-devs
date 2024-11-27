@@ -186,7 +186,7 @@ So **ensure** that the following traffic will be allowed.-
     - **Destination port ranges**: `53`
     - **Protocol**: `TCP`
 
-For more information on why this is important, see [DNS Vulnerabilities](../../../vulnerabilities.md#dns)
+For more information on why this is important, see [DNS Vulnerabilities](../../vulnerabilities.md#dns)
 
 #### Outbound: Deny ALL
 
