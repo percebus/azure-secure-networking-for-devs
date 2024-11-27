@@ -17,6 +17,13 @@ Here is how to Create and Configure a **Private DNS Zone** for Azure **Storage A
 > [!NOTE]
 > Unlike other resources, **Private DNS Zone** is "**Global**".
 
+> [!IMPORTANT]
+> All Storage containers will get registered under `{name}.blob.core.windows.net`
+
+But when we create a **Private DNS Zone**, storage accounts also get registered under the `privatelink` you create. as an alias:
+
+`{name}.{dns_zone_name}.blob.core.windows.net`
+
 #### Market place
 
 Look for a "Private DNS Zone" in the Azure Portal's market place
@@ -26,13 +33,6 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 #### Create
 
 ##### Basics
-
-> [!IMPORTANT]
-> All Storage containers will get registered under `{name}.blob.core.windows.net`
-
-But when we create a **Private DNS Zone**, storage accounts also get registered under the `privatelink` you create. as an alias:
-
-`{name}.{dns_zone_name}.blob.core.windows.net`
 
 - **Name**: `privatelink.blob.core.windows.net`
 
