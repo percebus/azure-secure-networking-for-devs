@@ -34,10 +34,10 @@ Try to add an allow rule.
 You should get a couple of errors
 
 <!-- prettier-ignore-start -->
-> [!CRITICAL]
+> [!CAUTION]
 > * is not allowed
 
-> [!CRITICAL]
+> [!CAUTION]
 > You must enable DNS Proxy
 <!-- prettier-ignore-end -->
 
