@@ -63,12 +63,18 @@ Search for "Storage Account" in the Azure Portal's Market Place.
 
 ![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/advanced.png)
 
+- [x] **Enable storage account key access**: Checked/Selected.
 - **Permitted scope of copy operations**: Choose _"Same Microsoft Entra tenant"_.
 
 > [!TIP]
-> You can also choose _"From storage accounts that have a private endpoint to the same virtual network"_.
+> You can also choose _"From storage accounts that have a **private endpoint** to the same **virtual network**"_.
 
 ![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/advanced-security.png)
+
+> [!TIP]
+> Would a **storage account** in a `spoke` **virtual network** connected via a **private endpoint** through **VNet Private Links** be able to copy data to a **storage account** in the `hub` **virtual network** with this setting?
+
+Something to consider.
 
 ##### Networking
 
