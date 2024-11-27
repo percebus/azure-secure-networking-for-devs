@@ -66,9 +66,6 @@ We've already proven how to close the security. No need to "start Public" and th
 
 ![Networking](../../../../assets/img/azure/solution/vnets/spoke/st/create/networking.png)
 
-> [!WARNING]
-> This view does **NOT** allow you to control the name of the "[N]etwork [I]nterfa[c]e". If you want to control the name, you should create the "[P]rivate [E]nd[p]oint" in the step above.
-
 ##### Data protection
 
 ![Data protection](../../../../assets/img/azure/solution/vnets/spoke/st/create/data_protection.png)
