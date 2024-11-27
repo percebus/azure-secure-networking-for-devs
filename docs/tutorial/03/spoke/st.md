@@ -53,7 +53,7 @@ Since you just created one **Storage account** at `hub`, we will skim over some 
 > [!TIP]
 > Would a **storage account** in a `spoke` **virtual network** connected via a **private endpoint** through **VNet Private Links** be able to copy data to a **storage account** in the `hub` **virtual network** with this setting?
 
-Something to consider.
+Something to ponder upon...
 
 ##### Networking
 

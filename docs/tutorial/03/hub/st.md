@@ -75,7 +75,7 @@ Search for "Storage Account" in the Azure Portal's Market Place.
 
 ###### Public access
 
-We will start by "poking a hole" and adding our Public IP address to test connectivity, and then proceed to lock it down to the VNet.
+We will start by "poking a hole" and adding our **Public IP address** to test connectivity, and then proceed to lock it down to the **VNet**.
 
 - **Public Network access**
   - [x] Enable: Choose
