@@ -211,14 +211,15 @@ Now that the **Private Endpoint** is created, it should have self-registered aga
 You can use any of the following methods to create a container:
 
 - Azure Portal
-  - Storage Account > Storage Browser > Containers
+  - `{storage_account}` > _"Data storage"_ > _"Containers"_
+  - Click on **[ + Container ]**
 - Storage Explorer
   - From your laptop
   - From the Jumpbox
 
 #### Status Check
 
-![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/empty.png)
+![Publicly accessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_jumpbox/empty.png)
 
 ## Reconfigure Storage Account
 
@@ -226,8 +227,7 @@ You can use any of the following methods to create a container:
 
 Having installed the "Storage Explorer" in both your **Jumpbox** and your local **laptop**, you should now be able to connect to this storage account from any of the 2 places:
 
-
-From Either **Your Laptop** or the **Jumpbox**
+From either **Your Laptop** or the **Jumpbox**
 
 1. Upload a file from your laptop
 
