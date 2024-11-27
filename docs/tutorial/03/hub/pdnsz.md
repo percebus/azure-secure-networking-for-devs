@@ -30,6 +30,8 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 > [!IMPORTANT]
 > All Storage containers will get registered under `{name}.blob.core.windows.net`
 
+But when we create a **Private DNS Zone**, storage accounts also get registered under the `privatelink` you create. as an alias: `{name}.{dns_zone_name}.blob.core.windows.net`
+
 - **Name**: `privatelink.blob.core.windows.net`
 
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/create/basics.png)
