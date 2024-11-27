@@ -19,7 +19,7 @@ Bear in mind that _Storage account_ names are very limited (3-24 chars, no `-` o
   - [V]irtual [N]etwork: `{prefix}-hub-{short_region}-{short_id}-vnet` (already exists)
     - [S]ubnet: `default` (already exists)
       - [N]etwork [S]ecurity [G]roup: `{prefix}-hub-{short_region}-{short_id}-nsg` (already exists)
-  - (🌟 **new**) [St]orage Account: `{short_prefix}hub{short_region}{short_id}st`. i.e. `jchubswitzerlandnorth1st`.
+  - (🌟 **new**) [St]orage Account: `{short_prefix}hub{short_region}{short_id}st`. i.e. `nwsecuhubswitzerlandn1st`.
     - (🌟 **new**) [P]rivate [E]nd[p]oint: `{short_prefix}hub{short_region}{short_id}st-pep`
       - (🌟 **new**) [N]etwork [I]nterfa[c]e: `{short_prefix}hub{short_region}{short_id}st-pep-nic`
       - (🌟 **new**) [A]pplication [S]ecurity [G]roup: `{short_prefix}hub{short_region}{short_id}st-pep-asg`
