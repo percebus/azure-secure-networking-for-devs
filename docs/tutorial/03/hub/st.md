@@ -141,7 +141,7 @@ Ensure that _"allow storage account **key access**"_ is **Enabled**
 
 In this step, we will end up with the following names:
 
-- `{storage_account_name}` (already exists)
+- `{storage_account_name}` (JUST created)
   - (🌟 **new**) `{storage_account_name}-pep`
     - (🌟 **new**) `{storage_account_name}-pep-nic`
     - (🌟 **new**) `{storage_account_name}-pep-asg`

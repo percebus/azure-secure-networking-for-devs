@@ -89,10 +89,12 @@ Like we did in **Hub**, create a BLOb container.
 
 ### Private Endpoint
 
-- `{storage_account_name}`
-  - `{storage_account_name}-pep`
-    - `{storage_account_name}-pep-nic`
-    - `{storage_account_name}-pep-asg`
+Just like in the hub, we will end up with the following names:
+
+- `{storage_account_name}` (JUST created)
+  - (🌟 **new**) `{storage_account_name}-pep`
+    - (🌟 **new**) `{storage_account_name}-pep-nic`
+    - (🌟 **new**) `{storage_account_name}-pep-asg`
 
 #### Create
 
