@@ -50,7 +50,7 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
   - **Destination**:
     - Application Security Group: `{storage_account_name}-pep-asg`
 
-> [!IMPORTANT]
+> [!WARNING]
 > What happens if a bad actor gets access from a `10.3.4.5` ?
 
 ##### Scenario 2: Allow VNets
@@ -66,8 +66,8 @@ You could add an **inbound** rule to allow traffic from VNets `10.1.x.x` (hub) a
   - **Destination**:
     - Application Security Group: `{storage_account_name}-pep-asg`
 
-> [!IMPORTANT]
-> What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
+> [!WARNING]
+> What happens if a bad actor creates a VM inside `hub`, from a `10.1.8.5` ?
 
 ##### Scenario 3: Allow Subnets
 
