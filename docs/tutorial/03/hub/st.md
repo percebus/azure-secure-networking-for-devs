@@ -143,7 +143,7 @@ Make sure that all the naming is solid, and that it is in the expected location 
 
 ##### Configuration
 
-Ensure that **Access Keys** are allowed
+Ensure that _"allow storage account **key access**"_ is **Enabled**
 
 ![Configuration](../../../../assets/img/azure/solution/vnets/hub/st/settings/configuration.png)
 
