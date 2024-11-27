@@ -97,7 +97,7 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 > The following is just to test connectivity. We will be removing this soon enough.
 
 - **Allow select public internet IP addresses to access your resource**
-  - Add your \_current) **Public IP address**
+  - Add your (current) **Public IP address**
 
 ##### Private Endpoints
 
@@ -261,85 +261,6 @@ You should now see an error like this.-
 ![Publicly inaccessible](../../../../assets/img/azure/solution/vnets/hub/st/explorer/from_public/disallowed.png)
 
 But it should still work from your Jumpbox 🥷
-
-### Network Security Group
-
-#### Inbound
-
-> [!IMPORTANT]
-> Keep reading all the following scenarios.
-
-You will be only doing **ONE** of the following scenarios.
-Depending on how venturous you are feeling.
-
-##### Scenario 1: Minimum security
-
-You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
-
-- **Name**: `allow-private-to-storage`
-- **Source**:
-  - IP Addresses: `10.0.0.0/8`, this includes.-
-    - `hub`'s vnet `10.1.x.x`
-    - `spoke`'s vnet `10.2.x.x`
-- **Destination**:
-  - Application Security Group: `{storage_account_name}-pep-asg`
-
-> [!IMPORTANT]
-> What happens if a bad actor gets access from a `10.3.4.5` ?
-
-##### Scenario 2: More explicit minimum security
-
-You could add an **inbound** rule to allow traffic from VNets `10.1.x.x` (hub) and `10.2.x.x` (spoke) explicitly.
-
-- **Name**: `allow-private-vnets-to-storage`
-  - **Source**:
-    - IP Addresses:
-      - `10.1.0.0/16`: `10.1.x.x` hub vnet
-      - `10.2.0.0/16`: `10.2.x.x` spoke vnet
-  - **Destination**:
-    - Application Security Group: `{storage_account_name}-pep-asg`
-
-> [!IMPORTANT]
-> What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
-
-##### Scenario 3: More security
-
-Instead of allowing the entire IP Address space of each VNet, we could only allow the `default` `subnet` for each VNet`.
-
-- **Name**: `allow-private-vnets-to-storage`
-  - **Source**:
-    - IP Addresses:
-      - ~~`10.1.0.0/16`~~ `10.1.4.0/22`: `10.1.4-7.x` `subnet` `default` @ `hub` vnet
-      - ~~`10.2.0.0/16`~~ `10.2.0.0/22`: `10.2.0-3.x` `subnet` `default` @ `spoke` vnet
-  - **Destination**:
-    - Application Security Group: `{storage_account_name}-pep-asg`
-
-> [!WARNING]
-> What happens if a bad actor creates a VM with an IP `10.2.3.4`?
-
-##### Scenario 4: Zero Trust
-
-This is **NOT** _"trust only **buddies**"_, this is **ZERO TRUST**!
-
-- Remember the ASG we created for the jumpbox(es) (currently only 1)? We'll use that instead.
-- As for spoke: _"But in the future, were planning to have a web application in the `spoke` `vnet` that we want to add access to this storage account"_
-  - Well, **ONLY THEN** you would add the excemption to allow it, **NEVER BEFORE**.
-
-[Read about YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
-
-So we end-up with something like this
-
-- **Name**: `allow-hub-jumpbox-to-storage`
-  - **Source**:
-    - Application Security Group:
-      - ~~`10.1.4.0/22`~~ `{jumpbox_name}-pep-asg`
-  - **Destination**:
-    - Application Security Group: `{storage_account_name}-pep-asg`
-
-<!-- prettier-ignore-start -->
-> [!NOTE]
-> `10.2.x.x`: Will remain TBD
-<!-- prettier-ignore-end  -->
 
 ## Status Check
 
