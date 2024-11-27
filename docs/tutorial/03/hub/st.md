@@ -106,8 +106,6 @@ We will start by "poking a hole" and adding our Public IP address to test connec
 
 **Leave empty**. We need the storage account to be created first.
 
-##### IP Addresses
-
 ##### Data protection
 
 We can remove all the "soft delete" protections, as it will only increase our costs.
@@ -286,8 +284,6 @@ You could add an **inbound** rule to allow traffic from our entire `10.x.x.x`
 - **Destination**:
   - Application Security Group: `{storage_account_name}-pep-asg`
 
-![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/02.png)
-
 > [!IMPORTANT]
 > What happens if a bad actor gets access from a `10.3.4.5` ?
 
@@ -305,8 +301,6 @@ You could add an **inbound** rule to allow traffic from VNets `10.1.x.x` (hub) a
 
 > [!IMPORTANT]
 > What happens if a bad actor creates a VM inside `hub`, from a `10.1.4.5` ?
-
-![Inbound](../../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/03.png)
 
 ##### Scenario 3: More security
 

@@ -4,10 +4,9 @@ Here is how to Create and Configure a **Private DNS Zone** for Azure **Storage A
 
 ## Resources
 
-- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
-  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+- [R]esource [G]roup: `{prefix}-hub-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{prefix}-hub-{region}-{id}-vnet` (already exists)
     - [S]ubnet: `default` (already exists)
-      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
   - (🌟 **new**) [P]rivate [DNS] [Z]one: `privatelink.blob.core.windows.net`
     - (🌟 **new**) Links to VNets
       - (🌟 **new**) `privatelink-at-hub`

@@ -45,6 +45,10 @@ Your resources should look like something this.-
 
 ![Resources](../../../../assets/img/azure/solution/vnets/hub/resources/03.png)
 
+### Network Diagram
+
+![Resources](../../../../assets/img/azure/solution/vnets/hub/network/03.png)
+
 ## Next Steps
 
 [Create Spoke Storage Account resources](../spoke/st.md)

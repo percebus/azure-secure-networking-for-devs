@@ -134,24 +134,7 @@ It should be registered to the same Private DNS Zone, like we did w/ the one at 
 
 ![DNS Configuration](../../../../assets/img/azure/solution/vnets/spoke/st/pep/settings/dns_configuration.png)
 
-### [N]etwork [S]ecurity [G]roup
-
-#### Inbound Rules
-
-Unfortunately, we can't use **Application Security Group** from other VNets to control access. We'll have to settle for IP addresses.
-
-- **Name**: `allow-hub-jumpbox-to-storage`
-- **Source**:
-  - ~~Application Security Group: `{jumpbox_name}-asg`~~ (if only it were that simple...)
-  - **IP Addresses**: ~~`10.1.x.x`~~ `10.1.4.0/22` (`hub`'s `default` `subnet`)
-- **Destination**:
-  - **Application Security Group**: `{storage_account_name}-pep-asg`
-
 ## Status Check
-
-### Resource Group
-
-![Resource Diagram](../../../../assets/img/azure/solution/vnets/spoke/resources/01.png)
 
 ### From Jumpbox (VM)
 
@@ -159,7 +142,7 @@ Unfortunately, we can't use **Application Security Group** from other VNets to c
 
 Open a PowerShell terminal run the following command:
 
-```
+```powershell
 $> nslookup {your storage}.blob.core.windows.net
 ```
 

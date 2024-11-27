@@ -20,10 +20,20 @@
 | `{short_prefix}spoke{short_region}{short_id}st-pep-asg` | Application security group | West US 2 |
 | `{short_prefix}spoke{short_region}{short_id}st-pep-nic` | Network Interface          | West US 2 |
 
+![Snapshot](../../../../assets/img/azure/solution/vnets/spoke/snapshots/03.png)
+
 #### Template
 
 [JSON Template](../../../../azure/templates/spoke/03)
 
+### Resource Visualizer
+
+![Resource Visualizer](../../../../assets/img/azure/solution/vnets/spoke/resources/03.png)
+
+### Network Diagram
+
+![Resources](../../../../assets/img/azure/solution/vnets/spoke/network/03.png)
+
 ## Next Steps
 
-[Go back to parent].(./README.md)
+[Configure NSG rules](../nsg.md)
