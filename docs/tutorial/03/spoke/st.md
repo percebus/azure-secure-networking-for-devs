@@ -40,7 +40,20 @@ Since you just created one **Storage account** at `hub`, we will skim over some 
 
 ##### Advanced
 
+- [x] **Enable storage account key access**: Checked/Selected.
+- **Permitted scope of copy operations**: Choose _"Same Microsoft Entra tenant"_.
+
 ![Advanced](../../../../assets/img/azure/solution/vnets/spoke/st/create/advanced.png)
+
+> [!TIP]
+> You can also choose _"From storage accounts that have a **private endpoint** to the same **virtual network**"_.
+
+![Advanced](../../../../assets/img/azure/solution/vnets/hub/st/create/advanced-security.png)
+
+> [!TIP]
+> Would a **storage account** in a `spoke` **virtual network** connected via a **private endpoint** through **VNet Private Links** be able to copy data to a **storage account** in the `hub` **virtual network** with this setting?
+
+Something to consider.
 
 ##### Networking
 
