@@ -23,7 +23,7 @@ In this chapter we'll be creating the following resources
 Where:
 
 - `{prefix}`: Your username (i.e. `johndoe`)
-- `{region}`: The region of your Hub VNet (i.e. `{region}`)
+- `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### Resoruce group
