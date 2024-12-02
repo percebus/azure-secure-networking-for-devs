@@ -1,17 +1,28 @@
-# Creating and Configuring a Private DNS Zone for Azure Storage Accounts
+# Private DNS Zone for Azure Storage Accounts
+
+Here is how to Create and Configure a **Private DNS Zone** for Azure **Storage Accounts**.
 
 ## Resources
 
-- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
-  - [V]irtual [N]etwork: `{my-prefix}-hub-{region}-{id}-vnet` (already exists)
+- [R]esource [G]roup: `{prefix}-hub-{region}-{id}-rg` (already exists)
+  - [V]irtual [N]etwork: `{prefix}-hub-{region}-{id}-vnet` (already exists)
     - [S]ubnet: `default` (already exists)
-      - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-nsg` (already exists)
-  - [P]rivate [DNS] [Z]one: `privatelink.blob.core.windows.net`
-    - Links to VNets
-      - `privatelink-at-hub`
-      - `privatelink-at-spoke-westus2`
+  - (🌟 **new**) [P]rivate [DNS] [Z]one: `privatelink.blob.core.windows.net`
+    - (🌟 **new**) Links to VNets
+      - (🌟 **new**) `privatelink-at-hub`
+      - (🌟 **new**) `privatelink-at-spoke-westus2`
 
 ### Private DNS Zone
+
+> [!NOTE]
+> Unlike other resources, **Private DNS Zone** is "**Global**".
+
+> [!IMPORTANT]
+> All Storage containers will get registered under `{name}.blob.core.windows.net`
+
+But when we create a **Private DNS Zone**, storage accounts also get registered under the `privatelink` you create. as an alias:
+
+`{name}.{dns_zone_name}.blob.core.windows.net`
 
 #### Market place
 
@@ -27,58 +38,62 @@ Look for a "Private DNS Zone" in the Azure Portal's market place
 
 ![Basics](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/create/basics.png)
 
-> [!IMPORTANT]
-> All Storage containers will get registered under `{name}.blob.core.windows.net`
-
 ##### Review + Create
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/create/review.png)
 
-#### Create VNet Links
+#### DNS Management
+
+##### Virtual Network Links
+
+We'll create Virtual Network Links for `hub` and `spoke` VNets.
 
 1. Go to "DNS Management" > "Virtual Network Links".
-1. Click on "Add" and select the VNet to link.
+1. Click on **[ + Add ]** and select the VNet to link.
 
-##### VNet: Hub
+![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/virtual_network_links/empty.png)
 
-![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/hub.png)
+###### VNet: Hub
+
+![Link to Hub VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/virtual_network_links/hub.png)
+
+**Virtual network details**
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-hub`
 - **Virtual Network**: Select the **Hub** VNet
-- [x] **Enable auto registration**: Click on this checkbox.
 
-##### VNet: Spoke
+**Configuration**
 
-![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/spoke.png)
+- [ ] **Enable auto registration**: Leave this unchecked.
+- [ ] **Enable fallback to the internet**: Leave this unchecked.
+
+<!-- prettier-ignore-start -->
+> [!TIP]
+> **Auto-registration** Is only used when you have VM scalesets or other services that need to register themselves.
+<!-- prettier-ignore-end -->
+
+###### VNet: Spoke
+
+![Link to Spoke VNet](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/virtual_network_links/spoke.png)
+
+**Virtual network details**
 
 - **Link name**: Give a meaningful name to the link, like `privatelink-at-spoke`
 - **Virtual Network**: Select the **Spoke** VNet
-- [x] **Enable auto registration**: Click on this checkbox.
 
-##### Status Check
+**Configuration**
 
-Go to "DNS Management" > "Virtual Network Links".
+- [ ] **Enable auto registration**: Leave this unchecked.
+- [ ] **Enable fallback to the internet**: Leave this unchecked.
 
-![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/vnet/links/all.png)
+## Status Check
 
-### Network Security Group
+### Virtual Network Links
 
-Private Endpoints will need to be able to register with the Private DNS Zone. So you need to take in account
+1. Go to "DNS Management" > "Virtual Network Links".
 
-- Spoke
-  - **Outbound**: Allow DNS traffic to `10.1.x.x`
-    - Storage Account's Private Endpoints registering from `hub` VNet (`10.1.x.x`), as well as other spoke VNets (like `10.2.x.x`).
-- Hub
-  - **Inbound**: Allow traffic DNS traffic (via port `53`) from `10.x.x.x`
-
-> [!NOTE]
-> In this tutorial we won't go to such extense
-
-Mainly because we're (I'm) NOT 100% sure that working on port `53` would suffice :p
-
-> [!IMPORTANT]
-> You should take this into account in a **Zero Trust** Production Environment.
+![Virtual Network Links](../../../../assets/img/azure/solution/vnets/hub/pdnsz/st/dns_management/virtual_network_links/all.png)
 
 ## Next Steps
 
-[Go back to parent](./README.md)
+[Create Storage Account resources](./st.md)

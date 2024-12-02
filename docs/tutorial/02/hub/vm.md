@@ -73,7 +73,7 @@ We'll just go ahead and put it in our `default` subnet (1 IP address down, 1,023
 - **Public IP**: _"None"_ .- **VERY IMPORTANT**. We'll access via Bastion's Public IP address
 - **NIC network security group**: **"None"**.- Having NSG attached on the `snet` level, as well as the VM's NIC's level can cause issues. So we'll stick to the `default` subnet's NSG.
 
-> [!CRITICAL]
+> [!CAUTION]
 > We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
 
 _"Unless you have a specific reason to, since rules in a network security group associated to a subnet can conflict with rules in a network security group associated to a network interface, you can have unexpected communication problems that require troubleshooting."_
@@ -158,4 +158,4 @@ If you want to avoid this, you would need to create those resources manually and
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Create a Route Table](./rt.md)

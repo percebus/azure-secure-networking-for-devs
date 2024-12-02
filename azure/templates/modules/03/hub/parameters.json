@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccounts_nwsecuhubswitzerlandn1st_name": {
+      "value": null
+    },
+    "privateEndpoints_nwsecuhubswitzerlandn1st_pep_name": {
+      "value": null
+    },
+    "privateDnsZones_privatelink_blob_core_windows_net_name": {
+      "value": null
+    },
+    "bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name": {
+      "value": null
+    },
+    "azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name": {
+      "value": null
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name": {
+      "value": null
+    },
+    "applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name": {
+      "value": null
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name": {
+      "value": null
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name": {
+      "value": null
+    },
+    "virtualMachines_nw_security_hub_switzerlandnorth_1_vm_jumpbox_name": {
+      "value": null
+    },
+    "routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name": {
+      "value": null
+    },
+    "networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name": {
+      "value": null
+    },
+    "applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name": {
+      "value": null
+    },
+    "networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name": {
+      "value": null
+    },
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid": {
+      "value": null
+    }
+  }
+}

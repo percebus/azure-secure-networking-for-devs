@@ -6,10 +6,51 @@
    1. Going to the internet: through the **Azure Firewall**
    1. Going to other VNets
 
+## Before you begin
+
+### Routing
+
+#### Virtual network traffic routing
+
+From [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
+
+Azure automatically creates system routes and assigns the routes to each subnet in a virtual network.
+
+- You can't _create_ **system routes**
+- You can't _remove_ **system routes**
+
+But you *can overrid*e some **system routes** with [custom routes](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#custom-routes).
+
+Azure creates _default_ **system routes** for each **subnet** and adds more [optional default route](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#optional-default-routes)s to **specific subnets**,
+[or every subnet, when you use specific Azure capabilities].
+
+#### Default routes
+
+From [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview) > [Default](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#default)
+
+Each route contains
+
+1. An address prefix
+1. And next hop type.
+
+When traffic leaving a **subnet**, is sent to an **IP address** _within_ the **address prefix** of a **route**,
+the route that contains the prefix is the route that Azure uses.
+
+...
+
+| Source  | Address prefixes              | Next hop type   |
+| ------- | ----------------------------- | --------------- |
+| Default | Unique to the virtual network | Virtual network |
+| Default | `x.x.x.x`                     | Internet        |
+| Default | `10.x.x.x`                    | None            |
+| Default | `172.16.0.0/12`               | None            |
+| Default | `192.168.x.x`                 | None            |
+| Default | `100.64.0.0/10`               | None            |
+
 ## Resources
 
-- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
-  - [R]oute [T]able: `{my-prefix}-hub-{region}-{id}-rt`
+- [R]esource [G]roup: `{prefix}-hub-{region}-{id}-rg` (already exists)
+  - [R]oute [T]able: `{prefix}-hub-{region}-{id}-rt`
 
 Where:
 
@@ -27,7 +68,7 @@ Look for a "Route table" in the Azure Portal's market place
 
 #### Create
 
-- **Name**: `{my-prefix}-hub-{region}-{id}-rt`
+- **Name**: `{prefix}-hub-{region}-{id}-rt`
 - **Propagate gateway routes**: _"Yes"_
 
 ![Create](../../../../assets/img/azure/solution/vnets/hub/rt/create/basics.png)
@@ -37,6 +78,23 @@ Look for a "Route table" in the Azure Portal's market place
 Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/rt/create/review.png)
+
+#### Settings
+
+##### Subnets
+
+###### Associate
+
+Just like with NSGs, we will associate **Route Table** with `default` subnet.-
+
+On the route table.-
+
+1. Go to > **Settings** > **Subnets**
+1. Click on [ **+ Associate** ]
+
+Use the hub network and `default` subnet
+
+![Associate](../../../../assets/img/azure/solution/vnets/hub/rt/routes/associate.png)
 
 ### Routes
 
@@ -74,14 +132,6 @@ We will now redirect Any traffic other than `10.x.x.x` to the WWW through the **
 
 ![Add](../../../../assets/img/azure/solution/vnets/hub/rt/routes/exit-vnet-thru-fw.png)
 
-### Associate Route Table with Subnet
-
-1. On the route table > **Settings** > **Associate**
-
-Use the hub network and `default` subnet
-
-![Associate](../../../../assets/img/azure/solution/vnets/hub/rt/routes/associate.png)
-
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Configure FireWall](./fw.md)

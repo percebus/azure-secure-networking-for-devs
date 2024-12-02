@@ -7,11 +7,11 @@ For this excercise we will only create 1 spoke subnet in the region of your choi
 
 ## Resources
 
-- [R]esource [G]roup: `{my-prefix}-spoke-{region}-{id}-rg`
-  - [V]irtual [Net]work: `{my-prefix}-spoke-{region}-{id}-vnet`: `10.2.x.x`
+- [R]esource [G]roup: `{prefix}-spoke-{region}-{id}-rg`
+  - [V]irtual [Net]work: `{prefix}-spoke-{region}-{id}-vnet`: `10.2.x.x`
     - Subnets
       - `default`: `10.2.0-3.x/22`
-        - [N]etwork [S]ecurity [G]roup: `{my-prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
+        - [N]etwork [S]ecurity [G]roup: `{prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
 
 Where:
 
@@ -25,7 +25,7 @@ Where:
 
 Just like we did on the `hub`, we will create a Resource group for the `spoke` VNet.
 
-1. Create a `{my-prefix}-spoke-{region}-{id}-rg` resource group in West US 2.
+1. Create a `{prefix}-spoke-{region}-{id}-rg` resource group in West US 2.
 
 ### [V]irtual [Net]work
 
@@ -33,7 +33,7 @@ Just like in the [Hub](./hub.md), we'll create a VNet. But this time, it **WILL 
 
 #### Create
 
-Name it `{my-prefix}-spoke-{region}-{id}-vnet` in West US 2.
+Name it `{prefix}-spoke-{region}-{id}-vnet` in West US 2.
 
 ##### Security
 
@@ -64,17 +64,25 @@ Review your settings and create the VNet.
 
 ##### Basics
 
+- Name: `{prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
+- Region: `{region}`
+
 ![Basics](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/create/basics.png)
 
-##### Review
+##### Review & Create
 
 ![Basics](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/create/review.png)
 
-We'll configure it later down the road
+#### Settings
 
-#### Associate
+##### Subnets
 
-Go to the `default` subnet and associate the NSG.
+###### Associate
+
+1. Go to your newly created NSG
+1. **Settings** > **Subnets**
+1. Click on [ **+ Associate** ]
+1. Associate it to the `default` subnet
 
 ![Associate](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/associate.png)
 
@@ -82,6 +90,21 @@ Go to the `default` subnet and associate the NSG.
 
 ![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
 
+## Status Check
+
+### Exported
+
+#### CSV
+
+| NAME                                                  | TYPE                   | LOCATION  |
+| ----------------------------------------------------- | ---------------------- | --------- |
+| `{prefix}-spoke-{region}-{id}-vnet`                   | Virtual network        | West US 2 |
+| `{prefix}-spoke-{region}-{id}-vnet-snets-default-nsg` | Network security group | West US 2 |
+
+#### Template
+
+[JSON Template](../../../azure/templates/modules/01/spoke)
+
 ## Next Steps
 
-[Go back to module](./README.md)
+[Create VNets peering](./peering.md)
