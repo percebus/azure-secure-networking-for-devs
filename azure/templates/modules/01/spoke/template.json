@@ -1,0 +1,136 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_name": {
+      "defaultValue": "nw-security-spoke-westus2-1-vnet",
+      "type": "String"
+    },
+    "networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name": {
+      "defaultValue": "nw-security-spoke-westus2-1-vnet-snets-default-nsg",
+      "type": "String"
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_externalid": {
+      "defaultValue": "/subscriptions/66a0559c-eb2a-48a3-97a2-cab4196a34fe/resourceGroups/nw-security-hub-switzerlandnorth-1-rg/providers/Microsoft.Network/virtualNetworks/nw-security-hub-switzerlandnorth-1-vnet",
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name')]",
+      "location": "westus2",
+      "properties": {
+        "securityRules": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name')]",
+      "location": "westus2",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name'))]"
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": ["10.2.0.0/16"]
+        },
+        "encryption": {
+          "enabled": false,
+          "enforcement": "AllowUnencrypted"
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'), 'default')]",
+            "properties": {
+              "addressPrefixes": ["10.2.0.0/22"],
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name'))]"
+              },
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [
+          {
+            "name": "spoke-westus2-1_to_hub-switzerlandnorth-1",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'), 'spoke-westus2-1_to_hub-switzerlandnorth-1')]",
+            "properties": {
+              "peeringState": "Connected",
+              "peeringSyncLevel": "FullyInSync",
+              "remoteVirtualNetwork": {
+                "id": "[parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_externalid')]"
+              },
+              "allowVirtualNetworkAccess": true,
+              "allowForwardedTraffic": true,
+              "allowGatewayTransit": false,
+              "useRemoteGateways": false,
+              "doNotVerifyRemoteGateways": false,
+              "peerCompleteVnets": true,
+              "remoteAddressSpace": {
+                "addressPrefixes": ["10.1.0.0/16"]
+              },
+              "remoteVirtualNetworkAddressSpace": {
+                "addressPrefixes": ["10.1.0.0/16"]
+              }
+            },
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+          }
+        ],
+        "enableDdosProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'), '/spoke-westus2-1_to_hub-switzerlandnorth-1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'))]"
+      ],
+      "properties": {
+        "peeringState": "Connected",
+        "peeringSyncLevel": "FullyInSync",
+        "remoteVirtualNetwork": {
+          "id": "[parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_externalid')]"
+        },
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": true,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "doNotVerifyRemoteGateways": false,
+        "peerCompleteVnets": true,
+        "remoteAddressSpace": {
+          "addressPrefixes": ["10.1.0.0/16"]
+        },
+        "remoteVirtualNetworkAddressSpace": {
+          "addressPrefixes": ["10.1.0.0/16"]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_name'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.2.0.0/22"],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name'))]"
+        },
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    }
+  ]
+}

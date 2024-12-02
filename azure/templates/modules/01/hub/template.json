@@ -1,0 +1,306 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-bas",
+      "type": "String"
+    },
+    "azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-fw",
+      "type": "String"
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vnet",
+      "type": "String"
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-fw-ip",
+      "type": "String"
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-bas-ip",
+      "type": "String"
+    },
+    "networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vnet-snets-default-nsg",
+      "type": "String"
+    },
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid": {
+      "defaultValue": "/subscriptions/66a0559c-eb2a-48a3-97a2-cab4196a34fe/resourceGroups/nw-security-spoke-westus2-1-rg/providers/Microsoft.Network/virtualNetworks/nw-security-spoke-westus2-1-vnet",
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name')]",
+      "location": "switzerlandnorth",
+      "properties": {
+        "securityRules": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name')]",
+      "location": "switzerlandnorth",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "ipAddress": "172.161.81.90",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": [],
+        "ddosSettings": {
+          "protectionMode": "VirtualNetworkInherited"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name')]",
+      "location": "switzerlandnorth",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "ipAddress": "172.161.81.92",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": ["10.1.0.0/16"]
+        },
+        "encryption": {
+          "enabled": false,
+          "enforcement": "AllowUnencrypted"
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]",
+            "properties": {
+              "addressPrefixes": ["10.1.4.0/22"],
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+              },
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "name": "AzureFirewallSubnet",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]",
+            "properties": {
+              "addressPrefixes": ["10.1.1.0/26"],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "name": "AzureBastionSubnet",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]",
+            "properties": {
+              "addressPrefixes": ["10.1.0.0/26"],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [
+          {
+            "name": "hub-switzerlandnorth-1_to_spoke-westus2-1",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'hub-switzerlandnorth-1_to_spoke-westus2-1')]",
+            "properties": {
+              "peeringState": "Connected",
+              "peeringSyncLevel": "FullyInSync",
+              "remoteVirtualNetwork": {
+                "id": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid')]"
+              },
+              "allowVirtualNetworkAccess": true,
+              "allowForwardedTraffic": true,
+              "allowGatewayTransit": false,
+              "useRemoteGateways": false,
+              "doNotVerifyRemoteGateways": false,
+              "peerCompleteVnets": true,
+              "remoteAddressSpace": {
+                "addressPrefixes": ["10.2.0.0/16"]
+              },
+              "remoteVirtualNetworkAddressSpace": {
+                "addressPrefixes": ["10.2.0.0/16"]
+              }
+            },
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+          }
+        ],
+        "enableDdosProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/AzureBastionSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.0.0/26"],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/AzureFirewallSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.1.0/26"],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/hub-switzerlandnorth-1_to_spoke-westus2-1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "peeringState": "Connected",
+        "peeringSyncLevel": "FullyInSync",
+        "remoteVirtualNetwork": {
+          "id": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid')]"
+        },
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": true,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "doNotVerifyRemoteGateways": false,
+        "peerCompleteVnets": true,
+        "remoteAddressSpace": {
+          "addressPrefixes": ["10.2.0.0/16"]
+        },
+        "remoteVirtualNetworkAddressSpace": {
+          "addressPrefixes": ["10.2.0.0/16"]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/azureFirewalls",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]"
+      ],
+      "properties": {
+        "sku": {
+          "name": "AZFW_VNet",
+          "tier": "Standard"
+        },
+        "threatIntelMode": "Alert",
+        "additionalProperties": {},
+        "ipConfigurations": [
+          {
+            "name": "ipConfig",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/azureFirewallIpConfigurations/ipConfig')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]"
+              }
+            }
+          }
+        ],
+        "networkRuleCollections": [],
+        "applicationRuleCollections": [],
+        "natRuleCollections": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/bastionHosts",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]"
+      ],
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "dnsName": "bst-22312e4a-3cc9-414c-82ed-0ad57da53304.bastion.azure.com",
+        "scaleUnits": 2,
+        "ipConfigurations": [
+          {
+            "name": "IpConf",
+            "id": "[concat(resourceId('Microsoft.Network/bastionHosts', parameters('bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name')), '/bastionHostIpConfigurations/IpConf')]",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.4.0/22"],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+        },
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    }
+  ]
+}

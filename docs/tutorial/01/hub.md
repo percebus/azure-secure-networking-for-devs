@@ -23,7 +23,7 @@ In this chapter we'll be creating the following resources
 Where:
 
 - `{prefix}`: Your username (i.e. `johndoe`)
-- `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
+- `{region}`: The region of your Hub VNet (i.e. `{region}`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
 ### Resoruce group
@@ -271,6 +271,23 @@ These are standard, to ensure connectivity with a minimum level of security on r
 ![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/default.png)
 
 ## Status Check
+
+### Exported
+
+#### CSV
+
+| NAME                                                | TYPE                   | LOCATION          |
+| --------------------------------------------------- | ---------------------- | ----------------- |
+| `{prefix}-hub-{region}-{id}-bas`                    | Bastion                | Switzerland North |
+| `{prefix}-hub-{region}-{id}-bas-ip`                 | Public IP address      | Switzerland North |
+| `{prefix}-hub-{region}-{id}-fw`                     | Firewall               | Switzerland North |
+| `{prefix}-hub-{region}-{id}-fw-ip`                  | Public IP address      | Switzerland North |
+| `{prefix}-hub-{region}-{id}-vnet`                   | Virtual network        | Switzerland North |
+| `{prefix}-hub-{region}-{id}-vnet-snets-default-nsg` | Network security group | Switzerland North |
+
+#### Template
+
+[JSON Template](../../../azure/templates/modules/01/hub)
 
 ### Snapshot
 

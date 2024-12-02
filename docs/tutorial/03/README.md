@@ -47,6 +47,14 @@ Sometimes the VM shuts down.
 
 ![Diagram](../../../assets/img/azure/solution/diagrams/03.png)
 
+## Status Check
+
+### Exported
+
+#### Templates
+
+[JSON Templates](../../../azure/templates/modules/03)
+
 ## Next Steps
 
 [Go to module 04](../04/README.md)

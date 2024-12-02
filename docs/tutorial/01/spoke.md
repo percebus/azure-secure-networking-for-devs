@@ -90,6 +90,21 @@ Review your settings and create the VNet.
 
 ![Overview](../../../assets/img/azure/solution/vnets/spoke/vnet/snets/default/nsg/overview/01.png)
 
+## Status Check
+
+### Exported
+
+#### CSV
+
+| NAME                                                  | TYPE                   | LOCATION  |
+| ----------------------------------------------------- | ---------------------- | --------- |
+| `{prefix}-spoke-{region}-{id}-vnet`                   | Virtual network        | West US 2 |
+| `{prefix}-spoke-{region}-{id}-vnet-snets-default-nsg` | Network security group | West US 2 |
+
+#### Template
+
+[JSON Template](../../../azure/templates/modules/01/spoke)
+
 ## Next Steps
 
 [Create VNets peering](./peering.md)
