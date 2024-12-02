@@ -65,6 +65,11 @@
 
 #### Private
 
+##### Private Link
+
+- [What is Azure Private Link?](https://learn.microsoft.com/en-us/azure/private-link/private-link-overview)
+- [Azure Private Link pricing](https://azure.microsoft.com/en-us/pricing/details/private-link/)
+
 ##### Private DNS zone
 
 - [What is an Azure Private DNS zone?](https://learn.microsoft.com/en-us/azure/dns/private-dns-privatednszone)
@@ -104,7 +109,7 @@
 
 - [What is a virtual network link?](https://learn.microsoft.com/en-us/azure/dns/private-dns-virtual-network-links)
 
-##### [VNet] Route table
+##### [VNet] Routing
 
 - [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
 - [Create, change, or delete a route table](https://learn.microsoft.com/en-us/azure/virtual-network/manage-route-table)

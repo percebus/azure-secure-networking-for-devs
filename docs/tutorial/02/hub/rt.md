@@ -6,6 +6,47 @@
    1. Going to the internet: through the **Azure Firewall**
    1. Going to other VNets
 
+## Before you begin
+
+### Routing
+
+#### Virtual network traffic routing
+
+From [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
+
+Azure automatically creates system routes and assigns the routes to each subnet in a virtual network.
+
+- You can't _create_ **system routes**
+- You can't _remove_ **system routes**
+
+But you *can overrid*e some **system routes** with [custom routes](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#custom-routes).
+
+Azure creates _default_ **system routes** for each **subnet** and adds more [optional default route](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#optional-default-routes)s to **specific subnets**,
+[or every subnet, when you use specific Azure capabilities].
+
+#### Default routes
+
+From [Virtual network traffic routing](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview) > [Default](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#default)
+
+Each route contains
+
+1. An address prefix
+1. And next hop type.
+
+When traffic leaving a **subnet**, is sent to an **IP address** _within_ the **address prefix** of a **route**,
+the route that contains the prefix is the route that Azure uses.
+
+...
+
+| Source  | Address prefixes              | Next hop type   |
+| ------- | ----------------------------- | --------------- |
+| Default | Unique to the virtual network | Virtual network |
+| Default | `x.x.x.x`                     | Internet        |
+| Default | `10.x.x.x`                    | None            |
+| Default | `172.16.0.0/12`               | None            |
+| Default | `192.168.x.x`                 | None            |
+| Default | `100.64.0.0/10`               | None            |
+
 ## Resources
 
 - [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg` (already exists)
