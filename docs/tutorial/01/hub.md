@@ -176,6 +176,11 @@ Look for a "Network security group" in the Azure Portal's market place
 
 Create a Network security group
 
+##### Basics
+
+- Name: `{prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
+- Region: `{region}`
+
 #### Settings
 
 ##### Subnets
@@ -194,7 +199,12 @@ Don't believe me? just add a "deny all" rule to the NSG and see how your resourc
 
 So associating the NSG to the subnet merely helps us avoid to have to explicitly add each resource hosted in the subnet to the NSG.
 
-1. Settings > Subnets > [ + Associate ]
+###### Associate
+
+1. Go to your newly created NSG
+1. **Settings** > **Subnets**
+1. Click on [ **+ Associate** ]
+1. Associate it to the `default` subnet
 
 > [!WARNING]
 > We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.

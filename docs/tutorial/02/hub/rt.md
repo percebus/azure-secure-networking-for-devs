@@ -79,6 +79,21 @@ Take a good look at the TERMS
 
 ![Review + Create](../../../../assets/img/azure/solution/vnets/hub/rt/create/review.png)
 
+#### Settings
+
+##### Subnets
+
+###### Associate
+
+Just like with NSGs, we will associate **Route Table** with `default` subnet.-
+
+1. On the route table > **Settings** > **Subnets** >
+1. Clikc on [ **+ Associate** ]
+
+Use the hub network and `default` subnet
+
+![Associate](../../../../assets/img/azure/solution/vnets/hub/rt/routes/associate.png)
+
 ### Routes
 
 > [!TIP]
@@ -114,14 +129,6 @@ We will now redirect Any traffic other than `10.x.x.x` to the WWW through the **
 - **Next hop address**: Use the **Private IP** address of the **Azure Firewall**
 
 ![Add](../../../../assets/img/azure/solution/vnets/hub/rt/routes/exit-vnet-thru-fw.png)
-
-### Associate Route Table with Subnet
-
-1. On the route table > **Settings** > **Associate**
-
-Use the hub network and `default` subnet
-
-![Associate](../../../../assets/img/azure/solution/vnets/hub/rt/routes/associate.png)
 
 ## Next Steps
 
