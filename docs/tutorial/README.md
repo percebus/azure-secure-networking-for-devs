@@ -1,5 +1,7 @@
 # azure-secure-networking-for-devs
 
+[`FAQ`s](./FAQ.md)
+
 ## Table of Contents
 
 > [!TIP]
@@ -10,6 +12,7 @@
 - [Goal](#goal)
 - [The Tutorial](#the-tutorial)
 - [Tear down](#tear-down)
+- [FAQs](#faqs)
 - [Next Steps](#next-steps)
 
 ## Virtual Networks & IP addresses
@@ -64,6 +67,10 @@ For each Resource Group
 1. Go to the Resource Group
 1. Click on `[ 🗑 Delete resource group ]`
 1. Confirm by typing the name of the Resource Group
+
+## FAQs
+
+Please refer to the [`FAQ`s](./FAQ.md) for more information.
 
 ## Next Steps
 
