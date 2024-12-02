@@ -1,0 +1,1216 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "storageAccounts_nwsecuhubswitzerlandn1st_name": {
+      "defaultValue": "nwsecuhubswitzerlandn1st",
+      "type": "String"
+    },
+    "privateEndpoints_nwsecuhubswitzerlandn1st_pep_name": {
+      "defaultValue": "nwsecuhubswitzerlandn1st-pep",
+      "type": "String"
+    },
+    "privateDnsZones_privatelink_blob_core_windows_net_name": {
+      "defaultValue": "privatelink.blob.core.windows.net",
+      "type": "String"
+    },
+    "bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-bas",
+      "type": "String"
+    },
+    "azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-fw",
+      "type": "String"
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vnet",
+      "type": "String"
+    },
+    "applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name": {
+      "defaultValue": "nwsecuhubswitzerlandn1st-pep-asg",
+      "type": "String"
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-fw-ip",
+      "type": "String"
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-bas-ip",
+      "type": "String"
+    },
+    "virtualMachines_nw_security_hub_switzerlandnorth_1_vm_jumpbox_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vm-jumpbox",
+      "type": "String"
+    },
+    "routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vnet-snets-default-rt",
+      "type": "String"
+    },
+    "networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vm-jumpbox379_z1",
+      "type": "String"
+    },
+    "applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vm-jumpbox-asg",
+      "type": "String"
+    },
+    "networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name": {
+      "defaultValue": "nw-security-hub-switzerlandnorth-1-vnet-snets-default-nsg",
+      "type": "String"
+    },
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid": {
+      "defaultValue": "/subscriptions/66a0559c-eb2a-48a3-97a2-cab4196a34fe/resourceGroups/nw-security-spoke-westus2-1-rg/providers/Microsoft.Network/virtualNetworks/nw-security-spoke-westus2-1-vnet",
+      "type": "String"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/applicationSecurityGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name')]",
+      "location": "switzerlandnorth",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.Network/applicationSecurityGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name')]",
+      "location": "switzerlandnorth",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones",
+      "apiVersion": "2024-06-01",
+      "name": "[parameters('privateDnsZones_privatelink_blob_core_windows_net_name')]",
+      "location": "global",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name')]",
+      "location": "switzerlandnorth",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "ipAddress": "172.161.81.90",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": [],
+        "ddosSettings": {
+          "protectionMode": "VirtualNetworkInherited"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name')]",
+      "location": "switzerlandnorth",
+      "sku": {
+        "name": "Standard",
+        "tier": "Regional"
+      },
+      "properties": {
+        "ipAddress": "172.161.81.92",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Static",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/routeTables",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name')]",
+      "location": "switzerlandnorth",
+      "properties": {
+        "disableBgpRoutePropagation": false,
+        "routes": [
+          {
+            "name": "exit-thru-fw",
+            "id": "[resourceId('Microsoft.Network/routeTables/routes', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'), 'exit-thru-fw')]",
+            "properties": {
+              "addressPrefix": "0.0.0.0/0",
+              "nextHopType": "VirtualAppliance",
+              "nextHopIpAddress": "10.1.1.4",
+              "hasBgpOverride": false
+            },
+            "type": "Microsoft.Network/routeTables/routes"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2023-05-01",
+      "name": "[parameters('storageAccounts_nwsecuhubswitzerlandn1st_name')]",
+      "location": "switzerlandnorth",
+      "sku": {
+        "name": "Standard_RAGRS",
+        "tier": "Standard"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "dnsEndpointType": "Standard",
+        "allowedCopyScope": "AAD",
+        "defaultToOAuthAuthentication": false,
+        "publicNetworkAccess": "Disabled",
+        "allowCrossTenantReplication": false,
+        "minimumTlsVersion": "TLS1_2",
+        "allowBlobPublicAccess": false,
+        "allowSharedKeyAccess": true,
+        "largeFileSharesState": "Enabled",
+        "networkAcls": {
+          "resourceAccessRules": [],
+          "bypass": "AzureServices",
+          "virtualNetworkRules": [],
+          "ipRules": [
+            {
+              "value": "209.94.151.254",
+              "action": "Allow"
+            }
+          ],
+          "defaultAction": "Deny"
+        },
+        "supportsHttpsTrafficOnly": true,
+        "encryption": {
+          "requireInfrastructureEncryption": false,
+          "services": {
+            "file": {
+              "keyType": "Account",
+              "enabled": true
+            },
+            "blob": {
+              "keyType": "Account",
+              "enabled": true
+            }
+          },
+          "keySource": "Microsoft.Storage"
+        },
+        "accessTier": "Hot"
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2024-07-01",
+      "name": "[parameters('virtualMachines_nw_security_hub_switzerlandnorth_1_vm_jumpbox_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name'))]"
+      ],
+      "zones": ["1"],
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_DS1_v2"
+        },
+        "additionalCapabilities": {
+          "hibernationEnabled": false
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2022-datacenter-azure-edition-hotpatch",
+            "version": "latest"
+          },
+          "osDisk": {
+            "osType": "Windows",
+            "name": "nw-security-hub-switzerlandnorth-1-vm-jumOS__1_429d99ba273c423da4e802a50ada6c75",
+            "createOption": "FromImage",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Standard_LRS",
+              "id": "[resourceId('Microsoft.Compute/disks', 'nw-security-hub-switzerlandnorth-1-vm-jumOS__1_429d99ba273c423da4e802a50ada6c75')]"
+            },
+            "deleteOption": "Delete",
+            "diskSizeGB": 127
+          },
+          "dataDisks": [],
+          "diskControllerType": "SCSI"
+        },
+        "osProfile": {
+          "computerName": "nw-security-hub",
+          "adminUsername": "JohnDoe",
+          "windowsConfiguration": {
+            "provisionVMAgent": true,
+            "enableAutomaticUpdates": true,
+            "patchSettings": {
+              "patchMode": "AutomaticByPlatform",
+              "automaticByPlatformSettings": {
+                "rebootSetting": "IfRequired"
+              },
+              "assessmentMode": "ImageDefault",
+              "enableHotpatching": true
+            }
+          },
+          "secrets": [],
+          "allowExtensionOperations": true,
+          "requireGuestProvisionSignal": true
+        },
+        "securityProfile": {
+          "uefiSettings": {
+            "secureBootEnabled": true,
+            "vTpmEnabled": true
+          },
+          "securityType": "TrustedLaunch"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name'))]",
+              "properties": {
+                "deleteOption": "Delete"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones/A",
+      "apiVersion": "2024-06-01",
+      "name": "[concat(parameters('privateDnsZones_privatelink_blob_core_windows_net_name'), '/nwsecuhubswitzerlandn1st')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+      ],
+      "properties": {
+        "metadata": {
+          "creator": "created by private endpoint nwsecuhubswitzerlandn1st-pep with resource guid 49ac6048-28bb-4394-ba29-1f3ef5b48097"
+        },
+        "ttl": 10,
+        "aRecords": [
+          {
+            "ipv4Address": "10.1.4.5"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones/A",
+      "apiVersion": "2024-06-01",
+      "name": "[concat(parameters('privateDnsZones_privatelink_blob_core_windows_net_name'), '/nwsecuspokewestus21st')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+      ],
+      "properties": {
+        "metadata": {
+          "creator": "created by private endpoint nwsecuspokewestus21st-pep with resource guid 3986eb99-863a-497b-ac51-0d0610c35dc1"
+        },
+        "ttl": 10,
+        "aRecords": [
+          {
+            "ipv4Address": "10.2.0.4"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones/SOA",
+      "apiVersion": "2024-06-01",
+      "name": "[concat(parameters('privateDnsZones_privatelink_blob_core_windows_net_name'), '/@')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+      ],
+      "properties": {
+        "ttl": 3600,
+        "soaRecord": {
+          "email": "azureprivatedns-host.microsoft.com",
+          "expireTime": 2419200,
+          "host": "azureprivatedns.net",
+          "minimumTtl": 10,
+          "refreshTime": 3600,
+          "retryTime": 300,
+          "serialNumber": 1
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+      "apiVersion": "2024-06-01",
+      "name": "[concat(parameters('privateDnsZones_privatelink_blob_core_windows_net_name'), '/privatelink-at-spoke-westus2')]",
+      "location": "global",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+      ],
+      "properties": {
+        "registrationEnabled": false,
+        "resolutionPolicy": "Default",
+        "virtualNetwork": {
+          "id": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/routeTables/routes",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'), '/exit-thru-fw')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'))]"
+      ],
+      "properties": {
+        "addressPrefix": "0.0.0.0/0",
+        "nextHopType": "VirtualAppliance",
+        "nextHopIpAddress": "10.1.1.4",
+        "hasBgpOverride": false
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/AzureBastionSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.0.0/26"],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/AzureFirewallSubnet')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.1.0/26"],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/hub-switzerlandnorth-1_to_spoke-westus2-1')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "peeringState": "Connected",
+        "peeringSyncLevel": "FullyInSync",
+        "remoteVirtualNetwork": {
+          "id": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid')]"
+        },
+        "allowVirtualNetworkAccess": true,
+        "allowForwardedTraffic": true,
+        "allowGatewayTransit": false,
+        "useRemoteGateways": false,
+        "doNotVerifyRemoteGateways": false,
+        "peerCompleteVnets": true,
+        "remoteAddressSpace": {
+          "addressPrefixes": ["10.2.0.0/16"]
+        },
+        "remoteVirtualNetworkAddressSpace": {
+          "addressPrefixes": ["10.2.0.0/16"]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "sku": {
+        "name": "Standard_RAGRS",
+        "tier": "Standard"
+      },
+      "properties": {
+        "cors": {
+          "corsRules": []
+        },
+        "deleteRetentionPolicy": {
+          "allowPermanentDelete": false,
+          "enabled": false
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/fileServices",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "sku": {
+        "name": "Standard_RAGRS",
+        "tier": "Standard"
+      },
+      "properties": {
+        "protocolSettings": {
+          "smb": {}
+        },
+        "cors": {
+          "corsRules": []
+        },
+        "shareDeleteRetentionPolicy": {
+          "enabled": false,
+          "days": 0
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/privateEndpointConnections",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '.d559de28-7005-456a-a62c-18ecf828b3fb')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "properties": {
+        "privateEndpoint": {},
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Auto-Approved",
+          "actionRequired": "None"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/queueServices",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "properties": {
+        "cors": {
+          "corsRules": []
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/tableServices",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "properties": {
+        "cors": {
+          "corsRules": []
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/azureFirewalls",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]"
+      ],
+      "properties": {
+        "sku": {
+          "name": "AZFW_VNet",
+          "tier": "Standard"
+        },
+        "threatIntelMode": "Alert",
+        "additionalProperties": {
+          "Network.DNS.EnableProxy": "true"
+        },
+        "ipConfigurations": [
+          {
+            "name": "ipConfig",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/azureFirewallIpConfigurations/ipConfig')]",
+            "properties": {
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]"
+              }
+            }
+          }
+        ],
+        "networkRuleCollections": [
+          {
+            "name": "deny-google",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/networkRuleCollections/deny-google')]",
+            "properties": {
+              "priority": 1000,
+              "action": {
+                "type": "Deny"
+              },
+              "rules": [
+                {
+                  "name": "google.com",
+                  "protocols": ["Any"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": [],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": ["google.com"],
+                  "destinationPorts": ["*"]
+                },
+                {
+                  "name": "www.google.com",
+                  "protocols": ["Any"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": [],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": ["www.google.com"],
+                  "destinationPorts": ["*"]
+                }
+              ]
+            }
+          },
+          {
+            "name": "allow-bing",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/networkRuleCollections/allow-bing')]",
+            "properties": {
+              "priority": 100,
+              "action": {
+                "type": "Allow"
+              },
+              "rules": [
+                {
+                  "name": "bing.com",
+                  "protocols": ["TCP"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": [],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": ["bing.com"],
+                  "destinationPorts": ["80", "443"]
+                },
+                {
+                  "name": "www.bing.com",
+                  "protocols": ["TCP"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": [],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": ["www.bing.com"],
+                  "destinationPorts": ["80", "443"]
+                }
+              ]
+            }
+          },
+          {
+            "name": "allow-ping",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/networkRuleCollections/allow-ping')]",
+            "properties": {
+              "priority": 101,
+              "action": {
+                "type": "Allow"
+              },
+              "rules": [
+                {
+                  "name": "10.x.x.x",
+                  "protocols": ["ICMP"],
+                  "sourceAddresses": ["10.0.0.0/8"],
+                  "destinationAddresses": ["*"],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": [],
+                  "destinationPorts": ["*"]
+                }
+              ]
+            }
+          },
+          {
+            "name": "deny-all",
+            "id": "[concat(resourceId('Microsoft.Network/azureFirewalls', parameters('azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name')), '/networkRuleCollections/deny-all')]",
+            "properties": {
+              "priority": 10000,
+              "action": {
+                "type": "Deny"
+              },
+              "rules": [
+                {
+                  "name": "*",
+                  "protocols": ["Any"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": ["*"],
+                  "sourceIpGroups": [],
+                  "destinationIpGroups": [],
+                  "destinationFqdns": [],
+                  "destinationPorts": ["*"]
+                }
+              ]
+            }
+          }
+        ],
+        "applicationRuleCollections": [],
+        "natRuleCollections": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/bastionHosts",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]"
+      ],
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "dnsName": "bst-22312e4a-3cc9-414c-82ed-0ad57da53304.bastion.azure.com",
+        "scaleUnits": 2,
+        "ipConfigurations": [
+          {
+            "name": "IpConf",
+            "id": "[concat(resourceId('Microsoft.Network/bastionHosts', parameters('bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name')), '/bastionHostIpConfigurations/IpConf')]",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+      ],
+      "kind": "Regular",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_nw_security_hub_switzerlandnorth_1_vm_jumpbox379_z1_name')), '/ipConfigurations/ipconfig1')]",
+            "type": "Microsoft.Network/networkInterfaces/ipConfigurations",
+            "properties": {
+              "privateIPAddress": "10.1.4.4",
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4",
+              "applicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+                }
+              ]
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": []
+        },
+        "enableAcceleratedNetworking": true,
+        "enableIPForwarding": false,
+        "disableTcpStateTracking": false,
+        "nicType": "Standard",
+        "auxiliaryMode": "None",
+        "auxiliarySku": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+      ],
+      "properties": {
+        "securityRules": [
+          {
+            "name": "st-from-jumpbox-allow",
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), 'st-from-jumpbox-allow')]",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [],
+              "sourceApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+                }
+              ],
+              "destinationApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+                }
+              ]
+            }
+          },
+          {
+            "name": "st-deny-all",
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), 'st-deny-all')]",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 1000,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [],
+              "destinationApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+                }
+              ]
+            }
+          },
+          {
+            "name": "st-from-spoke-westus2-allow",
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), 'st-from-spoke-westus2-allow')]",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "10.2.0.0/16",
+              "access": "Allow",
+              "priority": 101,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [],
+              "destinationApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+                }
+              ]
+            }
+          },
+          {
+            "name": "jumpbox-from-bastion-allow",
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), 'jumpbox-from-bastion-allow')]",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "10.1.0.0/26",
+              "access": "Allow",
+              "priority": 200,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [],
+              "destinationApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+                }
+              ]
+            }
+          },
+          {
+            "name": "jumpbox-deny-all",
+            "id": "[resourceId('Microsoft.Network/networkSecurityGroups/securityRules', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), 'jumpbox-deny-all')]",
+            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+            "properties": {
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 1100,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": [],
+              "destinationApplicationSecurityGroups": [
+                {
+                  "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), '/jumpbox-deny-all')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+      ],
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "*",
+        "access": "Deny",
+        "priority": 1100,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), '/jumpbox-from-bastion-allow')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+      ],
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "10.1.0.0/26",
+        "access": "Allow",
+        "priority": 200,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), '/st-deny-all')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+      ],
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "*",
+        "access": "Deny",
+        "priority": 1000,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), '/st-from-spoke-westus2-allow')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+      ],
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "sourceAddressPrefix": "10.2.0.0/16",
+        "access": "Allow",
+        "priority": 101,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [],
+        "destinationApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateDnsZones/virtualNetworkLinks",
+      "apiVersion": "2024-06-01",
+      "name": "[concat(parameters('privateDnsZones_privatelink_blob_core_windows_net_name'), '/privatelink-at-hub')]",
+      "location": "global",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+      ],
+      "properties": {
+        "registrationEnabled": false,
+        "resolutionPolicy": "Default",
+        "virtualNetwork": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/privateEndpoints', parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name'))]",
+        "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+      ],
+      "properties": {
+        "privateDnsZoneConfigs": [
+          {
+            "name": "privatelink-blob-core-windows-net",
+            "properties": {
+              "privateDnsZoneId": "[resourceId('Microsoft.Network/privateDnsZones', parameters('privateDnsZones_privatelink_blob_core_windows_net_name'))]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'))]"
+      ],
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": ["10.1.0.0/16"]
+        },
+        "encryption": {
+          "enabled": false,
+          "enforcement": "AllowUnencrypted"
+        },
+        "subnets": [
+          {
+            "name": "AzureFirewallSubnet",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureFirewallSubnet')]",
+            "properties": {
+              "addressPrefixes": ["10.1.1.0/26"],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "name": "AzureBastionSubnet",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'AzureBastionSubnet')]",
+            "properties": {
+              "addressPrefixes": ["10.1.0.0/26"],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          },
+          {
+            "name": "default",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]",
+            "properties": {
+              "addressPrefixes": ["10.1.4.0/22"],
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+              },
+              "routeTable": {
+                "id": "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'))]"
+              },
+              "serviceEndpoints": [
+                {
+                  "service": "Microsoft.Storage",
+                  "locations": ["switzerlandnorth", "switzerlandwest"]
+                }
+              ],
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Disabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            },
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ],
+        "virtualNetworkPeerings": [
+          {
+            "name": "hub-switzerlandnorth-1_to_spoke-westus2-1",
+            "id": "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'hub-switzerlandnorth-1_to_spoke-westus2-1')]",
+            "properties": {
+              "peeringState": "Connected",
+              "peeringSyncLevel": "FullyInSync",
+              "remoteVirtualNetwork": {
+                "id": "[parameters('virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid')]"
+              },
+              "allowVirtualNetworkAccess": true,
+              "allowForwardedTraffic": true,
+              "allowGatewayTransit": false,
+              "useRemoteGateways": false,
+              "doNotVerifyRemoteGateways": false,
+              "peerCompleteVnets": true,
+              "remoteAddressSpace": {
+                "addressPrefixes": ["10.2.0.0/16"]
+              },
+              "remoteVirtualNetworkAddressSpace": {
+                "addressPrefixes": ["10.2.0.0/16"]
+              }
+            },
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+          }
+        ],
+        "enableDdosProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+      "apiVersion": "2023-05-01",
+      "name": "[concat(parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), '/default/somecontainer')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'), 'default')]",
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]"
+      ],
+      "properties": {
+        "immutableStorageWithVersioning": {
+          "enabled": false
+        },
+        "defaultEncryptionScope": "$account-encryption-key",
+        "denyEncryptionScopeOverride": false,
+        "publicAccess": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'), '/st-from-jumpbox-allow')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+      ],
+      "properties": {
+        "protocol": "*",
+        "sourcePortRange": "*",
+        "destinationPortRange": "*",
+        "access": "Allow",
+        "priority": 100,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": [],
+        "sourceApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nw_security_hub_switzerlandnorth_1_vm_jumpbox_asg_name'))]"
+          }
+        ],
+        "destinationApplicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/privateEndpoints",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name')]",
+      "location": "switzerlandnorth",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]",
+        "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+      ],
+      "properties": {
+        "privateLinkServiceConnections": [
+          {
+            "name": "[parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name')]",
+            "id": "[concat(resourceId('Microsoft.Network/privateEndpoints', parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name')), concat('/privateLinkServiceConnections/', parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name')))]",
+            "properties": {
+              "privateLinkServiceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_nwsecuhubswitzerlandn1st_name'))]",
+              "groupIds": ["blob"],
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-Approved",
+                "actionsRequired": "None"
+              }
+            }
+          }
+        ],
+        "manualPrivateLinkServiceConnections": [],
+        "customNetworkInterfaceName": "[concat(parameters('privateEndpoints_nwsecuhubswitzerlandn1st_pep_name'), '-nic')]",
+        "subnet": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), 'default')]"
+        },
+        "ipConfigurations": [],
+        "applicationSecurityGroups": [
+          {
+            "id": "[resourceId('Microsoft.Network/applicationSecurityGroups', parameters('applicationSecurityGroups_nwsecuhubswitzerlandn1st_pep_asg_name'))]"
+          }
+        ],
+        "customDnsConfigs": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2024-01-01",
+      "name": "[concat(parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name'))]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]",
+        "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'))]"
+      ],
+      "properties": {
+        "addressPrefixes": ["10.1.4.0/22"],
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name'))]"
+        },
+        "routeTable": {
+          "id": "[resourceId('Microsoft.Network/routeTables', parameters('routeTables_nw_security_hub_switzerlandnorth_1_vnet_snets_default_rt_name'))]"
+        },
+        "serviceEndpoints": [
+          {
+            "service": "Microsoft.Storage",
+            "locations": ["switzerlandnorth", "switzerlandwest"]
+          }
+        ],
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    }
+  ]
+}

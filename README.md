@@ -8,6 +8,10 @@
 
 ## Additional Resources
 
+### Vulnerabilities
+
+- [Known Vulnerabilities](./docs/vulnerabilities.md)
+
 ### Networking
 
 - [CIDR to IP v4 Conversion](https://www.ipaddressguide.com/cidr)
@@ -112,3 +116,8 @@
 #### [W]eb [A]pplication [F]irewall
 
 - [What is Azure Web Application Firewall?](https://learn.microsoft.com/en-us/azure/web-application-firewall/overview)
+
+### Principles
+
+- [[Y]ou [A]ren't [G]onna [N]eed [I]t](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it#:~:text=%22You%20aren't%20gonna%20need,add%20functionality%20until%20deemed%20necessary.)
+- [Zero Trust](https://www.microsoft.com/en-us/security/business/zero-trust)

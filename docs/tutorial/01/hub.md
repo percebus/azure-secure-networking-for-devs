@@ -8,21 +8,21 @@ When doing a multi-region Hub-Spoke network architecture, you want your hub reso
 
 In this chapter we'll be creating the following resources
 
-- [R]esource [G]roup: `{my-prefix}-hub-{region}-{id}-rg`
-  - [V]irtual [Net]work: `{my-prefix}-hub-{region}-{id}-vnet`: `10.1.x.x`
-    - [Bas]tion: `{my-prefix}-hub-{region}-{id}-bas`
-      - Public [IP]: `{my-prefix}-hub-{region}-{id}-bas-ip`
-    - [F]ire[w]all: `{my-prefix}-hub-{region}-{id}-fw`
-      - Public [IP]: `{my-prefix}-hub-{region}-{id}-fw-ip`
+- [R]esource [G]roup: `{prefix}-hub-{region}-{id}-rg`
+  - [V]irtual [Net]work: `{prefix}-hub-{region}-{id}-vnet`: `10.1.x.x`
+    - [Bas]tion: `{prefix}-hub-{region}-{id}-bas`
+      - Public [IP]: `{prefix}-hub-{region}-{id}-bas-ip`
+    - [F]ire[w]all: `{prefix}-hub-{region}-{id}-fw`
+      - Public [IP]: `{prefix}-hub-{region}-{id}-fw-ip`
     - Subnets
       - `AzureBastionSubnet`: `10.1.0.x/26`
       - `AzureFirewallSubnet`: `10.1.1.x/26`
       - `default`: `10.1.4.x/22`
-        - [N]etwork [S]ecurity [G]roup: `{my-prefix}-hub-{region}-{id}-vnet-snet-default-nsg`
+        - [N]etwork [S]ecurity [G]roup: `{prefix}-hub-{region}-{id}-vnet-snet-default-nsg`
 
 Where:
 
-- `{some-short-prefix}`: Your username (i.e. `johndoe`)
+- `{prefix}`: Your username (i.e. `johndoe`)
 - `{region}`: The region of your Hub VNet (i.e. `switzerlandnorth`)
 - `{id}`: The unique identifier of the spoke VNet (i.e. `1`)
 
@@ -32,7 +32,7 @@ Where:
 
 ##### Basic
 
-Create a `{my-prefix}-hub-{region}-{id}-rg` resource group in Switzerland North.
+Create a `{prefix}-hub-{region}-{id}-rg` resource group in Switzerland North.
 
 ![Basics](../../../assets/img/azure/solution/vnets/hub/rg/create/basics.png)
 
@@ -62,7 +62,7 @@ Make sure you selected the right one, by `Microsoft | Azure Service`
 
 ##### Basics
 
-Create a `{my-prefix}-hub-{region}-{id}-vnet` virtual network in Switzerland North.
+Create a `{prefix}-hub-{region}-{id}-vnet` virtual network in Switzerland North.
 
 ![Basics](../../../assets/img/azure/solution/vnets/hub/vnet/create/basics.png)
 
@@ -77,13 +77,13 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 > [!WARNING]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
-1. Toggle ON the _"Enable Azure Bastion"_. Add a `{my-prefix}-hub-{region}-{id}-bas` name.
+1. Toggle ON the _"Enable Azure Bastion"_. Add a `{prefix}-hub-{region}-{id}-bas` name.
 1. For the **Public address**
 
-- You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-bastion` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-bastion`, which is confusing.
+- You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-bastion` suffix tho, so it will be `{prefix}-hub-{region}-{id}-bastion`, which is confusing.
 - So, if your OCD is anything like mine, and you are particular about naming, you can
   1. Click on `Create a public IP address`
-  1. Create a new one, naming it `{my-prefix}-hub-{region}-{id}-bas-ip` (see how the suffix just keep adding up?)
+  1. Create a new one, naming it `{prefix}-hub-{region}-{id}-bas-ip` (see how the suffix just keep adding up?)
   1. Go back to the previous screen and select the newly created public IP address.
 
 ###### Firewall
@@ -91,13 +91,13 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 > [!CAUTION]
 > Be mindful that this is an **expensive resource**, which is **charged by the hour**.
 
-1. Toggle ON the _"Enable Azure Firewall"_. Add a `{my-prefix}-hub-{region}-{id}-fw` name.
+1. Toggle ON the _"Enable Azure Firewall"_. Add a `{prefix}-hub-{region}-{id}-fw` name.
 1. **Tier**: You'll need at least **Standard** for this exercise.
 1. **Policy**: _"None (Use classic firewall rules)"_
 1. **Azure Firewall Public IP Address**: Same as above,
 
-- You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{my-prefix}-hub-{region}-{id}-firewall`, which is confusing.
-- But if you want to name it, you can create a new one, naming it `{my-prefix}-hub-{region}-{id}-fw-ip` and select it, just like we did with Bastion.
+- You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{prefix}-hub-{region}-{id}-firewall`, which is confusing.
+- But if you want to name it, you can create a new one, naming it `{prefix}-hub-{region}-{id}-fw-ip` and select it, just like we did with Bastion.
 
 ##### IP Address
 
@@ -209,7 +209,7 @@ Get familiarized with the default rules.
 
 These are standard, to ensure connectivity with a minimum level of security on resources you create under that subnet.
 
-![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/01.png)
+![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/default.png)
 
 ## Status Check
 
@@ -217,7 +217,7 @@ These are standard, to ensure connectivity with a minimum level of security on r
 
 Your resources should look like this.-
 
-![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
+![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/02.png)
 
 ### Resource visualizer
 
@@ -237,4 +237,4 @@ So keep an eye on them.
 
 ## Next Steps
 
-[Go to parent](../README.md)
+[Create Spoke VNet](./spoke.md)

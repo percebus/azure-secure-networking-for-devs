@@ -84,4 +84,4 @@ Use the hub network and `default` subnet
 
 ## Next Steps
 
-[Go back to parent](../README.md)
+[Configure FireWall](./fw.md)
