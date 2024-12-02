@@ -9,6 +9,8 @@
 - [Virtual Networks & IP addresses](#virtual-networks--ip-addresses)
 - [Goal](#goal)
 - [The Tutorial](#the-tutorial)
+- [Tear down](#tear-down)
+- [Next Steps](#next-steps)
 
 ## Virtual Networks & IP addresses
 
@@ -43,6 +45,26 @@ Each will contain a series of Excercises that will guide you through the process
 
 When each module is completed, you'll be taken back to the Module's main page, with something like this.-
 
-**Next Steps**:
+## Tear down
+
+Once you're done with the tutorial, you should delete the resources you created.
+Specially the ones in `hub` as it contains the most expensive resources.
+
+However, you need to tear down the `spoke` resources first, as they depend on the `hub` resources.
+
+### Resources groups order
+
+1. `spoke` resource groups (US, EU, etc.)
+1. `hub` resource grup
+
+### Steps
+
+For each Resource Group
+
+1. Go to the Resource Group
+1. Click on `[ 🗑 Delete resource group ]`
+1. Confirm by typing the name of the Resource Group
+
+## Next Steps
 
 [Go to parent](#the-tutorial)
