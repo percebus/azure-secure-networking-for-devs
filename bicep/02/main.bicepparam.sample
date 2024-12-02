@@ -1,0 +1,15 @@
+using './main.bicep'
+
+// your stack name prefix
+param prefix = FIXME
+
+// your stack name id
+param id = FIXME
+
+// your jumpbox username and password
+param jumpBoxUsername = FIXME
+param jumpBoxPassword = FIXME
+
+// Override the default values
+// param hubLocation = 'switzerlandnorth'
+// param spokeLocations = ['westus2', 'westeurope']
