@@ -87,8 +87,10 @@ Take a good look at the TERMS
 
 Just like with NSGs, we will associate **Route Table** with `default` subnet.-
 
-1. On the route table > **Settings** > **Subnets** >
-1. Clikc on [ **+ Associate** ]
+On the route table.-
+
+1. Go to > **Settings** > **Subnets**
+1. Click on [ **+ Associate** ]
 
 Use the hub network and `default` subnet
 
