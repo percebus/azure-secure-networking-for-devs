@@ -293,13 +293,17 @@ These are standard, to ensure connectivity with a minimum level of security on r
 
 Your resources should look like this.-
 
-![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/02.png)
+![snapshot](../../../assets/img/azure/solution/vnets/hub/snapshots/01.png)
 
 ### Resource visualizer
 
 You can see the relationship between the Firewall `fw` and the Public IP `fw-ip` in the resource visualizer.
 
 ![Resource visualizer](../../../assets/img/azure/solution/vnets/hub/fw/resources/01.png)
+
+### Network Diagram
+
+![Network Diagram](../../../assets/img/azure/solution/vnets/hub/network/01.png)
 
 ## Costs
 

@@ -43,11 +43,13 @@ Make sure **Bastion** & **Firewall** remained **Toggled OFF**.
 
 ###### IP addresses
 
+Virtual Network: `10.2.x.x/16`
+
 | Subnet    | IP family | CIDR Block    | Size    | Notes |
 | --------- | --------- | ------------- | ------- | ----- |
 | `default` | `0-3.x`   | `10.2.0.0/22` | `1,024` |       |
 
-![Security](../../../assets/img/azure/solution/vnets/spoke/vnet/create/ip/after.png)
+![Security](../../../assets/img/azure/solution/vnets/spoke/vnet/create/ip_addresses/after.png)
 
 ##### Review + Create
 
@@ -104,6 +106,10 @@ Review your settings and create the VNet.
 #### Template
 
 [JSON Template](../../../azure/templates/modules/01/spoke)
+
+### Network Diagram
+
+![Network Diagram](../../../assets/img/azure/solution/vnets/spoke/network/01.png)
 
 ## Next Steps
 
