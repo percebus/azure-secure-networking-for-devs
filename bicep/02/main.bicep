@@ -7,8 +7,8 @@ param id string
 @description('The username to use with the jumpbox')
 param jumpBoxUsername string
 
-@description('The password to use with the jumpbox username')
 @secure()
+@description('The password to use with the jumpbox username')
 param jumpBoxPassword string
 
 @description('The Azure region to deploy the hub to')
@@ -24,7 +24,7 @@ resource hubRG 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   location: hubLocation
 }
 
-module hubVNet 'modules/hubVNet.bicep' = {
+module hubVNet 'modules/hub/vNet.bicep' = {
   name: 'hubVNet'
   scope: hubRG
   params: {
@@ -42,7 +42,7 @@ resource spokeRGs 'Microsoft.Resources/resourceGroups@2023-07-01' = [for spokeLo
   location: spokeLocation
 }]
 
-module spokeVNets 'modules/spokeVNet.bicep' = [for (spokeLocation, i) in spokeLocations: {
+module spokeVNets '../01/modules/spoke/vNet.bicep' = [for (spokeLocation, i) in spokeLocations: {
   name: 'spokeVNet${i}'
   scope: spokeRGs[i]
   params: {
@@ -53,7 +53,7 @@ module spokeVNets 'modules/spokeVNet.bicep' = [for (spokeLocation, i) in spokeLo
   }
 }]
 
-module hubToSpokePeerings 'modules/vNetPeering.bicep' = [for (spokeLocation, i) in spokeLocations: {
+module hubToSpokePeerings '../01/modules/vNetPeering.bicep' = [for (spokeLocation, i) in spokeLocations: {
   name: 'hubToSpokePeering${i}'
   scope: hubRG
   params: {
@@ -63,7 +63,7 @@ module hubToSpokePeerings 'modules/vNetPeering.bicep' = [for (spokeLocation, i) 
   }
 }]
 
-module spokeToHubPeerings 'modules/vNetPeering.bicep' = [for (spokeLocation, i) in spokeLocations: {
+module spokeToHubPeerings '../01/modules/vNetPeering.bicep' = [for (spokeLocation, i) in spokeLocations: {
   name: 'spokeToHubPeering${i}'
   scope: spokeRGs[i]
   params: {

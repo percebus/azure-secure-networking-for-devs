@@ -17,7 +17,7 @@ resource hubRG 'Microsoft.Resources/resourceGroups@2024-07-01' = {
   location: hubLocation
 }
 
-module hubVNet 'modules/hubVNet.bicep' = {
+module hubVNet 'modules/hub/vNet.bicep' = {
   name: 'hubVNet'
   scope: hubRG
   params: {
@@ -33,7 +33,7 @@ resource spokeRGs 'Microsoft.Resources/resourceGroups@2023-07-01' = [for spokeLo
   location: spokeLocation
 }]
 
-module spokeVNets 'modules/spokeVNet.bicep' = [for (spokeLocation, i) in spokeLocations: {
+module spokeVNets 'modules/spoke/vNet.bicep' = [for (spokeLocation, i) in spokeLocations: {
   name: 'spokeVNet${i}'
   scope: spokeRGs[i]
   params: {

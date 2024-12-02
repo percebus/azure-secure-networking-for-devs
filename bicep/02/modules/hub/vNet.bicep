@@ -2,6 +2,7 @@ param prefix string
 param id string
 param hubLocation string = resourceGroup().location
 param jumpBoxUsername string
+
 @secure()
 param jumpBoxPassword string
 
@@ -63,7 +64,7 @@ resource bastionSubNet 'Microsoft.Network/virtualNetworks/subnets@2024-03-01' ex
   name: 'AzureBastionSubnet'
 }
 
-module bastion 'bastion.bicep' = {
+module bastion '../../../01/modules/hub/bastion.bicep' = {
   name: 'bastion'
   params: {
     name: '${basename}-bas'
