@@ -39,7 +39,7 @@ Your resources should look like something this.-
 
 #### Template
 
-[JSON Template](../../../../azure/templates/hub/03)
+[JSON Template](../../../../azure/templates/modules/03/hub)
 
 ### Resource Visualizer
 

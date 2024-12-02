@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_name": {
+      "value": null
+    },
+    "networkSecurityGroups_nw_security_spoke_westus2_1_vnet_snets_default_nsg_name": {
+      "value": null
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_externalid": {
+      "value": null
+    }
+  }
+}

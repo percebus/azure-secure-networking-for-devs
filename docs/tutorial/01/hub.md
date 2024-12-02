@@ -86,6 +86,8 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
   1. Create a new one, naming it `{prefix}-hub-{region}-{id}-bas-ip` (see how the suffix just keep adding up?)
   1. Go back to the previous screen and select the newly created public IP address.
 
+![bas-ip](../../../assets/img/azure/solution/vnets/hub/vnet/create/security/bas-ip.png)
+
 ###### Firewall
 
 > [!CAUTION]
@@ -99,16 +101,37 @@ Toggle ON: **Bastion** & **Firewall**. We'll talk more about these below.
 - You can just let the default pre-selected '(New)'. It will create a new public IP address. It will add a `-firewall` suffix tho, so it will be `{prefix}-hub-{region}-{id}-firewall`, which is confusing.
 - But if you want to name it, you can create a new one, naming it `{prefix}-hub-{region}-{id}-fw-ip` and select it, just like we did with Bastion.
 
+![fw-ip](../../../assets/img/azure/solution/vnets/hub/vnet/create/security/fw-ip.png)
+
 ##### IP Address
 
-When you first open the "IP addresses" tab, you'll see following.
+> [!IMPORTANT]
+> Read all the scenarios first
 
-![IP Addresses: Before](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/before.png)
-
-And eventho we'll be working on `10.x.x.x`, we'll make some changes.
+Eventho we'll be working on `10.x.x.x`, we'll make some changes.
 Remember that all VNets will communicate, so planning ahead to not have IP collision is important.
 
 Furthermore, we'll skip network optimization for now, and just create distinct subnets that are easy to read.
+
+We'll go over 3 scenarios:
+
+1. Default: And add some commentary about why it's not ideal
+1. A What-if: Exploring a scenario that might not scale.
+1. Custom: Our final setup
+
+###### Scenario: Default
+
+When you first open the "IP addresses" tab, you'll see following.-
+
+VNet: `10.0.x.x/16`
+
+| Subnets               | IP address range | CIDR  | Size  | NAT gateway |
+| --------------------- | ---------------- | ----- | ----- | ----------- |
+| `default`             | `10.0.0.x`       | `/24` | `256` | `-`         |
+| `AzureBastionSubnet`  | `10.0.1.0-63`    | `/26` | `64`  | `-`         |
+| `AzureFirewallSubnet` | `10.0.1.64-127`  | `/26` | `64`  | `-`         |
+
+![IP Addresses: Before](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/before.png)
 
 Both **Azure Bastion** and **Azure Firewall** need to have their own **delegated subnets**. The names are reserved standard and cannot be changed:
 
@@ -120,20 +143,32 @@ Both **Azure Bastion** and **Azure Firewall** need to have their own **delegated
 
 We'll also need a `default` subnet (for the lack of a better name) to host any other resource we want (NIC interfaces, VMs, etc).
 
+###### Scenario: Not scalable
+
 Now, you might be considering a setup like this
 
-![What-if](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/what-if.png)
+VNet: `10.1.x.x/16`
+
+| Subnets               | IP address range | CIDR  | Size  | NAT gateway |
+| --------------------- | ---------------- | ----- | ----- | ----------- |
+| `default`             | `10.1.1.x`       | `/24` | `256` | `-`         |
+| `AzureBastionSubnet`  | `10.1.2.0-63`    | `/26` | `64`  | `-`         |
+| `AzureFirewallSubnet` | `10.1.3.0-63`    | `/26` | `64`  | `-`         |
+
+![What-if](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/what-if.png)
 
 But the only problem is
 
 - What happens when you need MORE than 255 IP addresses?
 - You cannot extend your subnet past `10.1.1.x` into `10.1.2.x`, because it would collide with `AzureBastionSubnet`
 
+###### Scenario: Custom
+
 Because of this, we'll push the smaller/well known subnets to the beginning of our IP address planning, and let the `default` subnet take some of the larger range.
 We'll reserve all the `10.1.4-7.x` addresses for this subnet, w/ `1024` IP addresses.
 
 > [!TIP]
-> QUIZ: Could we use `10.1.2.0/22`?
+> QUIZ: Could we use `10.1.2.0/22`? Why or why not?
 
 So, we'll end up with 3 subnets:
 
@@ -147,24 +182,38 @@ So, we'll end up with 3 subnets:
 | `default`             | `4-7.x`    | `10.1.4.0/22` | `1,024` |          |
 |                       | `8-255.x`  |               |         | TBD      |
 
-After our changes, it should look something like this.-
+**AzureBastionSubnet**:
 
-![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip/after.png)
+![AzureBastionSubnet](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/snets/AzureBastionSubnet.png)
 
-> [!TIP]
-> QUIZ: How could we put both Bastion and Firewall under `10.1.0.x`?
+**AzureFirewallSubnet**:
 
-##### Review
+![AzureFirewallSubnet](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/snets/AzureFirewallSubnet.png)
+
+**default**:
+
+![default](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/snets/default.png)
+
+While modifying the `default` subnet, you can also create a Network Security Group (NSG) for it.
+
+![default-nsg](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/snets/default_nsg.png)
+
+> [!IMPORTANT]
+> THIS is the desired result
+
+![IP Addresses: After](../../../assets/img/azure/solution/vnets/hub/vnet/create/ip_addresses/after.png)
+
+##### Review & Create
 
 Give 1 good look before creating all the resources.
 
-<!-- FIXME it lies!
 ![Review](../../../assets/img/azure/solution/vnets/hub/vnet/create/review.png)
--->
 
 If everything looks good, hit that `[ Create ]` button.
 
 ### [N]etwork [S]ecurity [G]roup
+
+If you did not create the NSG while creating the subnet, you can create it now.
 
 #### Market place
 
@@ -175,6 +224,11 @@ Look for a "Network security group" in the Azure Portal's market place
 #### Create
 
 Create a Network security group
+
+##### Basics
+
+- Name: `{prefix}-spoke-{region}-{id}-vnet-snet-default-nsg`
+- Region: `{region}`
 
 #### Settings
 
@@ -194,7 +248,12 @@ Don't believe me? just add a "deny all" rule to the NSG and see how your resourc
 
 So associating the NSG to the subnet merely helps us avoid to have to explicitly add each resource hosted in the subnet to the NSG.
 
-1. Settings > Subnets > [ + Associate ]
+###### Associate
+
+1. Go to your newly created NSG
+1. **Settings** > **Subnets**
+1. Click on [ **+ Associate** ]
+1. Associate it to the `default` subnet
 
 > [!WARNING]
 > We recommend that you associate a network security group to a **subnet**, or a **network interface**, but **not both**.
@@ -212,6 +271,23 @@ These are standard, to ensure connectivity with a minimum level of security on r
 ![Inbound](../../../assets/img/azure/solution/vnets/hub/vnet/snets/default/nsg/rules/inbound/default.png)
 
 ## Status Check
+
+### Exported
+
+#### CSV
+
+| NAME                                                | TYPE                   | LOCATION          |
+| --------------------------------------------------- | ---------------------- | ----------------- |
+| `{prefix}-hub-{region}-{id}-bas`                    | Bastion                | Switzerland North |
+| `{prefix}-hub-{region}-{id}-bas-ip`                 | Public IP address      | Switzerland North |
+| `{prefix}-hub-{region}-{id}-fw`                     | Firewall               | Switzerland North |
+| `{prefix}-hub-{region}-{id}-fw-ip`                  | Public IP address      | Switzerland North |
+| `{prefix}-hub-{region}-{id}-vnet`                   | Virtual network        | Switzerland North |
+| `{prefix}-hub-{region}-{id}-vnet-snets-default-nsg` | Network security group | Switzerland North |
+
+#### Template
+
+[JSON Template](../../../azure/templates/modules/01/hub)
 
 ### Snapshot
 

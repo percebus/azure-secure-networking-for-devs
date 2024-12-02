@@ -24,7 +24,7 @@
 
 #### Template
 
-[JSON Template](../../../../azure/templates/spoke/03)
+[JSON Template](../../../../azure/templates/modules/03/spoke)
 
 ### Resource Visualizer
 

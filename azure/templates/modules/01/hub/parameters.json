@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "bastionHosts_nw_security_hub_switzerlandnorth_1_bas_name": {
+      "value": null
+    },
+    "azureFirewalls_nw_security_hub_switzerlandnorth_1_fw_name": {
+      "value": null
+    },
+    "virtualNetworks_nw_security_hub_switzerlandnorth_1_vnet_name": {
+      "value": null
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_fw_ip_name": {
+      "value": null
+    },
+    "publicIPAddresses_nw_security_hub_switzerlandnorth_1_bas_ip_name": {
+      "value": null
+    },
+    "networkSecurityGroups_nw_security_hub_switzerlandnorth_1_vnet_snets_default_nsg_name": {
+      "value": null
+    },
+    "virtualNetworks_nw_security_spoke_westus2_1_vnet_externalid": {
+      "value": null
+    }
+  }
+}
