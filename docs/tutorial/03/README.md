@@ -28,6 +28,11 @@ If you haven't already, please go through the following:
    1. Your laptop (Optional)
    1. In the JumpBox VM
 
+> [!TIP]
+> REMINDER: Is the Jumpbox VM running?
+
+Sometimes the VM shuts down.
+
 ### Steps
 
 > [!IMPORTANT]
