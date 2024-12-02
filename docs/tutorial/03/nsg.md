@@ -166,6 +166,27 @@ Not part of this tutorial.
 
 The following is meant to be only educational.
 
+### Ping Flooding
+
+First, read about [ICMP Flooding](../../vulnerabilities.md#icmp-flooding)
+
+`ping` uses `ICMP` by default, which, because of flood attacks, is often blocked now by routers.
+
+#### Inbound: Deny ICMP
+
+- **Name**: `deny-icmp`
+  - **Priority**: `1000`ish
+  - Source: Any
+  - Destination: Any
+    - **Protocol**: `ICMP`
+
+> [!IMPORTANT]
+> There are things like "TCP Ping" that can be used that use `TCP` instead of `ICMP`.
+
+[This article does a pretty good job of explaining this](https://www.baeldung.com/linux/tcp-packets-ping)
+
+You can sometimes cheat with `ssh` on a **specific port**.
+
 ### Storage account(s)
 
 #### Outbound: Allow DNS

@@ -131,7 +131,7 @@ We'll tell the WebApp to use that subnet to create IPs (NICs?) it can use for an
 
 ![Virtual Network Integration](../../../../assets/img/azure/solution/vnets/spoke/webapp/settings/networking/virtual_network_integration/subnet/add.png)
 
-- [x] **Outbound Internet Traffic**: Checked. Ensure it goes through our delegated `webapp` subnet and not directly to the internet. Will aalso
+- [x] **Outbound Internet Traffic**: Checked. Ensure it goes through our delegated `webapp` subnet and not directly to the internet.
 
 ![Virtual Network Integration](../../../../assets/img/azure/solution/vnets/spoke/webapp/settings/networking/virtual_network_integration/subnet/connected.png)
 
