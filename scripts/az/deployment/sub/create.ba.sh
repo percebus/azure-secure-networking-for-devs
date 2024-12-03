@@ -53,7 +53,7 @@ az deployment sub ${cmd} \
   --location ${AZURE_DEPLOYMENT_LOCATION} \
   --name ${deployment_name} \
   --template-file ${file_path} \
-  --parameters ./bicep/params/main.bicepparam
+  --parameters ${params_file_path}
 
 set +x
 set +e

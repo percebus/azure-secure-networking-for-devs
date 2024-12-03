@@ -10,4 +10,3 @@
 ### bicep
 
 - [x] ~~Add `bicep` linting/validation~~
-- [ ] Refactor `scripts/az/deployment` to have a a single `bicepparam` file with all parameters
