@@ -46,13 +46,14 @@ fi
 set -x
 
 file_path=${project_folder}/main.bicep
+params_file_path=${project_folder}/main.bicepparam
 
 # SRC: https://learn.microsoft.com/en-us/cli/azure/deployment/sub?view=azure-cli-latest#az-deployment-sub-create
 az deployment sub ${cmd} \
   --location ${AZURE_DEPLOYMENT_LOCATION} \
   --name ${deployment_name} \
   --template-file ${file_path} \
-  --parameters prefix=$AZURE_RESOURCES_NAME_PREFIX id=$AZURE_RESOURCES_NAME_ID
+  --parameters ${params_file_path}
 
 set +x
 set +e

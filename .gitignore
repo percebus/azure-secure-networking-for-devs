@@ -6,6 +6,10 @@
 # env files
 env/*.sh
 
+# bicep
+# params
+**/*.bicepparam
+**/*.parameters.json
 
 ##############################
 ### VisualStudio.gitignore ### SRC: https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
