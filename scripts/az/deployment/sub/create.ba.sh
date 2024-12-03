@@ -53,8 +53,7 @@ az deployment sub ${cmd} \
   --location ${AZURE_DEPLOYMENT_LOCATION} \
   --name ${deployment_name} \
   --template-file ${file_path} \
-  --parameters ${params_file_path} \
-  --parameters banana='power'
+  --parameters ${params_file_path}
 
 set +x
 set +e
