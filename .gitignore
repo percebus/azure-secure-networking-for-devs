@@ -8,8 +8,8 @@ env/*.sh
 
 # bicep
 # params
-**/*.biceparam
-
+**/*.bicepparam
+**/*.parameters.json
 
 ##############################
 ### VisualStudio.gitignore ### SRC: https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
