@@ -130,10 +130,6 @@ In the most basic scenario, we can
 1. We'll add an `allow` **all traffic** rule at the bottom.
 1. And then manage a disallow list were we add things we DON'T want.
 
-Do you know how time consuming it could be to basically keep an inventory of all the WWW?
-
-Who wants that kind of headache? Any who...
-
 #### Step 1: Check access
 
 1. Open Edge browser
@@ -218,9 +214,15 @@ So your rule should look like this:
 | `google.com`     | Any      | Any         | `*`    | `google.com`      | `*`               |
 | `www.google.com` | Any      | Any         | `*`    | `www.google.com`  | `*`               |
 
+#### Closing thoughts
+
 _"Are there any domains I have not accounted for?"_
 
 Well, Yeah! like THE REST OF THE INTERNET! (Why are we screaming?!)
+
+Do you know how time consuming it could be to basically keep an inventory of all the WWW?
+
+Who wants that kind of headache? Any who...
 
 ### Scenario 2: Zero Trust.- Disallow ALL, except...
 
