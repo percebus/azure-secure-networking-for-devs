@@ -59,11 +59,11 @@ You should get a couple of errors
 
 ![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
 
+Uhm, it seems we missed something...
+
 Proceed to next section
 
 ### Step 2: Enable DNS Proxy
-
-Uhm, it seems we missed something...
 
 Oh, so we need to enable the **DNS Proxy** first!
 
