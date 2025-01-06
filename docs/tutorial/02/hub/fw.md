@@ -15,7 +15,7 @@ We're going to add **Network Rules Collection**
 
 The FireWall disallows all traffic by default.
 
-It's configuration, is equivalent to this
+The FireWall disallows all traffic by default. Its configuration is equivalent to this
 
 - Name: `disallow-all`
 - Priority: `N`
