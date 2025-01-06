@@ -81,7 +81,7 @@ Now try to go back to the rules and add the rule again.
 
 You should take this into account, when securing Network Security Groups
 
-## Step 3: Add the FDQN rule
+### Step 3: Add the FDQN rule
 
 Now try again to add the `allow` rule mentioned above.
 
@@ -95,10 +95,16 @@ Now try again to add the `allow` rule mentioned above.
 | ------------ | -------- | ----------- | ------ | ----------------- | ----------------- |
 | `GitHub.com` | Any      | Any         | `*`    | `GitHub.com`      | `*`               |
 
-Yai! \o/
-err... success?
+### Step 4: Check access
+
+1. Open Edge browser
+1. Navigate to [https://GitHub.com](https://GitHub.com)
+1. You should see the following
 
 ![github.com](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/github/01.png)
+
+Yai! \o/
+err... success?
 
 Great... Seems that we're able to load **some** `GitHub.com` resources.
 
