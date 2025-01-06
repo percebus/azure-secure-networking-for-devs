@@ -57,13 +57,13 @@ You should get a couple of errors
 > You must enable DNS Proxy
 <!-- prettier-ignore-end -->
 
+![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
+
 Proceed to next section
 
 ### Step 2: Enable DNS Proxy
 
 Uhm, it seems we missed something...
-
-![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
 
 Oh, so we need to enable the **DNS Proxy** first!
 
