@@ -11,6 +11,22 @@ We're going to add **Network Rules Collection**
 1. Go to second tab **Network Rules Collection**
 1. Click on **+ Add network rule collection**
 
+## Before you begin
+
+The FireWall disallows all traffic by default.
+
+The FireWall disallows all traffic by default. Its configuration is equivalent to this
+
+- Name: `disallow-all`
+- Priority: `N`
+- Action: _"Deny"_
+- Rules
+  - IP Addresses:
+
+| name  | Protocol | Source Type | Source | Destination Type | Destination Addresses | Destination Ports |
+| ----- | -------- | ----------- | ------ | ---------------- | --------------------- | ----------------- |
+| `Any` | Any      | Any         | `*`    | Any              | `*`                   | `*`               |
+
 ## Pre-requisites: DNS Proxy
 
 ### Step 1: Try to add any FDQN rule
@@ -35,26 +51,26 @@ You should get a couple of errors
 
 <!-- prettier-ignore-start -->
 > [!CAUTION]
-> * is not allowed
+> `*` is not allowed
 
 > [!CAUTION]
 > You must enable DNS Proxy
 <!-- prettier-ignore-end -->
 
-Proceed to next section
-
-### Step 2: Enable DNS Proxy
+![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
 
 Uhm, it seems we missed something...
 
-![DNS Proxy must be enabled](../../../../assets/img/azure/solution/vnets/hub/fw/rules/allow-github-disallowed.png)
+Proceed to next section
+
+### Step 2: Enable DNS Proxy
 
 Oh, so we need to enable the **DNS Proxy** first!
 
 1. Navigate do DNS
 
-- [x] Mark "DNS Settings" as "Enabled"
-- [x] Mark "DNS Proxy" as Enabled
+- [x] Mark "DNS Settings" as **"Enabled"**
+- [x] Mark "DNS Proxy" as **"Enabled"**
 
 ![Enable DNS Proxy](../../../../assets/img/azure/solution/vnets/hub/fw/dns/proxy/disabled.png)
 
@@ -65,7 +81,7 @@ Now try to go back to the rules and add the rule again.
 
 You should take this into account, when securing Network Security Groups
 
-## Step 3: Add the FDQN rule
+### Step 3: Add the FDQN rule
 
 Now try again to add the `allow` rule mentioned above.
 
@@ -78,6 +94,21 @@ Now try again to add the `allow` rule mentioned above.
 | name         | Protocol | Source Type | Source | Destination FQDNs | Destination Ports |
 | ------------ | -------- | ----------- | ------ | ----------------- | ----------------- |
 | `GitHub.com` | Any      | Any         | `*`    | `GitHub.com`      | `*`               |
+
+### Step 4: Check access
+
+1. Open Edge browser
+1. Navigate to [https://GitHub.com](https://GitHub.com)
+1. You should see the following
+
+![github.com](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/github/01.png)
+
+Yai! \o/
+err... success?
+
+Great... Seems that we're able to load **some** `GitHub.com` resources.
+
+Keep reading. This will make sense later on.
 
 ## Scenarios
 
@@ -96,25 +127,46 @@ _"In politics, there are no solutions, only trade-offs."_
 
 In the most basic scenario, we can
 
-1. Assume `allow` **all traffic** by default (no additional rule needed)
+1. We'll add an `allow` **all traffic** rule at the bottom.
 1. And then manage a disallow list were we add things we DON'T want.
-
-Do you know how time consuming it could be to basically keep an inventory of all the WWW?
-
-Who wants that kind of headache? Any who...
 
 #### Step 1: Check access
 
 1. Open Edge browser
 1. Navigate to [https://google.com](https://google.com)
-1. See that the site is correctly rendered
+1. See that the site should be blocked
 
-We want to make sure that it was the firewall that did the blocking, and not some miss-vm-configuration.
+#### Step 2: Allow (any) & all
 
-#### Step 2: Disallow google.com
+- Name: `allow-any`
+- Priority: `10000`
+- Action: _"Allow"_
+- Rules
+  - IP Addresses:
+
+| name  | Protocol | Source Type | Source | Destination Type | Destination Addresses | Destination Ports |
+| ----- | -------- | ----------- | ------ | ---------------- | --------------------- | ----------------- |
+| `Any` | Any      | Any         | `*`    | Any              | `*`                   | `*`               |
+
+<!-- prettier-ignore-start -->
+
+> [!WARN]
+> Even if asked specifically, the firewall won't allow ALL traffic through. like ICMP (ping)
+
+<!-- prettier-ignore-END -->
+
+#### Step 3: Check access (again)
+
+1. Open Edge browser
+1. Navigate to [https://google.com](https://google.com)
+1. See that the site should now be allowed
+
+But, we want to make sure that it was the firewall that does the blocking, and not some miss-vm-configuration.
+
+#### Step 4: Disallow google.com
 
 - Name: `disallow-google`
-- Priority: `1000`
+- Priority: `1000`: NOTE this value is lower than the `allow-any` rule. So it takes higher precedence.
 - Action: _"Deny"_
 - Rules
   - FQDNS:
@@ -133,7 +185,7 @@ How so?
 
 Oh jeez!
 
-#### Step 3: Disallow www.google.com
+#### Step 5: Disallow www.google.com
 
 Well, let's add a rule for `*.google.com` then.
 
@@ -162,38 +214,41 @@ So your rule should look like this:
 | `google.com`     | Any      | Any         | `*`    | `google.com`      | `*`               |
 | `www.google.com` | Any      | Any         | `*`    | `www.google.com`  | `*`               |
 
+#### Closing thoughts
+
 _"Are there any domains I have not accounted for?"_
 
 Well, Yeah! like THE REST OF THE INTERNET! (Why are we screaming?!)
 
+Do you know how time consuming it could be to basically keep an inventory of all the WWW?
+
+Who wants that kind of headache? Any who...
+
 ### Scenario 2: Zero Trust.- Disallow ALL, except...
 
-#### Step 1: Disallow all
+#### Pre-requisites
 
-Add a rule to disallow all traffic.
+If you did Scenario 1, please go ahead and remove `allow-any` rule.
 
-- Name: `disallow-all`
-- Priority: `64000`
-- Action: _"Deny"_
-- Rules
-  - IP Addresses:
+#### Step 1: Check Access
 
-| name  | Protocol | Source Type | Source | Destination Type | Destination Addresses | Destination Ports |
-| ----- | -------- | ----------- | ------ | ---------------- | --------------------- | ----------------- |
-| `Any` | Any      | Any         | `*`    | Any              | `*`                   | `*`               |
+Go the Jump box, and test that in fact you cannot access anything in the WWW, like `bing.com`
 
-Now go to the Jump box, and test that in fact you cannot access anything in the WWW, like `bing.com`
+1. Open Edge browser
+1. Navigate to [https://bing.com](https://bing.com)
+1. See that the site should be blocked
 
 ![Deny all](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/bing/01.png)
 
 #### Step 2: Add MORE FQDNs
 
-Yai! \o/
-err... success?
+##### GitHub.com
+
+Navigate to [GitHub.com](https://GitHub.com) (see pre-requisites at the top)
 
 ![github.com](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/github/01.png)
 
-Great... Seems that we're able to load **some** `GitHub.com` resources.
+Seems that we're able to load **some** `GitHub.com` resources.
 
 If we inspect with Developer tools with <kbd>F11</kbd>, we can see OTHER domains, like `GitHub.GithubAssets.com`.
 
@@ -205,10 +260,14 @@ So keep rinse & repeat until:
 `GitHub.com`
 ![github.com](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/github/02.png)
 
+##### bing.com
+
+Following the same methodology, your goal is to render the page fully.
+
 `bing.com`
 ![github.com](../../../../assets/img/azure/solution/vnets/hub/vm/inside/com/bing/02.png)
 
-##### Rules
+#### Rules
 
 These are all the rules we ended up adding:
 
@@ -216,7 +275,7 @@ These are all the rules we ended up adding:
 
 **Zero Trust** can sure be exhausting!
 
-But hey, you're worth it!
+But hey, you're worth it ;D
 
 ## Next Steps
 
